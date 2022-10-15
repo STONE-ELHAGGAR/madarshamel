@@ -66,31 +66,31 @@ function Terms() {
                                     <div className="col-lg-8">
                                         <div className="single-detail"><img className="img-responsive bdr-16" src="assets/imgs/page/blog/single/img-1.png" alt="Madarshamel" />
                                             <h6 className="mt-35 mb-25" id="section-1">Limitation of Liability</h6>
-                                            <p>Under no circumstances shall Madarshamel be liable for any direct, indirect, special, incidental or consequential damages, including, but not limited to, loss of data or profit, arising out of the use, or the inability to use, the materials on this site, even if Madarshamel or an authorized representative has been advised of the possibility of such damages. If your use of materials from this site results in the need for servicing, repair or correction of equipment or data, you assume any costs thereof.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-2">Licensing Policy</h6>
-                                            <p>Madarshamel WordPress plugins and template are released under the GNU General Public License v2 or later. Please refer to licensing policy page for licensing details.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-3">Product Compatibility</h6>
-                                            <p>The products are developed to be compatible with the latest version of WordPress because we always strive to stay up-to-date with the latest version of WordPress. You might experience certain performance or functionality glitches with the products if you use any version prior to that.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-4">Delivery</h6>
-                                            <p>Your purchased product(s) information will be emailed to the email address (that you will provide) once we receive your payment. Even though this usually takes a few minutes, it may also take up to 24 hours. You can contact us through our contact page if you do not receive your email after waiting for this time period. You will also have access to your purchased products from your account in Madarshamel after logging in.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-5">Ownership</h6>
-                                            <p>All the products are the property of Madarshamel. So you may not claim ownership (intellectual or exclusive) over any of our products, modified or unmodified. Our products come ‘as is’, without any kind of warranty, either expressed or implied. Under no circumstances can our juridical person be accountable for any damages including, but not limited to, direct, indirect, special, incidental or consequential damages or other losses originating from the employment of or incapacity to use our products.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-6">Browser Compatibility</h6>
-                                            <p>We consider it our duty to offer a great experience across most major browsers, which is why our products support the latest modern web browsers including (but not limited to) Firefox, Safari, Chrome &amp; Internet Explorer 9+. However, the performance may vary between different browsers, versions, and operating systems.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-7">Updates</h6>
-                                            <p>Our templates are constantly updated to be compatible with the latest stable version of WordPress. Please ensure that you always use the most current version of our templates.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-8">Template Support</h6>
-                                            <p>Please refer to Help and Support Policy page for details.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-9">Price Changes</h6>
-                                            <p>Madarshamel reserves the right to modify or suspend (temporarily or permanently) a subscription at any point of time and from time to time with or without any notice.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-10">Refund Policy</h6>
-                                            <p>Please refer to Refund Policy page for details.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-11">Email &amp; Newsletter</h6>
-                                            <p>Madarshamel may occasionally send you emails related to the purchase of product(s) from our company. We may also send you occasional email newsletters relating to Madarshamel updates and promotions. We will never sell or release your email to any third party vendors. You may opt out of these emails at any time without penalty.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-12">License Agreement</h6>
-                                            <p>By purchasing our product(s), you indicate and consent that you have read and agree to the Terms &amp; Conditions listed and detailed on this page. We reserve the right to change or modify the current Terms and Conditions without prior notice or consent.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-35 mb-25" id="section-13">Severability</h6>
-                                            <p>If any part of this agreement is declared unenforceable or invalid, all remaining clauses in this agreement shall remain binding on the customer.</p>
+                                            <p>Example of replacable text you can change it later using Madarshamel admin panel.</p>
                                             <h6 className="mt-50">- Madarshamel Team -</h6>
                                         </div>
                                     </div>
