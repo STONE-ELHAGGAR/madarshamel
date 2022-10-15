@@ -23,7 +23,7 @@ const Banner = () => {
                         </div>
                         <div className="col-lg-5 d-none d-lg-block">
                             <div className="banner-imgs">
-                                <img className="img-responsive shape-2" alt="Agon" src="assets/imgs/page/homepage1/banner.png" />
+                                <img className="img-responsive shape-2" alt="Madarshamel" src="/assets/imgs/page/homepage1/banner.webp" />
                             </div>
                         </div>
                     </div>
