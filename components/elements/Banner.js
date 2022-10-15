@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const Banner = () => {
-    return(
+    return( 
         <section className="section-box">
             <div className="banner-hero banner-1">
                 <div className="container">
