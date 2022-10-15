@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -25,14 +25,29 @@ const OfferSlider = () => {
         }
     ];
 
+    const [domLoaded, setDomLoaded] = useState(false);
+
+    useEffect(() => {
+      setDomLoaded(true);
+    }, []);
+
 
     return (
         <>
             <div className="box-swiper">
                 <div className="swiper-container swiper-group-4">
+                {domLoaded && (
                     <Swiper
-                        slidesPerView={3}
-                        spaceBetween={30}
+                        breakpoints={{
+                            0: {
+                            slidesPerView: 1,
+                            spaceBetween: 20
+                            },
+                            768: {
+                            slidesPerView: 3,
+                            spaceBetween: 30
+                            }
+                        }}
                         loop={true}
                         autoplay={{
                             delay: 2500,
@@ -58,6 +73,7 @@ const OfferSlider = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
+                )}
                 </div>
             </div>
         </>

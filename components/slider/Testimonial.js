@@ -1,13 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import SwiperCore, { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link"
 
 SwiperCore.use([Autoplay, Navigation]);
 const TestimonialSlider = () => {
+    const [domLoaded, setDomLoaded] = useState(false);
 
+    useEffect(() => {
+      setDomLoaded(true);
+    }, []);
     const data = [
         {
             avatar: "1.png",
@@ -44,6 +48,7 @@ const TestimonialSlider = () => {
         <>
             <div className="box-swiper">
                 <div className="swiper-container swiper-group-4">
+                {domLoaded && (
                     <Swiper
                         slidesPerView={4}
                         spaceBetween={30}
@@ -52,6 +57,16 @@ const TestimonialSlider = () => {
                             delay: 2500,
                             disableOnInteraction: false
                         }}
+                        breakpoints={{
+                            0: {
+                              slidesPerView: 2,
+                              spaceBetween: 20
+                            },
+                            768: {
+                              slidesPerView: 4,
+                              spaceBetween: 30
+                            }
+                          }}
                         navigation={{
                             prevEl: ".swiper-button-prev-4",
                             nextEl: ".swiper-button-next-4"
@@ -73,6 +88,7 @@ const TestimonialSlider = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
+                )}
                 </div>
                 <div className="swiper-button-next swiper-button-next-4" />
                 <div className="swiper-button-prev swiper-button-prev-4" />
