@@ -50,8 +50,6 @@ const TestimonialSlider = () => {
                 <div className="swiper-container swiper-group-4">
                 {domLoaded && (
                     <Swiper
-                        slidesPerView={4}
-                        spaceBetween={30}
                         loop={true}
                         autoplay={{
                             delay: 2500,
@@ -59,7 +57,7 @@ const TestimonialSlider = () => {
                         }}
                         breakpoints={{
                             0: {
-                              slidesPerView: 2,
+                              slidesPerView: 1,
                               spaceBetween: 20
                             },
                             768: {
