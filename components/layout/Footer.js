@@ -65,7 +65,7 @@ const Footer = () => {
                             <h4 className="text-heading-5">Discover</h4>
                             <ul className="menu-footer mt-20">
                                 <li>
-                                    <Link href="/blog-2">
+                                    <Link href="/blog-1">
                                         <a>Our Blog</a>
                                     </Link>
                                 </li>
