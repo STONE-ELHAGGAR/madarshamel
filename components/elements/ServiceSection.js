@@ -14,7 +14,7 @@ const ServiceSection = () => {
                 <ServiceDetails
                     titleTab="Free Consultants"
                     bgColor="5"
-                    pageLink="/page-about-1"
+                    pageLink="/#"
                     imgSrc="/assets/imgs/page/homepage1/business-strategy.svg"
                 >
                     Get a free consultation from our customer service available 24/7.
@@ -22,7 +22,7 @@ const ServiceSection = () => {
                 <ServiceDetails
                     titleTab="Customs clearance of your imports"
                     bgColor="9"
-                    pageLink="/page-about-2"
+                    pageLink="/#"
                     imgSrc="/assets/imgs/page/homepage1/local.svg"
                 >
                     The cheapest
@@ -32,7 +32,7 @@ const ServiceSection = () => {
                 <ServiceDetails
                     titleTab="Cargo transportation"
                     bgColor="2"
-                    pageLink="/page-about-3"
+                    pageLink="/#"
                     imgSrc="/assets/imgs/page/homepage1/social.svg"
                 >
                     Fastest and safest way to transport your
