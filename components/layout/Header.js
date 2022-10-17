@@ -21,7 +21,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                             <div className="header-logo">
                                 <Link href="/">
                                     <a className="d-flex">
-                                        {headerStyle ? <Image width="500px" height="136px" alt="Madarshamel" src="/assets/imgs/template/logo-white.png" /> : <Image width="500px" height="136px" alt="Agon" src="/assets/imgs/template/logo.png" />}
+                                        {headerStyle ? <Image width="200px" height="136px" alt="Madarshamel" src="/assets/imgs/template/logo-white.png" /> : <Image width="200px" height="136px" alt="Agon" src="/assets/imgs/template/logo.png" />}
 
                                     </a>
                                 </Link>
