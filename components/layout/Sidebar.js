@@ -107,7 +107,7 @@ const Sidebar = ({ openClass }) => {
                                 <h6 className="mb-10">Your Account</h6>
                                 <ul className="mobile-menu font-heading">
                                     <li>
-                                        <Link href="/#"><a>Profile</a></Link>
+                                        <Link href="/dashboard"><a>Dashboard</a></Link>
                                     </li>
                                     <li>
                                         <Link href="/#"><a>Account Settings</a></Link>
