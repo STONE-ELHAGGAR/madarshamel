@@ -18,7 +18,7 @@ const Banner = () => {
                             </p>
                             <div className="mt-40">
                                 <Link href="/page-service-1"><a className="btn btn-black icon-arrow-right-white">Get Start</a></Link>
-                                <Link href="/page-about-1"><a className="btn btn-link icon-arrow-right color-gray-900 text-heading-6">Learn More</a></Link>
+                                <Link href="/page-about-2"><a className="btn btn-link icon-arrow-right color-gray-900 text-heading-6">Learn More</a></Link>
                             </div>
                         </div>
                         <div className="col-lg-5 d-none d-lg-block">
