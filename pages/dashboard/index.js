@@ -77,7 +77,7 @@ const App = () => {
                 <h5 className="text-center">TODAY'S MONEY</h5>
                 <h4 className="text-center">5619562 SAR</h4>
                 <div className="compare-tip">
-                  <span class="danger">-13% </span>
+                  <span className="danger">-13% </span>
                   decrease than yesterday
                 </div>
               </div>
@@ -90,7 +90,7 @@ const App = () => {
                 <h5 className="text-center">TODAY'S USERS</h5>
                 <h4 className="text-center">561 USER</h4>
                 <div className="compare-tip">
-                  <span class="success">+53% </span>
+                  <span className="success">+53% </span>
                   increase than yesterday
                 </div>
               </div>
@@ -103,9 +103,9 @@ const App = () => {
                 <h5 className="text-center">All Money</h5>
                 <h4 className="text-center">15619562 SAR</h4>
                 <div className="compare-tip">
-                  <span class="danger">45113 </span>
+                  <span className="danger">45113 </span>
                   SAR is 
-                  <span class="danger"> DEBT </span>
+                  <span className="danger"> DEBT </span>
                 </div>
               </div>
             </div>
@@ -117,9 +117,9 @@ const App = () => {
                 <h5 className="text-center">All USERS</h5>
                 <h4 className="text-center">1561 USER</h4>
                 <div className="compare-tip">
-                  <span class="success">45 </span>
+                  <span className="success">45 </span>
                   are Clients 
-                  <span class="success"> (Made Transactions) </span>
+                  <span className="success"> (Made Transactions) </span>
                 </div>
               </div>
             </div>
