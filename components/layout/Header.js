@@ -73,6 +73,31 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                 </li>
                                             </ul>
                                         </li>
+                                        <li className="has-children">
+                                            <div className="mobile-header-top float-start px-3 py-3 logged-in-user">
+                                                <div className="user-account">
+                                                    <img src="/assets/imgs/template/ava_1.png" alt="Madarshamel" />
+                                                    <div className="content">
+                                                        <h6 className="user-name">
+                                                            <span className="text-brand">Hossam</span>
+                                                        </h6>
+                                                        <p className="font-xs text-muted">5 messages</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ul className="sub-menu">
+                                                <li>
+                                                    <Link href="/dashboard"><a className="closer"><i className="fi fi-rr-user" />Dashboard</a></Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/settings"><a><i className="fi fi-rr-settings" />Settings</a></Link>
+                                                </li>
+                                                <li className="hr"><span /></li>
+                                                <li>
+                                                    <Link href="/page-login"><a><i className="fi fi-rr-sign-out" />Logout</a></Link>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <div className="burger-icon burger-icon-white" onClick={handleOpen}>

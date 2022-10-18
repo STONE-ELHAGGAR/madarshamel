@@ -82,5 +82,5 @@ function Home() {
         </>
     )
 }
-
+Home.layout = "L2";
 export default Home;

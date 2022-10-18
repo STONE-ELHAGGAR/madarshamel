@@ -3101,7 +3101,7 @@ label {
   position: relative; }
 
 .body-overlay-1 {
-  background: transparent;
+  background: #00000069;
   height: 100%;
   left: 0;
   opacity: 0;
@@ -3197,6 +3197,9 @@ label {
     background-repeat: no-repeat;
     background-position: center right 25px;
     padding-right: 56px; }
+
+.logged-in-user {
+  cursor: pointer; }
 
 .mobile-header-wrapper-style {
   position: fixed;
@@ -6980,6 +6983,20 @@ input.qty-val {
     padding: 20px 0px 20px 110px; }
   .product-item-1 .product-image {
     width: 90px; } }
+.compare-tip {
+  width: 100%;
+  float: right;
+  text-align: center; }
+  .compare-tip span.success {
+    color: green;
+    font-weight: bolder; }
+  .compare-tip span.danger {
+    color: red;
+    font-weight: bolder; }
+
+.backgrounded-con {
+  background: #f1f3f8; }
+
 @media (min-width: 1400px) {
   .block-we-do {
     padding-left: 40px; }

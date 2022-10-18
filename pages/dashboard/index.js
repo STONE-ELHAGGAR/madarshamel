@@ -1,0 +1,148 @@
+import React from 'react';
+import Layout from "../../components/layout/Layout";
+import LineChart from "../../components/elements/LineChart";
+import PieChart from "../../components/elements/PieChart";
+import Image from 'next/image';
+
+
+const options = {
+  responsive: true,
+  plugins: {
+  legend: {
+      position: 'top',
+  },
+  title: {
+      display: true,
+      text: 'Chart.js Line Chart',
+  },
+  },
+}
+
+const ChartData = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+  {
+      label: 'Dataset 1',
+      data: [5, 6, 7,20,20,3,7],
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+  },
+  {
+      label: 'Dataset 2',
+      data: [42, 30, 1,77,25,0,50],
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+  },
+  ],
+}
+
+const ChartDataPie = {
+  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+}
+
+const App = () => {
+  return (
+    <>
+    <Layout>
+        <div className="container">
+          <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 float-start">
+            <div className="col-12 col-lg-3 col-md-3 col-sm-12 col-xs-12 float-start px-3 py-3">
+              <div className="product-item-2 hover-up">
+                <div className="text-center">
+                  <Image width="50px" height="50px" src="/assets/imgs/template/icons/money.svg" alt="money" />
+                </div>
+                <h5 className="text-center">TODAY'S MONEY</h5>
+                <h4 className="text-center">5619562 SAR</h4>
+                <div className="compare-tip">
+                  <span class="danger">-13% </span>
+                  decrease than yesterday
+                </div>
+              </div>
+            </div>
+            <div className="col-12 col-lg-3 col-md-3 col-sm-12 col-xs-12 float-start px-3 py-3">
+              <div className="product-item-2 hover-up">
+                <div className="text-center">
+                  <Image width="50px" height="50px" src="/assets/imgs/template/icons/users.svg" alt="money" />
+                </div>
+                <h5 className="text-center">TODAY'S USERS</h5>
+                <h4 className="text-center">561 USER</h4>
+                <div className="compare-tip">
+                  <span class="success">+53% </span>
+                  increase than yesterday
+                </div>
+              </div>
+            </div>
+            <div className="col-12 col-lg-3 col-md-3 col-sm-12 col-xs-12 float-start px-3 py-3">
+              <div className="product-item-2 hover-up">
+                <div className="text-center">
+                  <Image width="50px" height="50px" src="/assets/imgs/template/icons/money-bills.svg" alt="money" />
+                </div>
+                <h5 className="text-center">All Money</h5>
+                <h4 className="text-center">15619562 SAR</h4>
+                <div className="compare-tip">
+                  <span class="danger">45113 </span>
+                  SAR is 
+                  <span class="danger"> DEBT </span>
+                </div>
+              </div>
+            </div>
+            <div className="col-12 col-lg-3 col-md-3 col-sm-12 col-xs-12 float-start px-3 py-3">
+              <div className="product-item-2 hover-up">
+                <div className="text-center">
+                  <Image width="50px" height="50px" src="/assets/imgs/template/icons/all-users.svg" alt="money" />
+                </div>
+                <h5 className="text-center">All USERS</h5>
+                <h4 className="text-center">1561 USER</h4>
+                <div className="compare-tip">
+                  <span class="success">45 </span>
+                  are Clients 
+                  <span class="success"> (Made Transactions) </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="container-fluid backgrounded-con float-start px-3 py-3">
+          <div className="container">
+            <div className="col-lg-7 col-md-7 col-sm-12 col-xs-12 px-2 py-2 float-start">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-white px-5 py-5 float-start">
+                <LineChart options={options} ChartData={ChartData} />
+              </div>
+            </div>
+            <div className="col-lg-5 col-md-5 col-sm-12 col-xs-12 px-2 py-2 float-start">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-white px-5 py-5 float-start">
+                <PieChart options={options} ChartData={ChartDataPie} />
+              </div>
+            </div>
+          </div>
+        </div>
+    </Layout>
+  </>
+  );
+}
+
+
+export default App;

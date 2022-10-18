@@ -1,8 +1,10 @@
 import '../public/assets/css/style.css'
-//import "../public/assets/css/swiper-custom.css";
+import "../public/assets/css/swiper-custom.css";
 import React, { useEffect, useState } from "react";
 import Preloader from '../components/elements/Preloader';
 import 'react-modal-video/css/modal-video.css';
+import { useRouter } from 'next/router'
+
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -16,6 +18,17 @@ function MyApp({ Component, pageProps }) {
     }
     new WOW.WOW().init();
   }, []);
+  /*
+  const router = useRouter();
+  console.log(router);
+
+  For Ahmed use it to detect current path and
+  Change your layout
+  
+  For Example:
+  router.pathname
+  
+  */
   return (
     <>
       {!loading ? (

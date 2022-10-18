@@ -10,11 +10,6 @@ const Footer = () => {
                     <div className="footer-top">
                         <div className="row">
                             <div className="col-md-4 col-sm-6 text-center text-md-start">
-                                <Link href="/">
-                                    <a>
-                                        <Image width="100px" height="70px" alt="madarshamel" src="/assets/imgs/template/logo.png" />
-                                    </a>
-                                </Link>
                             </div>
                             <div className="col-md-8 col-sm-6 text-center text-md-end">
                                 <span className="color-gray-900 text-heading-6 mr-30 text-mb-sm-20">Ready to get started?</span>

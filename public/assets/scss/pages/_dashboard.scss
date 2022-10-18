@@ -1,0 +1,16 @@
+.compare-tip {
+    width: 100%;
+    float: right;
+    text-align: center;
+    span.success {
+        color: green;
+        font-weight: bolder;
+    }
+    span.danger {
+        color: red;
+        font-weight: bolder;
+    }
+}
+.backgrounded-con {
+    background: #f1f3f8;
+}

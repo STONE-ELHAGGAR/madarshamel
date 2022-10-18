@@ -228,7 +228,7 @@
     position: relative;
 }
 .body-overlay-1 {
-	background: transparent;
+	background: #00000069;
 	height: 100%;
 	left: 0;
 	opacity: 0;
@@ -395,7 +395,9 @@
         padding-right: 56px;
     }
 }
-
+.logged-in-user {
+    cursor: pointer;
+}
 // .header-style-6
 // {
 //     background-color: $color-gray-200;
