@@ -72,7 +72,7 @@ const CustomClearanceForm = () => {
                     <button className="btn btn-square">Add</button>
                   </div>
                   <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2 py-2 float-start tableCon">
-                    <table class="table table-bordered col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <table className="table table-bordered col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <thead>
                         <tr>
                           <th scope="col">#</th>
