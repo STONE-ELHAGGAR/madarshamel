@@ -65,7 +65,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                                             <Link href="#"><a>Services</a></Link>
                                             <ul className="sub-menu">
                                                 <li>
-                                                    <Link href="/service-single"><a><i className="fi fi-rr-stats" />Custom Clearance</a></Link>
+                                                    <Link href="/service-single"><a><i className="fi fi-rr-stats" />Customs Clearance</a></Link>
                                                 </li>
                                                 <li>
                                                     <Link href="/service-single"><a><i className="fi fi-rr-data-transfer" />Transportation</a></Link>
@@ -112,10 +112,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                     <Link href="/dashboard/custom-clearance-form"><a><i className="fi fi-rr-stats" />Add Custom Clearance Request</a></Link>
                                                 </li>
                                                 <li>
-                                                    <Link href="/service-single"><a><i className="fi fi-rr-data-transfer" />Add Transportation Request</a></Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/service-single"><a><i className="fi fi-rr-paper-plane" />Add International Shipping Request</a></Link>
+                                                    <Link href="/dashboard/transportation-form"><a><i className="fi fi-rr-data-transfer" />Add Transportation Request</a></Link>
                                                 </li>
                                                 <li className="hr"><span /></li>
                                                 <li>

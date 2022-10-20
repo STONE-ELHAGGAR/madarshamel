@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from "../../components/layout/Layout";
 import Image from 'next/image';
 
-const CustomClearanceForm = () => {
+const Transportation = () => {
   return (
     <>
     <Layout>
@@ -10,7 +10,7 @@ const CustomClearanceForm = () => {
           <div className="container">
             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 float-start">
               <form action="#">
-                <h3 className="text-center">Custom Clearance Request</h3>
+                <h3 className="text-center">Transportation Request</h3>
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
                   <h4 className="text-center">Request Details</h4>
                   <label className="mt-20">Choose company name</label>
@@ -31,17 +31,17 @@ const CustomClearanceForm = () => {
                     <option>Transaction Place</option>
                     <option>Transaction Place</option>
                   </select>
-                  <label className="mt-20">Shipping Port</label>
+                  <label className="mt-20">FROM</label>
                   <select className="form-control display-1">
-                    <option>Shipping Port</option>
-                    <option>Shipping Port</option>
-                    <option>Shipping Port</option>
+                    <option>FROM</option>
+                    <option>FROM</option>
+                    <option>FROM</option>
                   </select>
-                  <label className="mt-20">Reciving Port</label>
+                  <label className="mt-20">To</label>
                   <select className="form-control display-1">
-                    <option>Reciving Port</option>
-                    <option>Reciving Port</option>
-                    <option>Reciving Port</option>
+                    <option>To</option>
+                    <option>To</option>
+                    <option>To</option>
                   </select>
                   <label className="mt-20">Source Country</label>
                   <select className="form-control display-1">
@@ -49,10 +49,25 @@ const CustomClearanceForm = () => {
                     <option>Source Country</option>
                     <option>Source Country</option>
                   </select>
+                  <label className="mt-20">Drivers</label>
+                  <select className="form-control display-1">
+                    <option>Driver</option>
+                    <option>Driver</option>
+                    <option>Driver</option>
+                  </select>
                   <label className="mt-20">Expected Ship Date</label>
                   <input type="date" className="form-control display-1" name="meeting-time" />
                 </div>
 
+                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
+                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start">
+                    <h4 className="text-center">Other Details</h4>
+                    <input className="form-control mt-20 display-1" name="car-cost" placeholder="Car Cost" />
+                    <label className="mt-20">Transfer Data</label>
+                    <input className="form-control display-1" type="date" name="transfer-data" placeholder="Transfer Data" />
+                  </div>
+                </div>
+                
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
                   <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start">
                     <h4 className="text-center">Files</h4>
@@ -103,7 +118,6 @@ const CustomClearanceForm = () => {
                   </div>
                 </div>
 
-                
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-4 py-4 float-start">
                   <button className="btn btn-square">Submit Request</button>
                 </div>
@@ -118,4 +132,4 @@ const CustomClearanceForm = () => {
 }
 
 
-export default CustomClearanceForm;
+export default Transportation;

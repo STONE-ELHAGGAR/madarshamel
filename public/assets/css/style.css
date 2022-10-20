@@ -7015,6 +7015,16 @@ select {
   .drag-and-drop p {
     font-size: 20px; }
 
+.tableCon {
+  overflow-x: scroll;
+  max-width: calc(100vh); }
+
+table {
+  border: 1px solid #333; }
+
+thead, tr, td {
+  border: 1px solid #333; }
+
 @media (min-width: 1400px) {
   .block-we-do {
     padding-left: 40px; }
