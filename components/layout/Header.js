@@ -62,6 +62,20 @@ const Header = ({ handleOpen, headerStyle }) => {
                                             </ul>
                                         </li>
                                         <li className="has-children">
+                                            <Link href="#"><a>Services</a></Link>
+                                            <ul className="sub-menu">
+                                                <li>
+                                                    <Link href="/service-single"><a><i className="fi fi-rr-stats" />Custom Clearance</a></Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/service-single"><a><i className="fi fi-rr-data-transfer" />Transportation</a></Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/service-single"><a><i className="fi fi-rr-paper-plane" />International Shipping</a></Link>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li className="has-children">
                                             <Link href="#"><a>Blog</a></Link>
                                             <ul className="sub-menu">
                                                 <li>
@@ -80,8 +94,9 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                     <div className="content">
                                                         <h6 className="user-name">
                                                             <span className="text-brand">Hossam</span>
+                                                            <span className="fi-rr-caret-down"></span>
                                                         </h6>
-                                                        <p className="font-xs text-muted">5 messages</p>
+                                                        <p className="font-xs text-muted">5 Notfications</p>
                                                     </div>
                                                 </div>
                                             </div>
