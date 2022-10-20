@@ -100,6 +100,22 @@ const Sidebar = ({ openClass }) => {
                                                 </li>
                                             </ul>
                                         </li>
+                                        <li className={isActive.key == 6 ? "has-children active" : "has-children"}>
+                                            <span onClick={() => handleToggle(6)}  className="menu-expand"><i className="fi-rr-angle-small-down"></i></span>
+
+                                            <Link href="#"><a>Services</a></Link>
+                                            <ul className={isActive.key == 6 ? "sub-menu d-block" : "sub-menu d-none"}>
+                                                <li>
+                                                    <Link href="/service-single"><a><i className="fi fi-rr-stats" />Custom Clearance</a></Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/service-single"><a><i className="fi fi-rr-data-transfer" />Transportation</a></Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/service-single"><a><i className="fi fi-rr-paper-plane" />International Shipping</a></Link>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>

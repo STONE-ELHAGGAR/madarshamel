@@ -109,6 +109,16 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                 </li>
                                                 <li className="hr"><span /></li>
                                                 <li>
+                                                    <Link href="/dashboard/custom-clearance-form"><a><i className="fi fi-rr-stats" />Add Custom Clearance Request</a></Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/service-single"><a><i className="fi fi-rr-data-transfer" />Add Transportation Request</a></Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/service-single"><a><i className="fi fi-rr-paper-plane" />Add International Shipping Request</a></Link>
+                                                </li>
+                                                <li className="hr"><span /></li>
+                                                <li>
                                                     <Link href="/page-login"><a><i className="fi fi-rr-sign-out" />Logout</a></Link>
                                                 </li>
                                             </ul>

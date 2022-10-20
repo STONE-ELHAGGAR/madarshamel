@@ -1,0 +1,88 @@
+import React from 'react';
+import Layout from "../../components/layout/Layout";
+import Image from 'next/image';
+
+const CustomClearanceForm = () => {
+  return (
+    <>
+    <Layout>
+        <div className="container-fluid backgrounded-con float-start px-3 py-3">
+          <div className="container">
+            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 float-start">
+              <form action="#">
+                <h3 className="text-center">Custom Clearance Request</h3>
+                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
+                  <h4 className="text-center">Request Details</h4>
+                  <label className="mt-20">Choose company name</label>
+                  <select className="form-control display-1">
+                    <option>Company Name</option>
+                    <option>Company Name</option>
+                    <option>Company Name</option>
+                  </select>
+                  <label className="mt-20">Branch</label>
+                  <select className="form-control display-1">
+                    <option>Branch</option>
+                    <option>Branch</option>
+                    <option>Branch</option>
+                  </select>
+                  <label className="mt-20">Transaction Place</label>
+                  <select className="form-control display-1">
+                    <option>Transaction Place</option>
+                    <option>Transaction Place</option>
+                    <option>Transaction Place</option>
+                  </select>
+                  <label className="mt-20">Shipping Port</label>
+                  <select className="form-control display-1">
+                    <option>Shipping Port</option>
+                    <option>Shipping Port</option>
+                    <option>Shipping Port</option>
+                  </select>
+                  <label className="mt-20">Reciving Port</label>
+                  <select className="form-control display-1">
+                    <option>Reciving Port</option>
+                    <option>Reciving Port</option>
+                    <option>Reciving Port</option>
+                  </select>
+                  <label className="mt-20">Source Country</label>
+                  <select className="form-control display-1">
+                    <option>Source Country</option>
+                    <option>Source Country</option>
+                    <option>Source Country</option>
+                  </select>
+                  <label className="mt-20">Expected Ship Date</label>
+                  <input type="date" className="form-control display-1" name="meeting-time" />
+                  <input className="form-control mt-20 display-1" name="shipping-port" placeholder="Shipping Port" />
+                </div>
+                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
+                  <h4 className="text-center">Documents</h4>
+                  <input className="form-control mt-20 display-1" name="main-policy" placeholder="Main Policy" />
+                  <input className="form-control mt-20 display-1" name="quantity" placeholder="Quantity" />
+                  <input className="form-control mt-20 display-1" name="type" placeholder="Type" />
+                  <input className="form-control mt-20 display-1" name="weight" placeholder="Weight" />
+                  <input className="form-control mt-20 display-1" name="weight-type" placeholder="Weight Type" />
+                  <input className="form-control mt-20 display-1" name="container-size" placeholder="Container Size" />
+                  <input className="form-control mt-20 display-1" name="container-temp" placeholder="Container Temprature" />
+                  <textarea className="form-control mt-20 display-1" name="details" placeholder="Additional Details"></textarea>
+                  <div className="text-center bg-white mt-20 px-5 py-5 drag-and-drop">
+                    <i className="fi fi-rr-file" />
+                    <p>Drag Your File here OR Click To Choose</p>
+                  </div>
+                </div>
+                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
+                  <div className="text-center bg-white mt-20 px-5 py-5 drag-and-drop">
+                    <i className="fi fi-rr-plus" />
+                    <i className="fi fi-rr-file" />
+                    <p>Add New File</p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </Layout>
+  </>
+  );
+}
+
+
+export default CustomClearanceForm;
