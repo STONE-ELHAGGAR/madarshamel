@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from "../../components/layout/Layout";
 import LineChart from "../../components/elements/LineChart";
 import PieChart from "../../components/elements/PieChart";
+import Link from 'next/link';
 import Image from 'next/image';
 
 
@@ -139,6 +140,152 @@ const App = () => {
             </div>
           </div>
         </div>
+
+        <div className="container-fluid backgrounded-con float-start px-3 py-3">
+          <div className="container">
+            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2 py-2 float-start">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-white px-3 py-3 float-start">
+                <h5>
+                  Custom Clearance Requests
+                  <Link href="/dashboard/custom-clearance-form">
+                    <a className="btn btn-square float-end">
+                      Add New
+                    </a>
+                  </Link>
+                </h5>
+
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+
+                <Link href="#">
+                  <a className="btn btn-square container-fluid float-end">
+                    View All
+                  </a>
+                </Link>
+
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2 py-2 float-start">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-white px-3 py-3 float-start">
+                <h5>
+                  Transportation Requests
+                  <Link href="/dashboard/transportation-form">
+                    <a className="btn btn-square float-end">
+                      Add New
+                    </a>
+                  </Link>
+                </h5>
+
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="container-fluid float-start">
+                  <div className="container-fluid h5 px-3 py-3 float-start">
+                    <Link href="#">
+                      <a className="container-fluid float-start">
+                        Request title example
+                        <i className="fi-rr-caret-right float-end"></i>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+
+                <Link href="#">
+                  <a className="btn btn-square container-fluid float-end">
+                    View All
+                  </a>
+                </Link>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
     </Layout>
   </>
   );
