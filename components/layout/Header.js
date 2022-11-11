@@ -2,8 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/router';
+const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
+
+
 const Header = ({ handleOpen, headerStyle }) => {
+    const router = useRouter();
     const [scroll, setScroll] = useState(0)
+    const [logged , setLogged] = useState(false);
     useEffect(() => {
         document.addEventListener("scroll", () => {
             const scrollCheck = window.scrollY > 100
@@ -11,7 +17,23 @@ const Header = ({ handleOpen, headerStyle }) => {
                 setScroll(scrollCheck)
             }
         })
+        sessionStorage.setItem('files','');
+        sessionStorage.setItem('attachedFiles','');
+        checkIfLoggedIn()
+            .then((result) => {
+                if(result){
+                    setLogged(true);
+                    console.log('Loggedin');
+                }else{
+                    setLogged(false);
+                    console.log('Not Loggedin');
+                }
+            })
     })
+    const handleLogout = () => {
+        sessionStorage.removeItem('loginData');
+        router.push({ pathname: '/page-login' })
+    }
     return (
         <>
             <header className={scroll ? `${headerStyle} header sticky-bar stick ` : `${headerStyle} header sticky-bar`}>
@@ -87,13 +109,15 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                 </li>
                                             </ul>
                                         </li>
+
+                                        {(logged) ? (
                                         <li className="has-children">
                                             <div className="mobile-header-top float-start px-3 py-3 logged-in-user">
                                                 <div className="user-account">
                                                     <img src="/assets/imgs/template/ava_1.png" alt="Madarshamel" />
                                                     <div className="content">
                                                         <h6 className="user-name">
-                                                            <span className="text-brand">Hossam</span>
+                                                            <span className="text-brand">{(sessionStorage.getItem('loginData')) ? JSON.parse(sessionStorage.getItem('loginData')).data.name : ''}</span>
                                                             <span className="fi-rr-caret-down"></span>
                                                         </h6>
                                                         <p className="font-xs text-muted">5 Notfications</p>
@@ -109,17 +133,12 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                 </li>
                                                 <li className="hr"><span /></li>
                                                 <li>
-                                                    <Link href="/dashboard/custom-clearance-form"><a><i className="fi fi-rr-stats" />Add Custom Clearance Request</a></Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/dashboard/transportation-form"><a><i className="fi fi-rr-data-transfer" />Add Transportation Request</a></Link>
-                                                </li>
-                                                <li className="hr"><span /></li>
-                                                <li>
-                                                    <Link href="/page-login"><a><i className="fi fi-rr-sign-out" />Logout</a></Link>
+                                                    <a onClick={handleLogout}><i className="fi fi-rr-sign-out" />Logout</a>
                                                 </li>
                                             </ul>
                                         </li>
+                                        ) : ''}
+
                                     </ul>
                                 </nav>
                                 <div className="burger-icon burger-icon-white" onClick={handleOpen}>
