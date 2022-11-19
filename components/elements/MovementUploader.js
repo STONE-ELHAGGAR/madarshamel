@@ -2,6 +2,7 @@ const attachedFilesFullData = [];
 const previousFiles = [];
 
 const handleSaveFile = async (e) => {
+  if (typeof window !== 'undefined') {
   e.preventDefault();
   const mainPolicy= document.querySelector('.mainPolicy').value;
   const quantity= document.querySelector('.quantity').value;
@@ -12,9 +13,23 @@ const handleSaveFile = async (e) => {
   const containerSize= document.querySelector('.containerSize').value;
   const containerTemp= document.querySelector('.containerTemp').value;
   const details= document.querySelector('.details').value;
+  const activeIndex= document.querySelector('.activeIndex').value;
   const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
 
-  const fileRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/files/create', {
+  let requestContent = {
+    mainPolicy: mainPolicy,
+    quantity: quantity,
+    type: type,
+    weight: weight,
+    weightType: weightType,
+    containerNumber: containerNumber,
+    containerSize: containerSize,
+    containerTemp: containerTemp,
+    details: details,
+    files: sessionStorage.getItem('files')
+  };
+  console.log(requestContent);
+  const fileRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/movements/create', {
     method: 'POST',
     headers: {
         'Accept': 'application/json',
@@ -22,16 +37,10 @@ const handleSaveFile = async (e) => {
         'Authorization': accessToken
     },
     body: JSON.stringify({
-      mainPolicy: mainPolicy,
-      quantity: quantity,
-      type: type,
-      weight: weight,
-      weightType: weightType,
-      containerNumber: containerNumber,
-      containerSize: containerSize,
-      containerTemp: containerTemp,
-      details: details,
-      files: sessionStorage.getItem('files')
+      content: JSON.stringify(requestContent),
+      type: 'attachedFile',
+      requestType: 'custom-clearance',
+      requestId: activeIndex,
     })
     });
   const content = await fileRequest.json();
@@ -52,37 +61,11 @@ const handleSaveFile = async (e) => {
       document.querySelector(".uploadedFiles").innerHTML = '';
       sessionStorage.setItem('files','');
       
-      document.getElementById('noFilesMsg').innerHTML = '';
-
-      const attachedFiles = '';
-
-      if(content.file.files){
-        Object.values(JSON.parse(content.file.files)).map((attachedFile) => {
-          attachedFiles += '<p><h6><i class="fi fi-rr-file"></i> ' + attachedFile + '</h6></p>';
-        });
-      }
-      attachedFilesFullData.push(content.file._id);
-      const attachedFilesFullDataJson = { ...attachedFilesFullData };
-      sessionStorage.setItem('attachedFiles',JSON.stringify(attachedFilesFullDataJson));
-      console.log(sessionStorage.getItem('attachedFiles'));
-      document.getElementById('tableBodyData').innerHTML =
-      document.getElementById('tableBodyData').innerHTML +
-      '<tr><th scope="row">'+content.file._id+'</th>\
-      <td>'+content.file.mainPolicy+'</td>\
-      <td>'+content.file.quantity+'</td>\
-      <td>'+content.file.type+'</td>\
-      <td>'+content.file.weight+'</td>\
-      <td>'+content.file.weightType+'</td>\
-      <td>'+content.file.containerNumber+'</td>\
-      <td>'+content.file.containerSize+'</td>\
-      <td>'+content.file.containerTemp+'</td>\
-      <td>'+content.file.details+'</td>\
-      <td>'+attachedFiles+'</td>\
-      </tr>';
       previousFiles = [];
   }else{
       document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please fill all fields correctly OR try again</div>';
   }
+}
 }
 
 const handleUploader = async (e) => {
@@ -120,11 +103,11 @@ const handleUploader = async (e) => {
       }
 }
 
-const Uploader = () => {
+const MovementUploader = ({id}) => {
     return (
         
-        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
-        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start">
+        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start">
+        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start">
           <h4 className="text-center">Files</h4>
           <div className="alert-data"> </div>
           <input className="form-control mt-20 display-1 mainPolicy" name="mainPolicy" placeholder="Main Policy" />
@@ -141,35 +124,14 @@ const Uploader = () => {
             <div className="uploadedFiles col-12 float-start">
               
             </div>
+            <input type="hidden" name="activeIndex" className="activeIndex" value={id} id="activeIndex" />
             <input type="file" name="file" accept=".png, .jpeg, .jpg, .pdf" onChange={handleUploader} id="fileUploadData" />
           </form>
           <br /><br />
-          <button className="btn btn-square" onClick={handleSaveFile}>Add</button>
-        </div>
-        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2 py-2 float-start tableCon">
-          <table className="table table-bordered col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Main Policy</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Type</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Weight Type</th>
-                <th scope="col">Container Number</th>
-                <th scope="col">Container Size</th>
-                <th scope="col">Container Temprature</th>
-                <th scope="col">Additional Details</th>
-                <th scope="col">Attached Files</th>
-              </tr>
-            </thead>
-            <tbody id="tableBodyData">
-            </tbody>
-          </table>
-          <h5 id="noFilesMsg">No Files Attached</h5>
+          <button className="btn btn-square" onClick={handleSaveFile}>Attach</button>
         </div>
       </div>
     )
 };
 
-export default Uploader;
+export default MovementUploader;

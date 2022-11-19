@@ -57,9 +57,87 @@ select {
     border: 0px;
     border-right: 1px solid #e5e5e5;
   }
+
 table {
     border: 1px solid #333;
 }
 thead, tr,td {
     border: 1px solid #333;
+}
+
+.settingsTab {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #f1f3f8;
+    font-size: 17px;
+    cursor: pointer;
+    &:hover{
+        background: #101828;
+        color: #fff;
+        font-weight: bold;
+    }
+}
+.activeSettingsTab {
+    background: #101828;
+    color: #fff;
+    font-weight: bold;
+}
+
+.a4 {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    min-height: 297mm;
+    background: #fff;
+    padding: 10px;
+    margin: auto;
+    h6,h5 {
+        font-weight: bold;
+    }
+    .requestTitle {
+        width: 210px;
+        margin: auto;
+        background: #E7E6E6;
+        text-align: center;
+        font-weight: bold;
+    }
+    .backgrounded-table {
+        background: #E7E6E6;
+        margin-bottom: 10px;
+    }
+    td {
+        padding: 2px  !important;
+    }
+    .table-borderless {
+        border-bottom: 3px solid #000000 !important;
+        border: 0px;
+        text-align: center;
+        thead, tr,td {
+            border: 0px !important;
+            padding: 0px  !important;
+        }
+    }
+    .conTT {
+        background: #fff;
+        font-size: 13px;
+        padding: 0px !important;
+        word-break: break-all;
+        text-align: center;
+        table{
+            border: 0px !important;
+            margin-bottom: 0px !important;
+        }
+    }
+    .p30i{
+        padding: 15px !important;
+    }
+    .p30ii{
+        padding: 20px !important;
+    }
+    .p30{
+        padding: 68px !important;
+    }
+    .tipData {
+        font-size: 13px;
+    }
 }

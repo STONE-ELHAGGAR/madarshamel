@@ -9,7 +9,7 @@ const Users = require('./../models/users');
 //JsonWebToken to create access token
 const authJWT = require('./../../util/authJWT');
 
-router.post('/create', authJWT.verify([]), async (req,res,next) => {
+router.post('/create', authJWT.verify(['original-user','custom-clearance','super-admin']), async (req,res,next) => {
     const {companyName, branch, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, attachedFiles} = req.body;
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
     const user = await Users.findById(req.userId);
@@ -26,15 +26,21 @@ router.post('/create', authJWT.verify([]), async (req,res,next) => {
     }
 });
 
-router.post('/read', authJWT.verify([]), async (req,res,next) => {
+router.post('/read', authJWT.verify(
+    ['same-as-u-id','custom-clearance','super-admin'], //Creds
+    ['_id'], //Needed Params to auth
+    'custom_clearance' //Model Name
+    ), async (req,res,next) => {
     const { _id } = req.body;
     try{
         const custom_clearance = await Custom_clearance.findById(req.body._id);
         const user = await Users.findById(custom_clearance.u_id);
-        const files = await Files.find( { _id : { $in : Object.values(JSON.parse(custom_clearance.attachedFiles)) } } );
+        //const files = await Files.find( { _id : { $in : Object.values(JSON.parse(custom_clearance.attachedFiles)) } } );
         const name = user.name;
-        console.log('Founded Custom Clearance Request '+custom_clearance._id+ ' ,And It`s "FILES"');
-        return res.status(200).json({ success: true, custom_clearance: custom_clearance, name: name, files: files});
+        //console.log('Founded Custom Clearance Request '+custom_clearance._id+ ' ,And It`s "FILES"');
+        console.log('Founded Custom Clearance Request '+custom_clearance._id);
+        //return res.status(200).json({ success: true, custom_clearance: custom_clearance, name: name, files: files});
+        return res.status(200).json({ success: true, custom_clearance: custom_clearance, name: name});
     }catch(e){
         return res.status(404).json({ message: 'Something went wrong' ,_id: _id ,error: e });
     }

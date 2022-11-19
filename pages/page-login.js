@@ -2,25 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import Layout from "../components/layout/Layout";
-const checkIfLoggedIn = require('./../util/checkIfLoggedIn');
 import { useRouter } from 'next/router';
 
 function Login() {
     const router = useRouter();
-    const [logged , setLogged] = useState(false);
-    // Similar to componentDidMount and componentDidUpdate:
-    useEffect(() => {
-        checkIfLoggedIn()
-            .then((result) => {
-                if(result){
-                    setLogged(true);
-                    router.push({ pathname: '/dashboard' })
-                }else{
-                    console.log('NOT Loggedin');
-                    setLogged(false);
-                }
-            })
-    });
     const handleLogin = async () => {
         const email = document.querySelector(".email").value;
         const password = document.querySelector(".password").value;
@@ -42,12 +27,10 @@ function Login() {
         }
     }
 
-    const LoggedInComponent = () => {
-        return false;
-    }
-    const NotLoggedInComponent = () => {
-        return (
-            <section className="section-box">
+    return (
+        <>
+            <Layout userCreds={[]} params={[]} modelName='' forNewUsers={1}>
+                <section className="section-box">
                     <div className="bg-2-opacity-80">
                         <div className="box-login">
                             <div className="row">
@@ -84,12 +67,6 @@ function Login() {
                         </div>
                     </div>
                 </section>
-        )
-    }
-    return (
-        <>
-            <Layout>
-                {((logged) ? <LoggedInComponent /> : <NotLoggedInComponent /> )}
             </Layout>
 
         </>

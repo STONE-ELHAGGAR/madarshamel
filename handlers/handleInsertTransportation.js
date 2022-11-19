@@ -11,7 +11,7 @@ const handleInsertTransportation = async (e) => {
   const carCost= document.querySelector('.carCost').value;
   const transferData= document.querySelector('.transferData').value;
   const expectedShipDate= document.querySelector('.expectedShipDate').value;
-  const attachedFiles= sessionStorage.getItem('attachedFiles');
+  const attachedFiles= '';//sessionStorage.getItem('attachedFiles');
   const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
   const requestBody = {
     companyName: companyName,

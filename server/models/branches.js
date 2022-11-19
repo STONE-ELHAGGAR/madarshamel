@@ -1,23 +1,18 @@
 const mongoose = require( "mongoose");
 const ModelSchema = new mongoose. Schema ({
-    content:
-        {
-            type: String,
-            required: true
-        },
-    type: //Contain (MSG, File, Edit ... etc)
+    name:
         {
             type: String,
             required: true,
             maxlength: 255
         },
-    requestType: //Contain (custom-clearance, transportation)
+    address:
         {
             type: String,
             required: true,
             maxlength: 255
         },
-    requestId:
+    belongsTo:
         {
             type: String,
             required: true,
@@ -36,5 +31,5 @@ const ModelSchema = new mongoose. Schema ({
             maxlength: 255
         }
 })
-const Model = mongoose. model('Movements', ModelSchema);
+const Model = mongoose. model('Branches', ModelSchema);
 module.exports = Model;

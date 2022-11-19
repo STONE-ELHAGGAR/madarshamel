@@ -8,11 +8,11 @@ const Files = require('./../models/files');
 const authJWT = require('./../../util/authJWT');
 
 router.post('/create', authJWT.verify([]), async (req,res,next) => {
-    const {mainPolicy, quantity, type, files, weight, weightType, containerSize, containerTemp, details} = req.body;
+    const {mainPolicy, quantity, type, files, weight, weightType, containerSize, containerNumber, containerTemp, details} = req.body;
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
-    const user = await Users.findOne(req.userId);
+    const user = await Users.findById(req.userId);
     const u_id = user.id;
-    const file = Files({mainPolicy, quantity, type, weight, weightType, containerSize, containerTemp, details, files, created_at, u_id});
+    const file = Files({mainPolicy, quantity, type, weight, weightType, containerSize, containerNumber, containerTemp, details, files, created_at, u_id});
 
     try {
         await file.save(function(err,fileData) {

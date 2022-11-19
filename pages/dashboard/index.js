@@ -4,7 +4,6 @@ import LineChart from "../../components/elements/LineChart";
 import PieChart from "../../components/elements/PieChart";
 import Link from 'next/link';
 import Image from 'next/image';
-const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 import { useRouter } from 'next/router';
 
 
@@ -67,40 +66,24 @@ const ChartDataPie = {
 }
 
 const App = () => {
-  const router = useRouter();
-  const [logged , setLogged] = useState(false);
-  // Similar to componentDidMount and componentDidUpdate:
-  useEffect(() => {
-      checkIfLoggedIn()
-          .then((result) => {
-              if(result){
-                setLogged(true);
-                console.log('Loggedin');
-              }else{
-                setLogged(false);
-                console.log('Not Loggedin');
-                router.push({ pathname: '/page-login' })
-              }
-          })
-  });
-  const NotLoggedInComponent = () => {
-    return false;
-  }
-  const LoggedInComponent = () => {
-    return (
-      <>
+  return (
+    <>
+    <Layout userCreds={['original-user','custom-clearance','super-admin']} params={[]} modelName='' forNewUsers={0}>
       <div className="container-fluid backgrounded-con float-start px-3 py-3">
         <div className="container">
           <div className="col-12 px-3 py-3 float-start" style={{background: '#fff'}}>
               <ul className="nav nav-pills nav-fill col-12 float-start">
                   <li className="nav-item">
-                      <Link href="/dashboard"><a className="nav-link h5"><i className="fi fi-rr-user"></i> Dashboard</a></Link>
+                      <Link href="/dashboard"><a className="nav-link"><i className="fi fi-rr-user"></i> Dashboard</a></Link>
                   </li>
                   <li className="nav-item">
-                      <Link href="/dashboard/custom-clearance-form"><a className="nav-link h5"><i className="fi fi-rr-stats"></i> Add Custom Clearance</a></Link>
+                      <Link href="/dashboard/custom-clearance-form"><a className="nav-link"><i className="fi fi-rr-stats"></i> Add Custom Clearance</a></Link>
                   </li>
                   <li className="nav-item">
-                      <Link href="/dashboard/transportation-form"><a className="nav-link h5"><i className="fi fi-rr-data-transfer"></i> Add Transportation</a></Link>
+                      <Link href="/dashboard/transportation-form"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> Add Transportation</a></Link>
+                  </li>
+                  <li className="nav-item">
+                      <Link href="/dashboard/dashboardSettings"><a className="nav-link"><i className="fi fi-rr-edit"></i> Dashboard Settings</a></Link>
                   </li>
               </ul>
           </div>
@@ -324,13 +307,6 @@ const App = () => {
           </div>
         </div>
       </div>
-      </>
-)
-  }
-  return (
-    <>
-    <Layout>
-      {((logged) ? <LoggedInComponent /> : <NotLoggedInComponent /> )}
     </Layout>
   </>
   );

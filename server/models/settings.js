@@ -3,21 +3,16 @@ const ModelSchema = new mongoose. Schema ({
     content:
         {
             type: String,
-            required: true
+            required: true,
+            maxlength: 255
         },
-    type: //Contain (MSG, File, Edit ... etc)
+    field:
         {
             type: String,
             required: true,
             maxlength: 255
         },
-    requestType: //Contain (custom-clearance, transportation)
-        {
-            type: String,
-            required: true,
-            maxlength: 255
-        },
-    requestId:
+    belongsTo:
         {
             type: String,
             required: true,
@@ -36,5 +31,5 @@ const ModelSchema = new mongoose. Schema ({
             maxlength: 255
         }
 })
-const Model = mongoose. model('Movements', ModelSchema);
+const Model = mongoose. model('Settings', ModelSchema);
 module.exports = Model;

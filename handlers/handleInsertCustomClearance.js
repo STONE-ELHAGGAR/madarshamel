@@ -8,7 +8,7 @@ const handleInsertCustomClearance = async (e) => {
   const recivingPort= document.querySelector('.recivingPort').value;
   const sourceCountry= document.querySelector('.sourceCountry').value;
   const expectedShipDate= document.querySelector('.expectedShipDate').value;
-  const attachedFiles= sessionStorage.getItem('attachedFiles');
+  const attachedFiles= '';//sessionStorage.getItem('attachedFiles');
   const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
   const requestBody = {
     companyName: companyName,

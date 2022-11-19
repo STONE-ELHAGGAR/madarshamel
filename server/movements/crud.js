@@ -16,11 +16,20 @@ router.post('/create', authJWT.verify([]), async (req,res,next) => {
 
     try {
         await movements.save(function(err,movementData) {
-            console.log('Inserted Movement '+movementData._id);
+            console.log('Inserted Movement '+movementData._id+' Type '+movementData.type);
             res.json({success: true,movement: movementData});
         });
     }catch(e) {
         return res.status(500).json({ message: 'Something went wrong' });
+    }
+});
+router.post('/readById', authJWT.verify([]), async (req,res,next) => {
+    const {id} = req.body;
+    try {
+        let movementsData = await Movements.find( { _id: id } );
+        res.json({success: true,movements: movementsData});
+    }catch(e) {
+        return res.status(500).json({ message: 'Something went wrong' ,error: e});
     }
 });
 

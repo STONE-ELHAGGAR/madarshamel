@@ -1,0 +1,23 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Image from 'next/image';
+import Layout from "./../../components/layout/Layout";
+
+const allUsers = () => {
+return (
+    <>
+        <Layout userCreds={['super-admin']} params={[]} modelName='' forNewUsers={0}>
+            <div className="container-fluid backgrounded-con float-start px-3 py-3">
+                <div className="container">
+                    <div className="col-12 px-3 py-3 float-start" style={{background: 'rgb(255, 255, 255)'}}>
+                        users
+                    </div>
+                </div>
+            </div>
+        </Layout>
+    </>
+    );
+}
+
+export default allUsers;

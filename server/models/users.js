@@ -38,6 +38,10 @@ const ModelSchema = new mongoose. Schema ({
         {
             type: String,
             required: true
+        },
+    debtLimit:
+        {
+            type: String
         }
 })
 const Model = mongoose. model('Users', ModelSchema);

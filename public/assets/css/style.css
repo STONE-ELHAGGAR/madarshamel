@@ -7042,6 +7042,68 @@ table {
 thead, tr, td {
   border: 1px solid #333; }
 
+.settingsTab {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #f1f3f8;
+  font-size: 17px;
+  cursor: pointer; }
+  .settingsTab:hover {
+    background: #101828;
+    color: #fff;
+    font-weight: bold; }
+
+.activeSettingsTab {
+  background: #101828;
+  color: #fff;
+  font-weight: bold; }
+
+.a4 {
+  width: 210mm;
+  height: 297mm;
+  max-height: 297mm;
+  min-height: 297mm;
+  background: #fff;
+  padding: 10px;
+  margin: auto; }
+  .a4 h6, .a4 h5 {
+    font-weight: bold; }
+  .a4 .requestTitle {
+    width: 210px;
+    margin: auto;
+    background: #E7E6E6;
+    text-align: center;
+    font-weight: bold; }
+  .a4 .backgrounded-table {
+    background: #E7E6E6;
+    margin-bottom: 10px; }
+  .a4 td {
+    padding: 2px  !important; }
+  .a4 .table-borderless {
+    border-bottom: 3px solid #000000 !important;
+    border: 0px;
+    text-align: center; }
+    .a4 .table-borderless thead, .a4 .table-borderless tr, .a4 .table-borderless td {
+      border: 0px !important;
+      padding: 0px  !important; }
+  .a4 .conTT {
+    background: #fff;
+    font-size: 13px;
+    padding: 0px !important;
+    word-break: break-all;
+    text-align: center; }
+    .a4 .conTT table {
+      border: 0px !important;
+      margin-bottom: 0px !important; }
+  .a4 .p30i {
+    padding: 15px !important; }
+  .a4 .p30ii {
+    padding: 20px !important; }
+  .a4 .p30 {
+    padding: 68px !important; }
+  .a4 .tipData {
+    font-size: 13px; }
+
 @media (min-width: 1400px) {
   .block-we-do {
     padding-left: 40px; }

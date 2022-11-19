@@ -3,14 +3,19 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
 import Layout from "./../../../components/layout/Layout";
+import Bank from "./../../../components/elements/Bank";
+import MovementUploader from "./../../../components/elements/MovementUploader";
 const handleCustomClearanceActiveIndex = require('./../../../handlers/handleCustomClearanceActiveIndex');
 //Table Socket Requirments
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 import ReactHtmlParser from 'react-html-parser';
 
+/*const handleTableReader = require('./../../../handlers/handleTableReader');
 
-
+handleTableReader('6374733b476304ed31e64069', 'id','/api/company/readById').then((result) => {
+    
+})*/
 const handleSendMessage = async (e) => {
     e.preventDefault();
     const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
@@ -74,7 +79,7 @@ const CustomClearanceRequestData = () => {
     const [receivedTableData ,setReceivedTableData] = useState('');
     const [accessToken ,setAccessToken] = useState('');
     const [activeIndex ,setActiveIndex] = useState(0);
-    const [activeTab ,setActiveTab] = useState(1);
+    const [activeTabCon ,setActiveTabCon] = useState(1);
 
     //Handle Table Socket
     const cc_send_accessToken_i_id = () => {
@@ -88,50 +93,25 @@ const CustomClearanceRequestData = () => {
     socketInterval;
 
     useEffect(() => {
-        socket.on('cc_receive_table_data', (data) => {
-            if(data.data.length > 0){
-                const replaceData = '';
-                data.data.map((movement) => {
-                    if(movement.type == 'message'){
-                        movement.type = 'Message';
-                    }
-                    if(movement.type == 'serviceAlert'){
-                        movement.type = 'Service Alert';
-                    }
-                    replaceData +=
-                    '<div class="col-12 px-3 py-3 mt-3 float-start" style="background: #fff">\
-                        <h5 style="border-bottom: 1px solid #ddd;padding-bottom: 10px;margin-bottom: 10px;">'+movement.type+' from '+movement.u_id+'</h5><h6>'
-                            +movement.content+
-                    '</h6></div>';
-                })
-                setReceivedTableData(replaceData);
-            }
-        })
+            socket.on('cc_receive_table_data', (data) => {
+                setReceivedTableData(data.replaceData);
+            })
     },[socket]);
 
 
-
+    /*useEffect(() => {
+        
+    }, [id]);*/
+    
+    // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
+        setAccessToken(JSON.parse(sessionStorage.getItem('loginData')).data.accessToken);
         if (id) {
             handleCustomClearanceActiveIndex(id).then((result) => {
                 (result) ? true : router.push({ pathname: '/404' }) ;
             })
             setActiveIndex(id);
         }
-    }, [id]);
-    
-    // Similar to componentDidMount and componentDidUpdate:
-    useEffect(() => {
-        setAccessToken(JSON.parse(sessionStorage.getItem('loginData')).data.accessToken);
-
-        //TAB Change Message
-        const message = document.getElementById('messageTab');
-        const serviceAlert = document.getElementById('serviceAlertTab');
-        const attachFile = document.getElementById('attachFileTab');
-        const tabCon = document.getElementById('tabCon');
-        message.addEventListener('click',() => {setActiveTab(1);})
-        attachFile.addEventListener('click',() => {setActiveTab(2);})
-        serviceAlert.addEventListener('click',() => {setActiveTab(3);})
     })
     const SendMessageComponent = () => {
         return (
@@ -154,11 +134,11 @@ const CustomClearanceRequestData = () => {
         );
     }
     const SendAttachFileComponent = () => {
-        return (<div><h2>AttachFile</h2></div>);
+        return (<div><MovementUploader id={activeIndex} /></div>);
     }
     return (
         <>
-            <Layout>
+            <Layout userCreds={['same-as-u-id','custom-clearance','super-admin']} params={[]} modelName='' forNewUsers={0}>
                 <div className="container-fluid px-3 py-3 float-start backgrounded-con">
                     <div className="container">
                         <h3>Custom Clearance Request</h3>
@@ -167,34 +147,20 @@ const CustomClearanceRequestData = () => {
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
                                 <ul className="nav nav-pills nav-fill col-12 float-start">
                                     <li className="nav-item">
-                                        <a className="nav-link h5" href="#"><i className="fi fi-rr-file"></i> Download PDF</a>
+                                        <div className={((activeTabCon === 1) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="messageTab" onClick={() => {setActiveTabCon(1)}}>Message</div>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link h5" href="#"><i className="fi fi-rr-list"></i> Full Report</a>
+                                        <div className={((activeTabCon === 2) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="attachFileTab" onClick={() => {setActiveTabCon(2)}}>Attach File</div>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link h5" href="#"><i className="fi fi-rr-edit"></i> Edit</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
-                                <ul className="nav nav-pills nav-fill col-12 float-start">
-                                    <li className="nav-item">
-                                        <div className={((activeTab === 1) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="messageTab">Message</div>
-                                    </li>
-                                    <li className="nav-item">
-                                        <div className={((activeTab === 2) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="attachFileTab">Attach File</div>
-                                    </li>
-                                    <li className="nav-item">
-                                        <div className={((activeTab === 3) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="serviceAlertTab">Service Alert (SECRET)</div>
+                                        <div className={((activeTabCon === 3) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="serviceAlertTab" onClick={() => {setActiveTabCon(3)}}>Service Alert (SECRET)</div>
                                     </li>
                                 </ul>
                                 <div className="container-fluid float-start" id="tabCon">
-                                    {((activeTab === 1) ? <SendMessageComponent /> : ((activeTab === 2) ? <SendAttachFileComponent /> : <SendAlertComponent /> ) )}
+                                    {((activeTabCon === 1) ? <SendMessageComponent /> : ((activeTabCon === 2) ? <SendAttachFileComponent /> : <SendAlertComponent /> ) )}
                                 </div>
                             </div>
-                            {ReactHtmlParser(receivedTableData)}
+                            <div id="tableMirrorData">{ReactHtmlParser(receivedTableData)}</div>
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
                                 <h4>Request Details</h4>
                                 <table className="table table-striped">
@@ -253,18 +219,7 @@ const CustomClearanceRequestData = () => {
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-xs-12 col-sm-12 px-2 py-2 float-start">
-                            <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
-                                <h5 className="text-center">Ahmed Elhaggar</h5>
-                                <h5>Balance: <code>10000</code> SAR | Debt: <code>0</code> SAR</h5><br />
-                                <h5>Bank Request</h5>
-                                <input type="text" placeholder="amount" name="amount" className="form-control amount"/><br />
-                                <select name="case" className="form-control case">
-                                    <option value="0">Withdraw</option>
-                                    <option value="1">Deposit</option>
-                                </select><br />
-                                <textarea placeholder="Additional Details" className="form-control additionalDetails"></textarea><br />
-                                <button className="btn btn-square">Create</button>
-                            </div>
+                            <Bank />
                         </div>
 
                     </div>

@@ -1,73 +1,42 @@
 const mongoose = require( "mongoose");
 const ModelSchema = new mongoose. Schema ({
-    mainPolicy:
+    name:
         {
             type: String,
             required: true,
             maxlength: 255
         },
-    quantity:
+    mobile:
         {
             type: String,
             required: true,
             maxlength: 255
         },
-    type:
+    truck:
         {
             type: String,
             required: true,
             maxlength: 255
         },
-    weight:
+    nid:
         {
             type: String,
             required: true,
             maxlength: 255
-        },
-    weightType:
-        {
-            type: String,
-            required: true,
-            maxlength: 255
-        },
-    containerNumber:
-        {
-            type: String,
-            required: true,
-            maxlength: 255
-        },
-    containerSize:
-        {
-            type: String,
-            required: true,
-            maxlength: 255
-        },
-    containerTemp:
-        {
-            type: String,
-            required: true,
-            maxlength: 255
-        },
-    details:
-        {
-            type: String,
-            required: true
-        },
-    u_id:
-        {
-            type: String,
-            required: true
         },
     created_at:
         {
             type: String,
-            required: true
+            required: true,
+            maxlength: 255
         },
-    files:
+    u_id:
         {
-            type: String
+            type: String,
+            required: true,
+            maxlength: 255
         }
         
 })
-const Model = mongoose. model('Files', ModelSchema);
+const Model = mongoose. model('Drivers', ModelSchema);
 module.exports = Model;

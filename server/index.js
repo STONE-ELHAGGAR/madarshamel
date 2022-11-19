@@ -9,6 +9,10 @@ const custom_clearance = require("./custom_clearance/crud");
 const transportation = require("./transportation/crud");
 const uploader = require("./uploader/crud");
 const movements = require("./movements/crud");
+const settings = require("./settings/crud");
+const branches = require("./branches/crud");
+const company = require("./company/crud");
+const driver = require("./driver/crud");
 const socketRouter = require("./socketRouter/index");
 
 
@@ -28,12 +32,22 @@ serverApp
     app.use('/api/transportation',transportation);
     app.use('/api/uploader',uploader);
     app.use('/api/movements',movements);
+    app.use('/api/settings',settings);
+    app.use('/api/branches',branches);
+    app.use('/api/company',company);
+    app.use('/api/driver',driver);
     app.use('/',socketRouter);
 
+    app.get('/api/download', function(req, res){
+      const {fileName} = req.query;
+      const file = `${__dirname}/../uploads/${fileName}`;
+      res.download(file); // Set disposition and send it.
+    });
+    
     app.get("*", (req, res) => {
       return handle(req, res);
     });
-
+    
     app.listen(PORT, err => {
       if (err) throw err;
       console.log(`>>>>>>> Ready on ${PORT}`);
