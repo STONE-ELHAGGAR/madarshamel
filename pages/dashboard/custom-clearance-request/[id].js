@@ -219,7 +219,7 @@ const CustomClearanceRequestData = () => {
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-xs-12 col-sm-12 px-2 py-2 float-start">
-                            <Bank />
+                            <Bank requestId={activeIndex} />
                         </div>
 
                     </div>

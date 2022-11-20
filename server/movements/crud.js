@@ -23,6 +23,20 @@ router.post('/create', authJWT.verify([]), async (req,res,next) => {
         return res.status(500).json({ message: 'Something went wrong' });
     }
 });
+router.post('/readByRequestId', authJWT.verify([]), async (req,res,next) => {
+    const {requestId} = req.body;
+    try {
+        let movementsData = await Movements.find( {
+            $and: [
+                {type: 'attachedFile'},
+                {requestId: requestId}
+            ]
+        } );
+        res.json({success: true,movements: movementsData});
+    }catch(e) {
+        return res.status(500).json({ message: 'Something went wrong' ,error: e});
+    }
+});
 router.post('/readById', authJWT.verify([]), async (req,res,next) => {
     const {id} = req.body;
     try {

@@ -7,6 +7,7 @@ const authRouter = require("./auth/authRouter");
 const files = require("./files/crud");
 const custom_clearance = require("./custom_clearance/crud");
 const transportation = require("./transportation/crud");
+const transactions = require("./transactions/crud");
 const uploader = require("./uploader/crud");
 const movements = require("./movements/crud");
 const settings = require("./settings/crud");
@@ -30,6 +31,7 @@ serverApp
     app.use('/api/files',files);
     app.use('/api/custom_clearance',custom_clearance);
     app.use('/api/transportation',transportation);
+    app.use('/api/transactions',transactions);
     app.use('/api/uploader',uploader);
     app.use('/api/movements',movements);
     app.use('/api/settings',settings);
