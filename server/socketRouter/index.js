@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
                         movements[movementId].content = movements[movementId].content;
                         let fileNames = '';
                         let contentFiles = JSON.parse(movements[movementId].content);
-                        let ccFiles = '<ul class="nav nav-pills nav-fill col-12 float-start"><li class="nav-item"><a class="nav-link h5" href="/dashboard/pdf-request/'+data.activeIndex+'/'+movements[movementId]._id+'"><i class="fi fi-rr-file"></i> Download PDF</a></li></ul>';
+                        let ccFiles = '<ul class="nav nav-pills nav-fill col-12 float-start"><li class="nav-item"><a class="nav-link h5" href="/dashboard/'+data.tableName+'-pdf-request/'+data.activeIndex+'/'+movements[movementId]._id+'"><i class="fi fi-rr-file"></i> Download PDF</a></li></ul>';
                         fileNames = '';
                             Object.values(JSON.parse(contentFiles.files)).map((fileName) => {
                             fileNames += '<a href="http://localhost:3000/api/download?fileName='+fileName+'" target="_blank">\

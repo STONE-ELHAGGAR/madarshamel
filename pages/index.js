@@ -70,13 +70,13 @@ function Home() {
                         </div>
                     </div>
                 </section>
-                <ModalVideo
+                {/*<ModalVideo
                     channel="youtube"
                     autoplay
                     isOpen={isOpen}
                     videoId="7e90gBu4pas"
                     onClose={() => setOpen(false)}
-                />
+                />*/}
             </Layout>
 
         </>

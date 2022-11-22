@@ -14,7 +14,8 @@ const handleBalance = async (u_id) => {
     });
   const content = await transactionsRequest.json();
   if(content.success) {
-      return content.currentBalance;
+    console.log(content)
+      return content;
   }else{
       console.log(content);
   }

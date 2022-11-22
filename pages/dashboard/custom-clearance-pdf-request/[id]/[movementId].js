@@ -57,7 +57,7 @@ const CustomClearanceRequestData = () => {
                         <tbody>
                             <tr>
                                 <td>Delivery note</td>
-                                <td>بيان تسليم</td>
+                                <td>بيان تسليم - تخليص</td>
                             </tr>
                         </tbody>
                     </table>

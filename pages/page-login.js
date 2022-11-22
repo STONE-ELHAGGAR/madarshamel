@@ -23,7 +23,7 @@ function Login() {
             console.log(JSON.parse(sessionStorage.getItem('loginData')));
             router.push({ pathname: '/dashboard' })
         }else{
-            document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please try again OR try another account</div>';
+            document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please activate your account Or and type your password correctly then try again (You may found Activation Message into email Spam folder)</div>';
         }
     }
 

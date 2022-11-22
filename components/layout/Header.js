@@ -120,7 +120,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                             <span className="text-brand">{(sessionStorage.getItem('loginData')) ? JSON.parse(sessionStorage.getItem('loginData')).data.name : ''}</span>
                                                             <span className="fi-rr-caret-down"></span>
                                                         </h6>
-                                                        <p className="font-xs text-muted">5 Notfications</p>
+                                                        {/*<p className="font-xs text-muted">5 Notfications</p>*/}
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,7 +129,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                     <Link href="/dashboard"><a className="closer"><i className="fi fi-rr-user" />Dashboard</a></Link>
                                                 </li>
                                                 <li>
-                                                    <Link href="/settings"><a><i className="fi fi-rr-settings" />Settings</a></Link>
+                                                    <Link href="/dashboard/settings"><a><i className="fi fi-rr-settings" />Settings</a></Link>
                                                 </li>
                                                 <li className="hr"><span /></li>
                                                 <li>

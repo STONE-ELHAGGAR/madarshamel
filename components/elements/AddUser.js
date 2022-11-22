@@ -16,6 +16,7 @@ const handleRegister = async () => {
   const password = document.querySelector(".password").value;
   const name = document.querySelector(".name").value;
   const mobile = document.querySelector(".mobile").value;
+  const debtLimit = document.querySelector(".debtLimit").value;
   const creds = JSON.stringify(checkedElementsArray);
   const registerRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/adminRegister', {
   method: 'POST',
@@ -23,7 +24,7 @@ const handleRegister = async () => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
   },
-  body: JSON.stringify({email: email, password: password, name: name, mobile: mobile, creds: creds})
+  body: JSON.stringify({email: email, password: password, debtLimit: debtLimit, name: name, mobile: mobile, creds: creds})
   });
   const content = await registerRequest.json();
   if(content.success) {
@@ -31,6 +32,7 @@ const handleRegister = async () => {
       document.querySelector(".password").value = '';
       document.querySelector(".name").value = '';
       document.querySelector(".mobile").value = '';
+      document.querySelector(".debtLimit").value = '';
       checkedElements.forEach( el => {
         el.checked = false;
       });
@@ -52,6 +54,7 @@ function Register() {
                     </div>
                     <div className="form-group"><input className="form-control name" type="text" placeholder="Your name *" />
                     </div>
+                    <div className="form-group"><input className="form-control debtLimit" type="text" placeholder="Debt Limit" /></div>
                     <div className="form-group"><input className="form-control mobile" type="text" placeholder="+966 55 555 5555" /></div>
                     <div className="form-group"><input className="form-control email" type="email" placeholder="user@example.com" /></div>
                     <div className="form-group"><input className="form-control password" type="password" placeholder="**********" /></div>

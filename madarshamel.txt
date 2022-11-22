@@ -1,2 +1,2 @@
-vercel build
+yarn global add @create-next-app/core
 yarn run build

@@ -1,7 +1,7 @@
 const attachedFilesFullData = [];
 const previousFiles = [];
 
-const handleSaveFile = async (e) => {
+const handleSaveFile = async (e,tableName) => {
   if (typeof window !== 'undefined') {
   e.preventDefault();
   const mainPolicy= document.querySelector('.mainPolicy').value;
@@ -39,7 +39,7 @@ const handleSaveFile = async (e) => {
     body: JSON.stringify({
       content: JSON.stringify(requestContent),
       type: 'attachedFile',
-      requestType: 'custom-clearance',
+      requestType: tableName,
       requestId: activeIndex,
     })
     });
@@ -103,7 +103,7 @@ const handleUploader = async (e) => {
       }
 }
 
-const MovementUploader = ({id}) => {
+const MovementUploader = ({id,tableName = 'custom-clearance'}) => {
     return (
         
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start">
@@ -128,7 +128,7 @@ const MovementUploader = ({id}) => {
             <input type="file" name="file" accept=".png, .jpeg, .jpg, .pdf" onChange={handleUploader} id="fileUploadData" />
           </form>
           <br /><br />
-          <button className="btn btn-square" onClick={handleSaveFile}>Attach</button>
+          <button className="btn btn-square" onClick={(e) => {handleSaveFile(e,tableName)}}>Attach</button>
         </div>
       </div>
     )

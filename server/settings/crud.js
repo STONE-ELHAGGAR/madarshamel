@@ -50,7 +50,7 @@ router.post('/readById', authJWT.verify([]), async (req,res,next) => {
         let settingsData = await Settings.find( { _id: id } );
         res.json({success: true,settings: settingsData});
     }catch(e) {
-        return res.status(500).json({ message: 'Something went wrong' ,error: e});
+        return res.json({success: false, message: 'Something went wrong' ,error: e});
     }
 });
 

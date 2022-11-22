@@ -42,6 +42,10 @@ const ModelSchema = new mongoose. Schema ({
     debtLimit:
         {
             type: String
+        },
+    timeStamp:
+        {
+            type: String
         }
 })
 const Model = mongoose. model('Users', ModelSchema);

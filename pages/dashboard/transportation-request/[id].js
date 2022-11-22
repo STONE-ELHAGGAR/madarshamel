@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Image from 'next/image';
 import Layout from "./../../../components/layout/Layout";
 import Bank from "./../../../components/elements/Bank";
-import TableItem from "./../../../components/elements/TableItem";
+import TrTableItem from "./../../../components/elements/TrTableItem";
 import MovementUploader from "./../../../components/elements/MovementUploader";
-const handleCustomClearanceActiveIndex = require('./../../../handlers/handleCustomClearanceActiveIndex');
+const handleTransportationActiveIndex = require('./../../../handlers/handleTransportationActiveIndex');
 //Table Socket Requirments
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
@@ -26,7 +26,7 @@ const handleSendMessage = async (e) => {
     let requestBody = {
         content: message,
         type: 'message',
-        requestType: 'custom-clearance',
+        requestType: 'transportation',
         requestId: activeIndexId,
     }
     const sendMsgRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/movements/create', {
@@ -52,7 +52,7 @@ const handleServiceAlert = async (e) => {
     let requestBody = {
         content: serviceAlert,
         type: 'serviceAlert',
-        requestType: 'custom-clearance',
+        requestType: 'transportation',
         requestId: activeIndexId,
     }
     const sendServiceAlertRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/movements/create', {
@@ -71,7 +71,7 @@ const handleServiceAlert = async (e) => {
 }
 
 
-const CustomClearanceRequestData = () => {
+const TransportationRequestData = () => {
 
     let router = useRouter()
     
@@ -86,7 +86,7 @@ const CustomClearanceRequestData = () => {
     //Handle Table Socket
     const cc_send_accessToken_i_id = () => {
         if(accessToken && activeIndex){
-            socket.emit('cc_send_accessToken_i_id', {accessToken: accessToken, activeIndex: activeIndex, tableName: 'custom-clearance'});
+            socket.emit('cc_send_accessToken_i_id', {accessToken: accessToken, activeIndex: activeIndex, tableName: 'transportation'});
         }
     }
 
@@ -103,7 +103,7 @@ const CustomClearanceRequestData = () => {
 
     useEffect(() => {
         if (id) {
-            handleCustomClearanceActiveIndex(id).then((result) => {
+            handleTransportationActiveIndex(id).then((result) => {
                 (result.success) ? setActiveIndexData(result) : router.push({ pathname: '/404' }) ;
             })
             setActiveIndex(id);
@@ -136,14 +136,14 @@ const CustomClearanceRequestData = () => {
         );
     }
     const SendAttachFileComponent = () => {
-        return (<div><MovementUploader id={activeIndex} /></div>);
+        return (<div><MovementUploader tableName="transportation" id={activeIndex} /></div>);
     }
     return (
         <>
             <Layout userCreds={['same-as-u-id','custom-clearance','super-admin']} params={[]} modelName='' forNewUsers={0}>
                 <div className="container-fluid px-3 py-3 float-start backgrounded-con">
                     <div className="container">
-                        <h3>Custom Clearance Request</h3>
+                        <h3>Transportation Request</h3>
                         <h5>{id}</h5>
                         <div className="col-lg-8 col-md-8 col-xs-12 col-sm-12 float-start px-2 py-2">
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
@@ -178,15 +178,18 @@ const CustomClearanceRequestData = () => {
                                         <th scope="row">ID</th>
                                         <td id="_id">{activeIndex}</td>
                                     </tr>
-                                        <TableItem content={activeIndexData} id="companyName" row="Company Name" />
-                                        <TableItem content={activeIndexData} id="branch" row="Branch" />
-                                        <TableItem content={activeIndexData} id="transactionPlace" row="Transaction Place" />
-                                        <TableItem content={activeIndexData} id="shippingPort" row="Shipping Port" />
-                                        <TableItem content={activeIndexData} id="recivingPort" row="Reciving Port" />
-                                        <TableItem content={activeIndexData} id="sourceCountry" row="Source Country" />
-                                        <TableItem content={activeIndexData} id="expectedShipDate" row="Expected Ship Date" />
-                                        <TableItem content={activeIndexData} id="created_at" row="Created At" />
-                                        <TableItem content={activeIndexData} id="u_id" row="By User" />
+                                        <TrTableItem content={activeIndexData} id="companyName" row="Company Name" />
+                                        <TrTableItem content={activeIndexData} id="branch" row="Branch" />
+                                        <TrTableItem content={activeIndexData} id="transactionPlace" row="Transaction Place" />
+                                        <TrTableItem content={activeIndexData} id="fromDate" row="From" />
+                                        <TrTableItem content={activeIndexData} id="toDate" row="To" />
+                                        <TrTableItem content={activeIndexData} id="sourceCountry" row="Source Country" />
+                                        <TrTableItem content={activeIndexData} id="expectedShipDate" row="Expected Ship Date" />
+                                        <TrTableItem content={activeIndexData} id="carCost" row="Car Cost" />
+                                        <TrTableItem content={activeIndexData} id="drivers" row="Driver" />
+                                        <TrTableItem content={activeIndexData} id="transferData" row="Transfer Date" />
+                                        <TrTableItem content={activeIndexData} id="created_at" row="Created At" />
+                                        <TrTableItem content={activeIndexData} id="u_id" row="By User" />
                                     </tbody>
                                 </table>
                                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 float-start" id="ccFiles">
@@ -195,7 +198,7 @@ const CustomClearanceRequestData = () => {
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-xs-12 col-sm-12 px-2 py-2 float-start">
-                            <Bank tableName="custom_clearance" requestId={activeIndex} />
+                            <Bank tableName="transportation" requestId={activeIndex} />
                         </div>
 
                     </div>
@@ -207,4 +210,4 @@ const CustomClearanceRequestData = () => {
 
 
 
-export default CustomClearanceRequestData;
+export default TransportationRequestData;

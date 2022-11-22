@@ -52,6 +52,7 @@ const handleInsertTransportation = async (e) => {
       document.querySelector('.expectedShipDate').value = '';
 
       sessionStorage.setItem('attachedFiles','');
+      window.location.href = process.env.NEXT_PUBLIC_BASE_URL+'/dashboard/transportation-request/'+content.transportation._id;  // this reloads
       
   }else{
       document.querySelector(".custom-alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please fill all fields correctly OR try again</div>';

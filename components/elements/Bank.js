@@ -8,8 +8,10 @@ const handleMovements = require('./../../handlers/handleMovements');
 const handleBalance = require('./../../handlers/handleBalance');
 const handleTableReader = require('./../../handlers/handleTableReader');
 
-const Bank = ({requestId}) => {
+const Bank = ({requestId, tableName}) => {
     const [choosedUserBalance, setChoosedUserBalance] = useState('');
+    const [choosedUserDebt, setChoosedUserDebt] = useState('');
+    const [choosedUserDebtLimit, setChoosedUserDebtLimit] = useState('');
     const [choosedUser, setChoosedUser] = useState('');
     const [allUsersData, setAllUsersData] = useState([]);
     const [allMovementsData, setAllMovementsData] = useState([]);
@@ -50,10 +52,12 @@ const Bank = ({requestId}) => {
             document.querySelector('.details').value = '';
             handleBalance(choosedUser).
                 then((result) => {
-                    setChoosedUserBalance(result);
+                    setChoosedUserBalance(result?.currentBalance);
+                    setChoosedUserDebt(result?.currentDebt);
+                    setChoosedUserDebtLimit(result?.debtLimit);
                 })
         }else{
-            document.querySelector(".custom-alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please fill all fields correctly OR try again</div>';
+            document.querySelector(".custom-alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, User haven`t enough Balance. (And his debt is/will Maximum)</div>';
         }
     }
     const userChanged = () => {
@@ -71,10 +75,12 @@ const Bank = ({requestId}) => {
             });
         handleBalance(choosedUser).
             then((result) => {
-                setChoosedUserBalance(result);
+                setChoosedUserBalance(result?.currentBalance);
+                setChoosedUserDebt(result?.currentDebt);
+                setChoosedUserDebtLimit(result?.debtLimit);
             })
-        handleTableReader(requestId, '_id','/api/custom_clearance/read').then((result) => {
-            handleTableReader(result.custom_clearance.companyName, 'id','/api/company/readById').then((result2) => {
+        handleTableReader(requestId, '_id','/api/'+tableName+'/read').then((result) => {
+            handleTableReader(result[tableName].companyName, 'id','/api/company/readById').then((result2) => {
                 setChoosedUser(result2.companies[0].u_id);
             })
         })
@@ -83,7 +89,9 @@ const Bank = ({requestId}) => {
     useEffect(() => {
         handleBalance(choosedUser).
             then((result) => {
-                setChoosedUserBalance(result);
+                setChoosedUserBalance(result?.currentBalance);
+                setChoosedUserDebt(result?.currentDebt);
+                setChoosedUserDebtLimit(result?.debtLimit);
                 document.querySelector('.u_id').value = choosedUser;
             })
     },[choosedUser]);
@@ -94,7 +102,9 @@ const Bank = ({requestId}) => {
         <select name="u_id" onChange={userChanged} className="u_id my-2 h6" style={{width: '100%', padding: '10px'}}>
             <OptionItem content={allUsersData} property="name" table="users" />
         </select><br />
-        <h5>Balance: <code>{choosedUserBalance}</code> SAR | Debt: <code>0</code> SAR</h5><br />
+        <h5>Balance: <code>{choosedUserBalance}</code> SAR | Debt: <code>{choosedUserDebt}</code> SAR</h5><br />
+        <h5>Debt Limit: <code>{choosedUserDebtLimit}</code> SAR | Remaining: <code>{choosedUserDebtLimit-choosedUserDebt}</code> SAR</h5><br />
+        
         <label>Transaction Amount</label>
         <input type="text" placeholder="amount" name="amount" className="form-control amount"/><br />
         <label>Choose Status</label>

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Layout from "../../components/layout/Layout";
 import LineChart from "../../components/elements/LineChart";
 import PieChart from "../../components/elements/PieChart";
+import RequestItem from "../../components/elements/RequestItem";
+const handleDashboardRequest = require("../../handlers/handleDashboardRequest");
+const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -15,7 +18,7 @@ const options = {
   },
   title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: 'BETA',
   },
   },
 }
@@ -66,6 +69,20 @@ const ChartDataPie = {
 }
 
 const App = () => {
+
+  const [customClearanceData, setCustomClearanceData] = useState([]);
+  const [transportationsData, setTransportationsData] = useState([]);
+
+  useEffect(() => {
+    handleDashboardRequest('custom_clearance').
+      then((result) => {
+        setCustomClearanceData(result);
+      })
+    handleDashboardRequest('transportation').
+      then((result) => {
+        setTransportationsData(result);
+      })
+  }, [])
   return (
     <>
     <Layout userCreds={['original-user','custom-clearance','super-admin']} params={[]} modelName='' forNewUsers={0}>
@@ -77,13 +94,19 @@ const App = () => {
                       <Link href="/dashboard"><a className="nav-link"><i className="fi fi-rr-user"></i> Dashboard</a></Link>
                   </li>
                   <li className="nav-item">
+                      <Link href="/dashboard/controlCCRequests"><a className="nav-link"><i className="fi fi-rr-stats"></i> Custom Clearance</a></Link>
+                  </li>
+                  <li className="nav-item">
+                      <Link href="/dashboard/controlTRRequests"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> Transportation</a></Link>
+                  </li>
+                  {/*<li className="nav-item">
                       <Link href="/dashboard/custom-clearance-form"><a className="nav-link"><i className="fi fi-rr-stats"></i> Add Custom Clearance</a></Link>
                   </li>
                   <li className="nav-item">
                       <Link href="/dashboard/transportation-form"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> Add Transportation</a></Link>
-                  </li>
+                  </li>*/}
                   <li className="nav-item">
-                      <Link href="/dashboard/dashboardSettings"><a className="nav-link"><i className="fi fi-rr-edit"></i> Dashboard Settings</a></Link>
+                      <Link href="/dashboard/settings"><a className="nav-link"><i className="fi fi-rr-edit"></i> Dashboard Settings</a></Link>
                   </li>
               </ul>
           </div>
@@ -97,9 +120,9 @@ const App = () => {
                 <Image width="50px" height="50px" src="/assets/imgs/template/icons/money.svg" alt="money" />
               </div>
               <h5 className="text-center">TODAY'S MONEY</h5>
-              <h4 className="text-center">5619562 SAR</h4>
+              <h4 className="text-center">BETA SAR</h4>
               <div className="compare-tip">
-                <span className="danger">-13% </span>
+                <span className="danger">-BETA% </span>
                 decrease than yesterday
               </div>
             </div>
@@ -110,9 +133,9 @@ const App = () => {
                 <Image width="50px" height="50px" src="/assets/imgs/template/icons/users.svg" alt="money" />
               </div>
               <h5 className="text-center">TODAY'S USERS</h5>
-              <h4 className="text-center">561 USER</h4>
+              <h4 className="text-center">BETA USER</h4>
               <div className="compare-tip">
-                <span className="success">+53% </span>
+                <span className="success">+BETA% </span>
                 increase than yesterday
               </div>
             </div>
@@ -123,9 +146,9 @@ const App = () => {
                 <Image width="50px" height="50px" src="/assets/imgs/template/icons/money-bills.svg" alt="money" />
               </div>
               <h5 className="text-center">All Money</h5>
-              <h4 className="text-center">15619562 SAR</h4>
+              <h4 className="text-center">BETA SAR</h4>
               <div className="compare-tip">
-                <span className="danger">45113 </span>
+                <span className="danger">BETA </span>
                 SAR is 
                 <span className="danger"> DEBT </span>
               </div>
@@ -137,9 +160,9 @@ const App = () => {
                 <Image width="50px" height="50px" src="/assets/imgs/template/icons/all-users.svg" alt="money" />
               </div>
               <h5 className="text-center">All USERS</h5>
-              <h4 className="text-center">1561 USER</h4>
+              <h4 className="text-center">BETA USER</h4>
               <div className="compare-tip">
-                <span className="success">45 </span>
+                <span className="success">BETA </span>
                 are Clients 
                 <span className="success"> (Made Transactions) </span>
               </div>
@@ -176,56 +199,10 @@ const App = () => {
                 </Link>
               </h5>
 
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
+              <RequestItem
+                content={customClearanceData}
+                table="custom_clearances"
+              />
 
               <Link href="#">
                 <a className="btn btn-square container-fluid float-end">
@@ -246,56 +223,10 @@ const App = () => {
                 </Link>
               </h5>
 
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="container-fluid float-start">
-                <div className="container-fluid h5 px-3 py-3 float-start">
-                  <Link href="/dashboard/custom-clearance-request/636668dc786b5747c96b0202">
-                    <a className="container-fluid float-start">
-                      Request title example
-                      <i className="fi-rr-caret-right float-end"></i>
-                    </a>
-                  </Link>
-                </div>
-              </div>
+              <RequestItem
+                content={transportationsData}
+                table="transportations"
+              />
 
               <Link href="#">
                 <a className="btn btn-square container-fluid float-end">

@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const next = require("next");
 
+
 const authRouter = require("./auth/authRouter");
 const files = require("./files/crud");
 const custom_clearance = require("./custom_clearance/crud");
@@ -45,6 +46,22 @@ serverApp
       const file = `${__dirname}/../uploads/${fileName}`;
       res.download(file); // Set disposition and send it.
     });
+    
+      /*
+      --- Send Email
+      const sendEmail = require('./../util/sendEmail');
+      sendEmail(
+        'ahmedelhagar74@gmail.com', //To Email
+        'Ahmed Elhaggar', //To Name
+        'Welcome To Madarshamel', //Message Subject
+        'https://madarshamel.sa/', //btn_link
+        'GO', //btn_content
+        'temp_line1 Data', //temp_line1
+        'temp_line2 Data', //temp_line2
+        'temp_line3 Data', //temp_line3
+        'temp_line4 Data', //temp_line4
+      );
+      */
     
     app.get("*", (req, res) => {
       return handle(req, res);

@@ -1,13 +1,13 @@
 const handleTableReader = require('./handleTableReader');
 
-const handleCustomClearanceActiveIndex = async (id) => {
+const handleTransportationActiveIndex = async (id) => {
   if (typeof window !== 'undefined') {
     console.log('handle ' + id);
     const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
     const requestBody = {
       _id: id
     }
-    const customClearanceActiveIndexRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/custom_clearance/read', {
+    const transportationActiveIndexRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/transportation/read', {
           method: 'POST',
           headers: {
               'Accept': 'application/json',
@@ -17,7 +17,7 @@ const handleCustomClearanceActiveIndex = async (id) => {
           body: JSON.stringify(requestBody)
     });
 
-    const content = await customClearanceActiveIndexRequest.json();
+    const content = await transportationActiveIndexRequest.json();
     const fileNames = '';
     if(content.success){
       /*for(let fieldKey in content.custom_clearance) {
@@ -52,4 +52,4 @@ const handleCustomClearanceActiveIndex = async (id) => {
   }
 }
 
-module.exports = handleCustomClearanceActiveIndex;
+module.exports = handleTransportationActiveIndex;

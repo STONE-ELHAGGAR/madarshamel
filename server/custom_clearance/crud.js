@@ -46,4 +46,24 @@ router.post('/read', authJWT.verify(
     }
 });
 
+router.post('/readAll', authJWT.verify(['same-as-u-id','custom-clearance','super-admin']), async (req,res,next) => {
+    try{
+        const custom_clearances = await Custom_clearance.find().limit(5);
+        console.log('Founded Custom Clearance Requests');
+        return res.status(200).json({ success: true, custom_clearances: custom_clearances});
+    }catch(e){
+        return res.status(404).json({ message: 'Something went wrong' ,error: e });
+    }
+});
+
+router.post('/readAllRequests', authJWT.verify(['custom-clearance','super-admin']), async (req,res,next) => {
+    try{
+        const custom_clearances = await Custom_clearance.find();
+        console.log('Founded Custom Clearance Requests');
+        return res.status(200).json({ success: true, custom_clearances: custom_clearances});
+    }catch(e){
+        return res.json({ message: 'Something went wrong' ,error: e });
+    }
+});
+
 module.exports = router;
