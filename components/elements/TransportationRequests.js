@@ -35,9 +35,6 @@ return (
                                 <th scope="col">Car Cost</th>
                                 <th scope="col">Transfer Date</th>
                                 <th scope="col">Expected Ship Date</th>
-                                
-                                <th scope="col">Edit</th>
-                                <th scope="col">Remove</th>
                             </tr>
                             </thead>
                             <tbody id="allRecords">

@@ -7,7 +7,7 @@ const Companies = require('./../models/companies');
 //JsonWebToken to create access token
 const authJWT = require('./../../util/authJWT');
 
-router.post('/create', authJWT.verify([]), async (req,res,next) => {
+router.post('/create', authJWT.verify(['original-user','super-admin']), async (req,res,next) => {
     const {companyName, companyMobile} = req.body;
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
     const user = await Users.findById(req.userId);
@@ -24,9 +24,9 @@ router.post('/create', authJWT.verify([]), async (req,res,next) => {
     }
 });
 
-router.post('/read', authJWT.verify([]), async (req,res,next) => {
+router.post('/read', authJWT.verify(['original-user','super-admin']), async (req,res,next) => {
     try {
-        let companiesData = await Companies.find();
+        let companiesData = await Companies.find({u_id: req.userId});
         res.json({success: true,companies: companiesData});
     }catch(e) {
         return res.status(500).json({ message: 'Something went wrong' ,error: e});

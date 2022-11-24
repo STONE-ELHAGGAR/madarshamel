@@ -7,6 +7,7 @@ import Bank from "./../../../components/elements/Bank";
 import TrTableItem from "./../../../components/elements/TrTableItem";
 import MovementUploader from "./../../../components/elements/MovementUploader";
 const handleTransportationActiveIndex = require('./../../../handlers/handleTransportationActiveIndex');
+const handleGetNumId = require('./../../../handlers/handleGetNumId');
 //Table Socket Requirments
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
@@ -80,6 +81,7 @@ const TransportationRequestData = () => {
     const [receivedTableData ,setReceivedTableData] = useState('');
     const [accessToken ,setAccessToken] = useState('');
     const [activeIndex ,setActiveIndex] = useState(0);
+    const [guiId ,setGuiId] = useState(0);
     const [activeIndexData ,setActiveIndexData] = useState([]);
     const [activeTabCon ,setActiveTabCon] = useState(1);
 
@@ -109,7 +111,13 @@ const TransportationRequestData = () => {
             setActiveIndex(id);
         }
     }, [id]);
-    
+    useEffect(() => {
+        if(activeIndex){
+            handleGetNumId('transportation',activeIndex).then((result) => {
+                setGuiId(result.numId);
+            })
+        }
+    }, [activeIndex]);
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
         setAccessToken(JSON.parse(sessionStorage.getItem('loginData')).data.accessToken);
@@ -140,11 +148,11 @@ const TransportationRequestData = () => {
     }
     return (
         <>
-            <Layout userCreds={['same-as-u-id','custom-clearance','super-admin']} params={[]} modelName='' forNewUsers={0}>
+            <Layout userCreds={['same-as-u-id','transportation','super-admin']} params={['_id']} modelName='transportation' forNewUsers={0} itemId={activeIndex}>
                 <div className="container-fluid px-3 py-3 float-start backgrounded-con">
                     <div className="container">
                         <h3>Transportation Request</h3>
-                        <h5>{id}</h5>
+                        <h5>{guiId}</h5>
                         <div className="col-lg-8 col-md-8 col-xs-12 col-sm-12 float-start px-2 py-2">
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
                                 <ul className="nav nav-pills nav-fill col-12 float-start">
@@ -176,7 +184,7 @@ const TransportationRequestData = () => {
 
                                     <tr>
                                         <th scope="row">ID</th>
-                                        <td id="_id">{activeIndex}</td>
+                                        <td id="_id">{guiId}</td>
                                     </tr>
                                         <TrTableItem content={activeIndexData} id="companyName" row="Company Name" />
                                         <TrTableItem content={activeIndexData} id="branch" row="Branch" />

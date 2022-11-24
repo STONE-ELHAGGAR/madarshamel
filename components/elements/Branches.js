@@ -23,7 +23,7 @@ const handleReadBranches = async (e) => {
       if(contentReq.success){
         if(contentReq.companies.length > 0){
             let belongsTo = document.getElementById('belongsTo');
-            let newOptions = '<option value="0">Not Belongs</option>';
+            let newOptions = '';
             contentReq.companies.map((option) => {
                 newOptions += '<option value="'+option._id+'">'+option.companyName+' - '+option.companyMobile+'</option>';
             })
@@ -62,8 +62,10 @@ const handleSaveSetting = async (e) => {
       document.getElementById('address').value = '';
       document.getElementById('belongsTo').value = 0;
       handleReadBranches();
+      document.getElementById('alert-section').innerHTML = '<div class="alert alert-success" role="alert">Added Succesfully.</div>';
       console.log(contentReq.setting)
     }else{
+      document.getElementById('alert-section').innerHTML = '<div class="alert alert-danger" role="alert">Something Went Wrong.</div>';
       console.log(contentReq)
     }
 }
@@ -79,13 +81,13 @@ function Branches() {
         <>
             <div className="container-fluid px-3 py-3 float-start backgrounded-con">
                 <div className="container px-3 py-3" style={{background: '#fff'}}>
+                    <div id="alert-section"></div>
                     <label>Branch Name</label>
                     <input type="text" className="form-control" placeholder="Branch Name" id="name" />
                     <label>Address</label>
                     <input type="text" className="form-control" placeholder="Address" id="address" />
                     <label>Belongs To</label>
                     <select style={{width: '100%'}} className="px-3 py-3" name="belongsTo" id="belongsTo">
-                        <option value="0">Not Belongs</option>
                     </select><br />
                     <button type="submit" onClick={handleSaveSetting} className="btn btn-square mt-3">Add</button>
                 </div>

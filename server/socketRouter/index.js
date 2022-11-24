@@ -110,7 +110,7 @@ io.on('connection', (socket) => {
                     }
                     replaceData +=
                     '<div class="col-12 px-3 py-3 mt-3 float-start" style="background: #fff">\
-                        <h5 style="border-bottom: 1px solid #ddd;padding-bottom: 10px;margin-bottom: 10px;">'+movements[movementId].type+' ID: '+movements[movementId]._id+' from '+user.name+'</h5><h6>'
+                        <h5 style="border-bottom: 1px solid #ddd;padding-bottom: 10px;margin-bottom: 10px;">'+movements[movementId].type+' from '+user.name+'</h5><h6>'
                             +movements[movementId].content+
                     '</h6></div>';
                 }

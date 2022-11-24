@@ -3,15 +3,24 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
 const handleTableReader = require('./../../handlers/handleTableReader');
+const handleGetNumId = require('./../../handlers/handleGetNumId');
 
 const CcItem = ({content}) => {
     let userCreds = '';
     let allItems = '';
+    if(content?.custom_clearances){
     if(content.custom_clearances?.length > 0){
         allItems = content.custom_clearances?.map((custom_clearance, index) => {
             for(let fieldKey in custom_clearance) {
                 const requestConData = document.getElementById(fieldKey+'_'+custom_clearance._id);
+                const idConData = document.getElementById('_'+custom_clearance._id);
                 if(requestConData){
+                  
+                  handleGetNumId('custom_clearance',custom_clearance._id).
+                    then((result) => {
+                      idConData.innerHTML = '<a href="/dashboard/custom-clearance-request/'+custom_clearance._id+'">'+result.numId+'</a>';
+                    })
+
                   if(fieldKey == 'u_id'){
                     custom_clearance.u_id = custom_clearance.u_id;
                   }else{
@@ -36,7 +45,7 @@ const CcItem = ({content}) => {
             return(
                 <>
                     <tr key={index}>
-                        <th scope="row">{custom_clearance._id}</th>
+                        <th scope="row" id={'_'+custom_clearance._id}></th>
                         <td id={'companyName_'+custom_clearance._id}></td>
                         <td id={'branch_'+custom_clearance._id}></td>
                         <td id={'transactionPlace_'+custom_clearance._id}></td>
@@ -44,16 +53,6 @@ const CcItem = ({content}) => {
                         <td id={'recivingPort_'+custom_clearance._id}></td>
                         <td id={'sourceCountry_'+custom_clearance._id}></td>
                         <td id={'expectedShipDate_'+custom_clearance._id}></td>
-                        <td>
-                            <div className="btn btn-square">
-                                <i className="fi fi-rr-edit"></i> Edit
-                            </div>
-                        </td>
-                        <td>
-                            <div className="btn btn-square">
-                                <i className="fi fi-rr-trash"></i> Remove
-                            </div>
-                        </td>
                     </tr>
                 </>
             )
@@ -64,6 +63,13 @@ const CcItem = ({content}) => {
             {allItems}
         </>
     );
+    }else{
+      return (
+        <>
+            <h3>No Requests Yet.</h3>
+        </>
+    );
+    }
 }
 
 export default CcItem;

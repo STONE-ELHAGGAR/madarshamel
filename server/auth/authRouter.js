@@ -12,11 +12,6 @@ const sendEmail = require('./../../util/sendEmail');
 router.post('/login',async (req,res,next) => {
     const { email, password } = req.body;
     const user = await Users.findOne({ email });
-    /*if(!user || user.password != password) {
-        return res.status(401).json({
-            message: 'Invalid Credentials'
-        });
-    }*/
     comparePassword(password, user.password, (err, isPasswordMatch) => {
             if(isPasswordMatch){
                 //Matched
@@ -51,10 +46,61 @@ router.post('/login',async (req,res,next) => {
     })
 });
 
+router.post('/getNumId', authJWT.verify([]), async (req,res,next) => {
+    const {modelName, _id} = req.body;
+    if(_id){
+        const Model = require('./../models/'+modelName);
+        const countGTrecords = await Model.find({_id: {$lt: _id}}).count()+501;
+        return res.status(200).json({ success: true, numId: countGTrecords});
+    }
+});
+
+router.post('/verifyAccount' ,async (req,res) => {
+    const {verifyCode} = req.body;
+    let id_stamp = verifyCode.split('_');
+    let u_id = id_stamp[0];
+    let timeStamp = id_stamp[1];
+    let verifyResult = {};
+    try{
+        const user = await Users.find({ _id: u_id });
+        if(user[0]?.timeStamp){
+            if(user[0].timeStamp == timeStamp){
+                user[0].timeStamp
+                const userUpdate = await Users.updateOne(
+                    {_id: user[0]._id},
+                    {$set:{ timeStamp: '' }}
+                );
+                verifyResult = {
+                    success: true,
+                    message: 'Verified Successfully.'
+                };
+            }else{
+                verifyResult = {
+                    success: true,
+                    message: 'Verification Code is Wrong.'
+                };
+            }
+        }else{
+            verifyResult = {
+                success: true,
+                message: 'This account is already Verified.'
+            };
+        }
+    }catch(e){
+        verifyResult = {
+            success: true,
+            message: 'Cannot Find the User.',
+            error: e
+        };
+    }
+    
+    return res.status(200).json(verifyResult);
+})
 router.post('/loginCheck', authJWT.verify([]) ,async (req,res,next) => {
     const {userCreds,params,modelName} = req.body;
     const currentLoggedInUser = await Users.findById(req.userId);
     const currentLoggedInUserCreds = JSON.parse(currentLoggedInUser.creds);
+    
     let authCredsSum;
     //Check Creds Means Route Requested Creds
     if(userCreds.length > 0){
@@ -65,8 +111,8 @@ router.post('/loginCheck', authJWT.verify([]) ,async (req,res,next) => {
             const Model = require('./../models/'+modelName);
             let itemId = req.body[params[0]];
             const itemData = await Model.find({_id: itemId});
-
-            (itemData[0].u_id == currentLoggedInUser.id) ? same_as_u_id = true : same_as_u_id = false;
+            console.log('Check if User '+currentLoggedInUser._id+' Same u_id for '+modelName+' : '+itemId);
+            (itemData[0].u_id == currentLoggedInUser._id) ? same_as_u_id = true : same_as_u_id = false;
             
         }
         (currentLoggedInUserCreds.includes('custom-clearance')) ? custom_clearance = true : custom_clearance = false;
@@ -74,7 +120,6 @@ router.post('/loginCheck', authJWT.verify([]) ,async (req,res,next) => {
         (currentLoggedInUserCreds.includes('super-admin')) ? super_admin = true : super_admin = false;
         (currentLoggedInUserCreds.includes('live-chat')) ? live_chat = true : live_chat = false;
         (currentLoggedInUserCreds.includes('original-user')) ? original_user = true : original_user = false;
-
 
         (userCreds.includes('same-as-u-id')) ? authSum.push(same_as_u_id) : false ;
         (userCreds.includes('custom-clearance')) ? authSum.push(custom_clearance) : false ;

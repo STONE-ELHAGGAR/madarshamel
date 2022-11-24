@@ -8,7 +8,7 @@ const Users = require('./../models/users');
 //JsonWebToken to create access token
 const authJWT = require('./../../util/authJWT');
 
-router.post('/create', authJWT.verify([]), async (req,res,next) => {
+router.post('/create', authJWT.verify(['original-user','transportation','super-admin']), async (req,res,next) => {
     const {companyName, branch, transactionPlace, fromDate, toDate, sourceCountry, drivers, expectedShipDate, carCost, transferData, attachedFiles} = req.body;
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
     const user = await Users.findById(req.userId);
@@ -43,18 +43,55 @@ router.post('/read', authJWT.verify(
         return res.status(404).json({ message: 'Something went wrong' ,_id: _id ,error: e });
     }
 });
-router.post('/readAll', authJWT.verify([]), async (req,res,next) => {
+router.post('/readAll', authJWT.verify(['original-user','transportation','super-admin']), async (req,res,next) => {
     try {
-        let transportationsData = await Transportation.find().limit(5);
+        let transportationsData = await Transportation.find({u_id: req.userId}).limit(5);
         res.json({success: true,transportations: transportationsData});
     }catch(e) {
         return res.json({success: false, message: 'Something went wrong' ,error: e});
     }
 });
 
-router.post('/readAllRequests', authJWT.verify([]), async (req,res,next) => {
+router.post('/readAllRequests', authJWT.verify(['original-user','transportation','super-admin']), async (req,res,next) => {
     try {
-        let transportationsData = await Transportation.find();
+        const currentLoggedInUser = await Users.findById(req.userId);
+            const currentLoggedInUserCreds = JSON.parse(currentLoggedInUser.creds);
+            
+            let authCredsSum;
+            let userCreds = ['transportation','super-admin'];
+            //Check Creds Means Route Requested Creds
+            if(userCreds.length > 0){
+                let same_as_u_id, custom_clearance, super_admin, live_chat, original_user, transportation;
+                let authSum = [];
+
+                (currentLoggedInUserCreds.includes('custom-clearance')) ? custom_clearance = true : custom_clearance = false;
+                (currentLoggedInUserCreds.includes('transportation')) ? transportation = true : transportation = false;
+                (currentLoggedInUserCreds.includes('super-admin')) ? super_admin = true : super_admin = false;
+                (currentLoggedInUserCreds.includes('live-chat')) ? live_chat = true : live_chat = false;
+                (currentLoggedInUserCreds.includes('original-user')) ? original_user = true : original_user = false;
+
+                (userCreds.includes('same-as-u-id')) ? authSum.push(same_as_u_id) : false ;
+                (userCreds.includes('custom-clearance')) ? authSum.push(custom_clearance) : false ;
+                (userCreds.includes('transportation')) ? authSum.push(transportation) : false ;
+                (userCreds.includes('super-admin')) ? authSum.push(super_admin) : false ;
+                (userCreds.includes('live-chat')) ? authSum.push(live_chat) : false ;
+                (userCreds.includes('original-user')) ? authSum.push(original_user) : false ;
+                if (authSum.find(e => e === true)) {
+                    authCredsSum = true;
+                }else{
+                    authCredsSum = false;
+                }
+            }else{
+                authCredsSum = true;
+            }
+            console.log(authCredsSum)
+            let userRequest = {u_id: req.userId}; 
+            if(authCredsSum){
+                //He is 'transportation','super-admin'
+                userRequest = {};
+            }
+        let transportationsData = await Transportation.find(userRequest);
+        console.log('Founded Transportation Requests');
         res.json({success: true,transportations: transportationsData});
     }catch(e) {
         return res.json({success: false, message: 'Something went wrong' ,error: e});

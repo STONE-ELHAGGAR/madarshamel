@@ -48,5 +48,6 @@ const ModelSchema = new mongoose. Schema ({
             type: String
         }
 })
+
 const Model = mongoose. model('Users', ModelSchema);
 module.exports = Model;

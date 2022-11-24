@@ -6,7 +6,7 @@ const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 import { useRouter } from 'next/router';
 import Sidebar from "./Sidebar";
 
-const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName = '', forNewUsers = 1}) => {
+const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName = '', forNewUsers = 1, itemId = ''}) => {
     const [openClass, setOpenClass] = useState('');
 
     const handleOpen = () => {
@@ -39,17 +39,33 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
     }else{
         // Similar to componentDidMount and componentDidUpdate:
         useEffect(() => {
-            checkIfLoggedIn(userCreds,params,modelName)
-                .then((result) => {
-                    if(result){
-                        setLogged(true);
-                        console.log('Loggedin');
-                    }else{
-                        setLogged(false);
-                        console.log('Not Loggedin');
-                        router.push({ pathname: '/page-login' })
-                    }
-                })
+            if(modelName && itemId){
+                //Need to check u_id for item so wait until modelName && itemId ready together
+                checkIfLoggedIn(userCreds,params,modelName,itemId)
+                    .then((result) => {
+                        if(result){
+                            setLogged(true);
+                            console.log('Loggedin');
+                        }else{
+                            setLogged(false);
+                            console.log('Not Loggedin Needed to check u_id for item so wait until Model Name && Item Id ready together');
+                            router.push({ pathname: '/page-login' })
+                        }
+                    })
+            }else if(params.length === 0 && modelName == '' && itemId == ''){
+                //No Need to check u_id for item
+                checkIfLoggedIn(userCreds,params,modelName,itemId)
+                    .then((result) => {
+                        if(result){
+                            setLogged(true);
+                            console.log('Loggedin');
+                        }else{
+                            setLogged(false);
+                            console.log('Not Loggedin No Need to check u_id for item');
+                            router.push({ pathname: '/page-login' })
+                        }
+                    })
+            }
         });
     }
     

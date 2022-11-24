@@ -20,7 +20,7 @@ const controlRequests = () => {
     const ChoosedSetting = all[activeSettingsTab];
 return (
     <>
-        <Layout userCreds={['super-admin']} params={[]} modelName='' forNewUsers={0}>
+        <Layout userCreds={['original-user','custom-clearance','super-admin']} params={[]} modelName='' forNewUsers={0}>
             <div className="container-fluid backgrounded-con float-start px-3 py-3">
                 <div className="container">
                     <div className="col-12 px-3 py-3">

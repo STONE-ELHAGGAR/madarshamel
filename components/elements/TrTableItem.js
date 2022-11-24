@@ -5,6 +5,7 @@ const TrTableItem = ({content, id, row}) => {
 
     const [conValue, setConValue] = useState('Undefined');
 
+    if(content.transportation?.companyName){
     if(id == 'u_id'){}else{
       if(id == 'companyName'){
         handleTableReader(content.transportation[id], 'id','/api/company/readById').then((result) => {
@@ -24,7 +25,7 @@ const TrTableItem = ({content, id, row}) => {
         })
       }
     }
-
+  }
     return (
         <>
             <tr>

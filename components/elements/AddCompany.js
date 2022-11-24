@@ -28,7 +28,9 @@ const handleSaveCompany = async (e) => {
     if(contentReq.success){
       document.getElementById('companyName').value = '';
       document.getElementById('companyMobile').value = '';
+      document.getElementById('alert-section').innerHTML = '<div class="alert alert-success" role="alert">Added Succesfully.</div>';
     }else{
+      document.getElementById('alert-section').innerHTML = '<div class="alert alert-danger" role="alert">Something Went Wrong.</div>';
       console.log(contentReq)
     }
 }
@@ -39,6 +41,7 @@ function Company() {
         <>
             <div className="container-fluid px-3 py-3 float-start backgrounded-con">
                 <div className="container px-3 py-3" style={{background: '#fff'}}>
+                    <div id="alert-section"></div>
                     <label>Company Name</label>
                     <input type="text" className="form-control" placeholder="Company Name" id="companyName" />
                     <label>Company Mobile</label>

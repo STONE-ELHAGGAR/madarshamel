@@ -33,8 +33,6 @@ return (
                                 <th scope="col">Reciving Port</th>
                                 <th scope="col">Source Country</th>
                                 <th scope="col">Expected Ship Date</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Remove</th>
                             </tr>
                             </thead>
                             <tbody id="allRecords">

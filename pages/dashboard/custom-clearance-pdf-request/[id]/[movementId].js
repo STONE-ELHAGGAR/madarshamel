@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Layout from "./../../../../components/layout/Layout";
 const handleTableReader = require('./../../../../handlers/handleTableReader');
 const handleCustomClearancePDFActiveIndex = require('./../../../../handlers/handleCustomClearancePDFActiveIndex');
+const handleGetNumId = require('./../../../../handlers/handleGetNumId');
 
 const CustomClearanceRequestData = () => {
 
@@ -15,6 +16,8 @@ const CustomClearanceRequestData = () => {
     const [receivedTableData ,setReceivedTableData] = useState('');
     const [accessToken ,setAccessToken] = useState('');
     const [activeIndex ,setActiveIndex] = useState(0);
+    const [guiId ,setGuiId] = useState(0);
+    const [guiMovementId ,setGuiMovementId] = useState(0);
     const [activeMovementId ,setActiveMovementId] = useState(0);
     const [activeTab ,setActiveTab] = useState(1);
 
@@ -28,7 +31,20 @@ const CustomClearanceRequestData = () => {
             setActiveIndex(id);
         }
     }, [id]);
-    
+    useEffect(() => {
+        if(activeIndex){
+            handleGetNumId('custom_clearance',activeIndex).then((result) => {
+                setGuiId(result.numId);
+            })
+        }
+    }, [activeIndex]);
+    useEffect(() => {
+        if(activeIndex){
+            handleGetNumId('movements',activeMovementId).then((result) => {
+                setGuiMovementId(result.numId);
+            })
+        }
+    }, [activeMovementId]);
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
         setAccessToken(JSON.parse(sessionStorage.getItem('loginData')).data.accessToken);
@@ -49,6 +65,7 @@ const CustomClearanceRequestData = () => {
                                 <td style={{textAlign: 'center',float: 'right',width: '100%'}}>
                                     <h5>المدار الشامل للتخليص الجمركي</h5>
                                     <h6>خدمات الشحن الدولي – التخليص الجمركي</h6>
+                                    <h6>خدمات النقل البري</h6>
                                 </td>
                             </tr>
                         </tbody>
@@ -73,17 +90,17 @@ const CustomClearanceRequestData = () => {
                             <tbody>
                                 <tr>
                                     <td>Waybill No.</td>
-                                    <td style={{background: '#fff',fontSize: '13px',wordBreak: 'break-all',maxWidth: '170px'}}>{activeIndex}</td>
+                                    <td style={{background: '#fff',fontSize: '13px',wordBreak: 'break-all',maxWidth: '170px'}}>{guiId}</td>
                                     <td>رقم الاشعار</td>
                                 </tr>
                                 <tr>
                                     <td>JOB No.</td>
-                                    <td style={{background: '#fff',fontSize: '13px',wordBreak: 'break-all',maxWidth: '170px'}}>{activeMovementId}</td>
+                                    <td style={{background: '#fff',fontSize: '13px',wordBreak: 'break-all',maxWidth: '170px'}}>{guiMovementId}</td>
                                     <td>رقم المعاملة</td>
                                 </tr>
                                 <tr>
                                     <td>DOC No.</td>
-                                    <td style={{background: '#fff',fontSize: '13px',wordBreak: 'break-all',maxWidth: '170px'}}>{activeIndex}</td>
+                                    <td style={{background: '#fff',fontSize: '13px',wordBreak: 'break-all',maxWidth: '170px'}}>{guiId}</td>
                                     <td>رقم البيان</td>
                                 </tr>
                                 <tr>

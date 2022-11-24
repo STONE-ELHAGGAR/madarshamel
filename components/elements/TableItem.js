@@ -4,6 +4,7 @@ const handleTableReader = require('./../../handlers/handleTableReader');
 const TableItem = ({content, id, row}) => {
 
     const [conValue, setConValue] = useState('Undefined');
+    if(content.custom_clearance?.companyName){
     if(id == 'u_id'){}else{
         if(id == 'companyName' && content.custom_clearance[id]){
             handleTableReader(content.custom_clearance[id], 'id','/api/company/readById').then((result) => {
@@ -19,6 +20,7 @@ const TableItem = ({content, id, row}) => {
             })
           }
     }
+  }
     return (
         <>
             <tr>

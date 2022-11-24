@@ -3,15 +3,22 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
 const handleTableReader = require('./../../handlers/handleTableReader');
+const handleGetNumId = require('./../../handlers/handleGetNumId');
 
 const TrItem = ({content}) => {
     let userCreds = '';
     let allItems = '';
+    if(content?.transportations){
     if(content.transportations?.length > 0){
         allItems = content.transportations?.map((transportation, index) => {
             for(let fieldKey in transportation) {
                 const requestConData = document.getElementById(fieldKey+'_'+transportation._id);
+                const idConData = document.getElementById('_'+transportation._id);
                 if(requestConData){
+                  handleGetNumId('transportation',transportation._id).
+                    then((result) => {
+                      idConData.innerHTML = '<a href="/dashboard/transportation-request/'+transportation._id+'">'+result.numId+'</a>';
+                    })
                   if(fieldKey == 'u_id'){
                     transportation.u_id = transportation.u_id;
                   }else{
@@ -40,7 +47,7 @@ const TrItem = ({content}) => {
             return(
                 <>
                     <tr key={index}>
-                        <th scope="row">{transportation._id}</th>
+                        <th scope="row" id={'_'+transportation._id}></th>
                         <td id={'companyName_'+transportation._id}></td>
                         <td id={'branch_'+transportation._id}></td>
                         <td id={'transactionPlace_'+transportation._id}></td>
@@ -51,16 +58,6 @@ const TrItem = ({content}) => {
                         <td id={'carCost_'+transportation._id}>{transportation.carCost}</td>
                         <td id={'transferData_'+transportation._id}>{transportation.transferData}</td>
                         <td id={'expectedShipDate_'+transportation._id}></td>
-                        <td>
-                            <div className="btn btn-square">
-                                <i className="fi fi-rr-edit"></i> Edit
-                            </div>
-                        </td>
-                        <td>
-                            <div className="btn btn-square">
-                                <i className="fi fi-rr-trash"></i> Remove
-                            </div>
-                        </td>
                     </tr>
                 </>
             )
@@ -71,6 +68,13 @@ const TrItem = ({content}) => {
             {allItems}
         </>
     );
+  }else{
+    return (
+      <>
+          <h3>No Requests Yet.</h3>
+      </>
+  );
+  }
 }
 
 export default TrItem;
