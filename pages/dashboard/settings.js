@@ -10,11 +10,11 @@ import AddDriver from "./../../components/elements/AddDriver";
 import AddCompany from "./../../components/elements/AddCompany";
 import Branches from "./../../components/elements/Branches";
 import AllUsers from "./../../components/elements/AllUsers";
+import AllPriceRequests from "./../../components/elements/AllPriceRequests";
 import RequestSettings from "./../../components/elements/RequestSettings";
 
 
-const dashboardSettings = () => {
-
+const dashboardSettings = ({content}) => {
     const [activeSettingsTab , setActiveSettingsTab] = useState('LoadingSettings');
     const [componentsTab , setComponentsTab] = useState({});
     const [menuTabs , setMenuTabs] = useState(false);
@@ -66,6 +66,10 @@ const dashboardSettings = () => {
                     onClick={() => {setActiveSettingsTab('AllUsers')}}>
                     All Users
                 </div>
+                <div className={(activeSettingsTab == 'AllPriceRequests') ? "settingsTab activeSettingsTab" : "settingsTab" }
+                    onClick={() => {setActiveSettingsTab('AllPriceRequests')}}>
+                    All Price Requests
+                </div>
                 <div className={(activeSettingsTab == 'RequestSettings') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('RequestSettings')}}>
                     Request Settings
@@ -83,7 +87,8 @@ const dashboardSettings = () => {
                     'AddCompany': AddCompany,    
                     'AddUser': AddUser,    
                     'Branches': Branches,    
-                    'AllUsers': AllUsers,    
+                    'AllUsers': AllUsers,
+                    'AllPriceRequests': AllPriceRequests,
                     'RequestSettings': RequestSettings    
                 });
                 setActiveSettingsTab('AddDriver');
@@ -106,7 +111,6 @@ const dashboardSettings = () => {
     // The resolved component must begin with a capital letter
     const ChoosedSetting = all[activeSettingsTab];
 return (
-    <>
         <Layout userCreds={['original-user','super-admin']} params={[]} modelName='' forNewUsers={0}>
             <div className="container-fluid backgrounded-con float-start px-3 py-3">
                 <div className="container">
@@ -117,15 +121,34 @@ return (
                         </div>
                         <div className="col-lg-8 col-md-8 col-xs-12 col-sm-12 float-start px-2 py-2">
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
-                                {(pageIsReady) ? <ChoosedSetting /> : <LoadingSettings />}
+                                {(pageIsReady) ? <ChoosedSetting requests={content} /> : <LoadingSettings />}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </Layout>
-    </>
     );
 }
 
 export default dashboardSettings;
+
+export async function getServerSideProps(context) {
+    let accessToken = context.req.cookies['accessToken'];
+    const customClearanceRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/prices/read', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': accessToken
+      }
+    });
+  
+    let resultData = await customClearanceRequest.json();
+
+    return {
+      props:{
+        content: resultData
+      }
+    }
+  } 

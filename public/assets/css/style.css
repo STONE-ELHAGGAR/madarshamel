@@ -7104,6 +7104,96 @@ thead, tr, td {
   .a4 .tipData {
     font-size: 13px; }
 
+.chatBox {
+  float: left;
+  position: fixed;
+  bottom: 0px;
+  background: #fff;
+  box-shadow: 2px -2px 20px 3px #d9d9d9de;
+  z-index: 99;
+  border-top-right-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer; }
+  .chatBox .chatTitle {
+    padding: 15px; }
+    .chatBox .chatTitle span {
+      color: #27ac41;
+      font-weight: bolder;
+      padding: 5px; }
+  .chatBox .usersBox {
+    height: 350px;
+    max-height: 100%;
+    border-top: 2px solid #f1f3f8; }
+    .chatBox .usersBox textarea {
+      padding: 10px;
+      width: 100%;
+      float: left; }
+    .chatBox .usersBox .userData {
+      max-width: 100%;
+      word-break: break-all;
+      border-top: 2px solid #f1f3f8;
+      padding: 15px;
+      text-align: left;
+      font-weight: 200;
+      color: #6f6f6f; }
+      .chatBox .usersBox .userData .userName {
+        text-align: center;
+        font-weight: bold;
+        color: #000 !important;
+        font-size: 17px; }
+      .chatBox .usersBox .userData p {
+        font-size: 14px; }
+    .chatBox .usersBox .sendMsg {
+      float: left;
+      position: absolute;
+      bottom: 0px;
+      padding: 10px;
+      border-top: 2px solid #f1f1f1;
+      z-index: 1000;
+      background: #fff; }
+    .chatBox .usersBox .send {
+      padding: 15px;
+      cursor: pointer; }
+    .chatBox .usersBox .fromOther {
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 12px; }
+      .chatBox .usersBox .fromOther span {
+        min-width: 70%;
+        float: left;
+        padding: 5px;
+        background: #f1f3f8;
+        border-radius: 30px;
+        word-break: break-all;
+        max-width: 100%;
+        font-size: 14px;
+        font-weight: bold; }
+    .chatBox .usersBox .fromMe {
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 12px; }
+      .chatBox .usersBox .fromMe span {
+        min-width: 70%;
+        float: right;
+        padding: 5px;
+        background: #c7debf;
+        border-radius: 30px;
+        word-break: break-all;
+        max-width: 100%;
+        font-size: 15px; }
+  .chatBox .close {
+    padding: 10px !important;
+    float: right;
+    margin-top: -10px;
+    background: #ce4343;
+    color: #fff !important;
+    border-radius: 50px;
+    width: 43px; }
+  .chatBox .chatMsgs {
+    height: 258px;
+    overflow-y: scroll; }
+
 @media (min-width: 1400px) {
   .block-we-do {
     padding-left: 40px; }

@@ -20,6 +20,13 @@ function Login() {
         const content = await loginRequest.json();
         if(content.success) {
             sessionStorage.setItem('loginData', JSON.stringify(content));
+            function setCookie(cname, cvalue, exdays) {
+                const d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                let expires = "expires="+ d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+              }
+              setCookie('accessToken',content.data.accessToken,10)
             console.log(JSON.parse(sessionStorage.getItem('loginData')));
             router.push({ pathname: '/dashboard' })
         }else{

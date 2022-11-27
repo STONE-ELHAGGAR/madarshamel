@@ -15,9 +15,9 @@ import WhatWeDo from "../components/elements/WhatWeDo";
 import BlogPosts from "../components/elements/BlogPosts";
 import OfferSliderSection from "../components/elements/OfferSliderSection";
 
-const ModalVideo = dynamic(import("react-modal-video"), {
+/*const ModalVideo = dynamic(import("react-modal-video"), {
     ssr: false,
-});
+});*/
 
 function Home() {
     const [isOpen, setOpen] = useState(false);

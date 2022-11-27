@@ -14,8 +14,10 @@ const handleVerifyAccount = async (e) => {
     });
 
   const content = await verifyRequest.json();
-  console.log(content)
-  return content;
+  if(content.success){
+    const alertCon = document.getElementById('alert-section');
+    alertCon.innerHTML = '<div class="alert alert-primary" role="alert">'+content.message+'</div>';
+    }
 }
 
 module.exports = handleVerifyAccount;

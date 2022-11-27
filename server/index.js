@@ -15,6 +15,8 @@ const settings = require("./settings/crud");
 const branches = require("./branches/crud");
 const company = require("./company/crud");
 const driver = require("./driver/crud");
+const chat = require("./chat/crud");
+const prices = require("./prices/crud");
 const socketRouter = require("./socketRouter/index");
 
 
@@ -39,6 +41,8 @@ serverApp
     app.use('/api/branches',branches);
     app.use('/api/company',company);
     app.use('/api/driver',driver);
+    app.use('/api/chat',chat);
+    app.use('/api/prices',prices);
     app.use('/',socketRouter);
 
     app.get('/api/download', function(req, res){

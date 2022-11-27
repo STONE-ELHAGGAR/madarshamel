@@ -8,8 +8,7 @@ import AddCC from "./../../components/elements/AddCC";
 import CCRequests from "./../../components/elements/CCRequests";
 
 
-const controlRequests = () => {
-
+const controlRequests = ({content}) => {
     const [activeSettingsTab , setActiveSettingsTab] = useState('AddCC');
     
     const all = {
@@ -19,7 +18,6 @@ const controlRequests = () => {
     // The resolved component must begin with a capital letter
     const ChoosedSetting = all[activeSettingsTab];
 return (
-    <>
         <Layout userCreds={['original-user','custom-clearance','super-admin']} params={[]} modelName='' forNewUsers={0}>
             <div className="container-fluid backgrounded-con float-start px-3 py-3">
                 <div className="container">
@@ -39,15 +37,35 @@ return (
                         </div>
                         <div className="col-lg-8 col-md-8 col-xs-12 col-sm-12 float-start px-2 py-2">
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
-                                <ChoosedSetting settingsTab={activeSettingsTab} />
+                                <ChoosedSetting content={content} settingsTab={activeSettingsTab} />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </Layout>
-    </>
     );
 }
 
 export default controlRequests;
+
+
+export async function getServerSideProps(context) {
+    let accessToken = context.req.cookies['accessToken'];
+    const customClearanceRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/custom_clearance/readAllRequests', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': accessToken
+      }
+    });
+  
+    let resultData = await customClearanceRequest.json();
+
+    return {
+      props:{
+        content: resultData
+      }
+    }
+  } 

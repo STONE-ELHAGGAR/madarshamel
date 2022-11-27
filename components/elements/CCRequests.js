@@ -6,17 +6,7 @@ import CcItem from "./CcItem";
 const handleAllCC = require('./../../handlers/handleAllCC');
 
 
-const CCRequests = ({settingsTab}) => {
-    const [ccData, setCcData] = useState([]);
-
-    useEffect(() => {
-        if(settingsTab == 'CCRequests'){
-            handleAllCC().
-                then((result) => {
-                    setCcData(result)
-                });
-        }
-    },[settingsTab]);
+const CCRequests = ({content}) => {
 return (
     <>
             <div className="container-fluid backgrounded-con float-start px-3 py-3">
@@ -33,10 +23,11 @@ return (
                                 <th scope="col">Reciving Port</th>
                                 <th scope="col">Source Country</th>
                                 <th scope="col">Expected Ship Date</th>
+                                <th scope="col">Created At</th>
                             </tr>
                             </thead>
                             <tbody id="allRecords">
-                                <CcItem content={ccData} />
+                                <CcItem content={content} />
                             </tbody>
                         </table>
                     </div>

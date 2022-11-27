@@ -20,6 +20,7 @@ const verifyPage = () => {
             <Layout userCreds={[]} params={[]} modelName=''>
                 <div className="container-fluid backgrounded-con float-start">
                     <div className="col-5 my-3 px-3 py-3 text-center" style={{background: '#fff',margin: 'auto'}}>
+                        <div id="alert-section"></div>
                         <h4>Verfication Code:</h4>
                         <input type="hidden" value={verifyCode} id="verifyCode" />
                         <h5>{verifyCode}</h5><br />

@@ -7,12 +7,14 @@ const authJWT = require('./../../util/authJWT');
 const Users = require('./../models/users');
 const Movements = require('./../models/movements');
 const Custom_clearance = require('./../models/custom_clearance');
+const Chat = require('./../models/chat');
+const jwt = require('jsonwebtoken');
 //Socket IO
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const SERVERPORT = process.env.PORT || 3001;
-
+const secret = process.env.API_SECRET;
 
 router.use(cors());
 const server = http.createServer(router);
@@ -24,6 +26,58 @@ io.on('connection', (socket) => {
     let resData = {};
     let movementsData;
     console.log('User Connected id = ' + socket.id);
+
+    socket.on("join_room", (data) => {
+        console.log('Joined Room : '+data);
+        socket.join(data);
+    });
+    
+    socket.on("send_message", async (data) => {
+        //Here Insert Messages To Chats Table
+        const message = data.message;
+        const for_u_id = data.activeRoom;
+        const accessToken = data.accessToken;
+        let newChatsData = [];
+        const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
+        let u_id = '0';
+        try{
+            const payload = jwt.verify(accessToken, secret);
+            u_id = payload.sub;
+        }catch(e){
+            console.log(e,accessToken);
+        }
+        const seen = 'unseen';
+        let resData = [];
+        const chat = Chat({message, seen, created_at, u_id, for_u_id});
+
+        try {
+            await chat.save(async (err,messageData) => {
+                console.log(err,'Inserted Message '+messageData._id);
+                resData = {success: true,message: messageData};
+                try {
+                    let chatsData = await Chat.find( { for_u_id: for_u_id } );
+                    for (var i = 0; i < chatsData.length; i++) {
+                        let usersData = await Users.find( { _id: chatsData[i].u_id } );
+                        chatsData[i] = {
+                            name: usersData[0].name,
+                            message: chatsData[i].message,
+                            u_id: chatsData[i].u_id,
+                            seen: chatsData[i].seen,
+                            _id: chatsData[i]._id,
+                            created_at: chatsData[i].created_at,
+                        }
+                    }
+                    resData = {success: true,chats: chatsData};
+                    socket.to(data.activeRoom).emit("receive_message", resData);
+                }catch(e) {
+                    resData = { message: 'Something went wrong' ,error: e};
+                }
+            });
+        }catch(e) {
+            console(e);
+        }
+    });
+
     socket.on('cc_send_accessToken_i_id', async (data) => {
         try {
             let replaceData = '';

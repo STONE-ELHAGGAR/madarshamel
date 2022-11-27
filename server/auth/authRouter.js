@@ -113,7 +113,6 @@ router.post('/loginCheck', authJWT.verify([]) ,async (req,res,next) => {
             const itemData = await Model.find({_id: itemId});
             console.log('Check if User '+currentLoggedInUser._id+' Same u_id for '+modelName+' : '+itemId);
             (itemData[0].u_id == currentLoggedInUser._id) ? same_as_u_id = true : same_as_u_id = false;
-            
         }
         (currentLoggedInUserCreds.includes('custom-clearance')) ? custom_clearance = true : custom_clearance = false;
         (currentLoggedInUserCreds.includes('transportation')) ? transportation = true : transportation = false;

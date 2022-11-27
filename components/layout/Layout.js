@@ -21,6 +21,7 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
         }
     }
     const router = useRouter();
+    
     const [logged , setLogged] = useState(false);
     if(forNewUsers){
         // Similar to componentDidMount and componentDidUpdate:
@@ -29,7 +30,9 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
                 .then((result) => {
                     if(result){
                         setLogged(true);
-                        router.push({ pathname: '/dashboard' })
+                        if(router.pathname == '/page-login' || router.pathname == '/page-signup'){
+                            router.push({ pathname: '/dashboard' })
+                        }
                     }else{
                         console.log('NOT Loggedin');
                         setLogged(false);
