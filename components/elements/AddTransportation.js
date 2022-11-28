@@ -22,10 +22,17 @@ const Transportation = () => {
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
                   <h4 className="text-center">Request Details</h4>
                   <div className="custom-alert-data"> </div>
-                  <CompanySelector />
+                  <label className="mt-20">Company Name</label>
+                  <input type="text" className="form-control display-1 companyName" name="companyName" id="companyName" placeholder="Company Name" />
+                  <label className="mt-20">Company Mobile</label>
+                  <input type="text" className="form-control display-1 companyMobile" name="companyMobile" id="companyMobile" placeholder="Company Mobile" />
+                  <label className="mt-20">Company Address</label>
+                  <input type="text" className="form-control display-1 companyAddress" name="companyAddress" id="companyAddress" placeholder="Company Address" />
                   <SettingSelector field="transactionPlace" />
-                  <SettingSelector field="fromDate" />
-                  <SettingSelector field="toDate" />
+                  <label className="mt-20">From</label>
+                  <input type="text" className="form-control display-1 fromDate" name="fromDate" id="fromDate" placeholder="From" />
+                  <label className="mt-20">To</label>
+                  <input type="text" className="form-control display-1 toDate" name="toDate" id="toDate" placeholder="To" />
                   <SettingSelector field="sourceCountry" />
                   <DriverSelector />
                   <label className="mt-20">Expected Ship Date</label>

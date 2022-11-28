@@ -22,19 +22,11 @@ const TrItem = ({content}) => {
                   if(fieldKey == 'u_id'){
                     transportation.u_id = transportation.u_id;
                   }else{
-                    if(fieldKey == 'companyName'){
-                      handleTableReader(transportation[fieldKey], 'id','/api/company/readById').then((result) => {
-                        requestConData.innerHTML = result.companies[0].companyName;
-                      })
-                    } else if (fieldKey == 'branch'){
-                      handleTableReader(transportation[fieldKey], 'id','/api/branches/readById').then((result) => {
-                        requestConData.innerHTML = result.branches[0].name+' --- '+result.branches[0].address;
-                      })
-                    } else if (fieldKey == 'drivers'){
+                    if (fieldKey == 'drivers'){
                       handleTableReader(transportation[fieldKey], 'id','/api/driver/readById').then((result) => {
                         requestConData.innerHTML = result.drivers[0].name+' --- '+result.drivers[0].mobile;
                       })
-                    } else if (fieldKey == 'expectedShipDate' || fieldKey == '_id' || fieldKey == 'carCost' || fieldKey == 'transferData' || fieldKey == 'created_at'){
+                    } else if (fieldKey == 'expectedShipDate' || fieldKey == 'companyName' || fieldKey == 'companyMobile' || fieldKey == 'fromDate' || fieldKey == 'toDate' || fieldKey == 'companyAddress' || fieldKey == '_id' || fieldKey == 'carCost' || fieldKey == 'transferData' || fieldKey == 'created_at'){
                         requestConData.innerHTML = transportation[fieldKey];
                     }else{
                       handleTableReader(transportation[fieldKey], 'id','/api/settings/readById').then((result) => {
@@ -48,11 +40,12 @@ const TrItem = ({content}) => {
                 <>
                     <tr key={index}>
                         <th scope="row" id={'_'+transportation._id}></th>
-                        <td id={'companyName_'+transportation._id}></td>
-                        <td id={'branch_'+transportation._id}></td>
+                        <td id={'companyName_'+transportation._id}>{transportation.companyName}</td>
+                        <td id={'companyMobile_'+transportation._id}>{transportation.companyMobile}</td>
+                        <td id={'companyAddress_'+transportation._id}>{transportation.companyAddress}</td>
                         <td id={'transactionPlace_'+transportation._id}></td>
-                        <td id={'fromDate_'+transportation._id}></td>
-                        <td id={'toDate_'+transportation._id}></td>
+                        <td id={'fromDate_'+transportation._id}>{transportation.fromDate}</td>
+                        <td id={'toDate_'+transportation._id}>{transportation.toDate}</td>
                         <td id={'sourceCountry_'+transportation._id}></td>
                         <td id={'drivers_'+transportation._id}></td>
                         <td id={'carCost_'+transportation._id}>{transportation.carCost}</td>

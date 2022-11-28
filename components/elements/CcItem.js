@@ -15,7 +15,8 @@ const CcItem = ({content}) => {
                     <tr key={custom_clearance._id}>
                         <th scope="row"><a href={"/dashboard/custom-clearance-request/"+custom_clearance._id}>{custom_clearance.id}</a></th>
                         <td>{custom_clearance.companyName}</td>
-                        <td>{custom_clearance.branch}</td>
+                        <td>{custom_clearance.companyMobile}</td>
+                        <td>{custom_clearance.companyAddress}</td>
                         <td>{custom_clearance.transactionPlace}</td>
                         <td>{custom_clearance.shippingPort}</td>
                         <td>{custom_clearance.recivingPort}</td>

@@ -2,7 +2,8 @@
 const handleInsertCustomClearance = async (e) => {
   e.preventDefault();
   const companyName= document.querySelector('.companyName').value;
-  const branch= document.querySelector('.branch').value;
+  const companyMobile= document.querySelector('.companyMobile').value;
+  const companyAddress= document.querySelector('.companyAddress').value;
   const transactionPlace= document.querySelector('.transactionPlace').value;
   const shippingPort= document.querySelector('.shippingPort').value;
   const recivingPort= document.querySelector('.recivingPort').value;
@@ -12,7 +13,8 @@ const handleInsertCustomClearance = async (e) => {
   const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
   const requestBody = {
     companyName: companyName,
-    branch: branch,
+    companyMobile: companyMobile,
+    companyAddress: companyAddress,
     transactionPlace: transactionPlace,
     shippingPort: shippingPort,
     recivingPort: recivingPort,
@@ -35,11 +37,12 @@ const handleInsertCustomClearance = async (e) => {
       document.querySelector(".custom-alert-data").innerHTML = '';
       document.querySelector(".custom-alert-data").innerHTML = '<div class="alert alert-success" role="alert">Added Succesfully</div>';
 
-      document.querySelector('.companyName').value = 0;
-      document.querySelector('.branch').value = 0;
+      document.querySelector('.companyName').value = '';
+      document.querySelector('.companyMobile').value = '';
+      document.querySelector('.companyAddress').value = '';
       document.querySelector('.transactionPlace').value = 0;
-      document.querySelector('.shippingPort').value = 0;
-      document.querySelector('.recivingPort').value = 0;
+      document.querySelector('.shippingPort').value = '';
+      document.querySelector('.recivingPort').value = '';
       document.querySelector('.sourceCountry').value = 0;
       document.querySelector('.expectedShipDate').value = '';
 

@@ -3,7 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
+import ServicesPages from "../elements/ServicesPages";
 const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
+const handleReadAllPages = require('./../../handlers/handleReadAllPages');
+
 //Table Socket Requirments
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
@@ -12,6 +15,7 @@ const Header = ({ handleOpen, headerStyle }) => {
     const router = useRouter();
     const [scroll, setScroll] = useState(0)
     const [logged , setLogged] = useState(false);
+    const [servicePages , setServicePages] = useState([]);
     // Messages States
     const [messagesReceived, setMessagesReceived] = useState([]);
     const [chatUsers , setChatUsers] = useState([]);
@@ -37,6 +41,14 @@ const Header = ({ handleOpen, headerStyle }) => {
                 }
             })
     })
+    useEffect(() => {
+        handleReadAllPages().
+            then((result) => {
+                if(result?.pages){
+                    setServicePages(result);
+                }
+            });
+    },[])
     const handleLogout = () => {
         sessionStorage.removeItem('loginData');
         router.push({ pathname: '/page-login' })
@@ -251,26 +263,23 @@ const Header = ({ handleOpen, headerStyle }) => {
                                             <Link href="/"><a className="active">Home</a></Link>
                                         </li>
                                         <li>
-                                            <Link href="/page-about-2"><a>About</a></Link>
-                                        </li>
-                                        <li>
                                             <Link href="/price-request"><a>Pricing</a></Link>
                                         </li>
-                                        <li>
-                                            <Link href="/page-faqs-1"><a>FAQs</a></Link>
-                                        </li>
+                                        
                                         <li className="has-children">
-                                            <Link href="#"><a>Pages</a></Link>
+                                            <Link href="#"><a>More</a></Link>
                                             <ul className="sub-menu">
                                                 <li>
-                                                    <Link href="/page-contact"><a><i className="fi fi-rr-paper-plane" />Contact</a></Link>
+                                                    <Link href="/page-faqs-1"><a>FAQs</a></Link>
                                                 </li>
                                                 <li>
-                                                    <Link href="/page-signup"><a><i className="fi fi-rr-user-add" />Sign Up</a></Link>
+                                                    <Link href="/page-about-2"><a>About</a></Link>
                                                 </li>
-                                                <li>
-                                                    <Link href="/page-login"><a><i className="fi fi-rr-fingerprint" />Log In</a></Link>
-                                                </li>
+                                            </ul>
+                                        </li>
+                                        {/*<li className="has-children">
+                                            <Link href="#"><a>Pages</a></Link>
+                                            <ul className="sub-menu">
                                                 <li>
                                                     <Link href="/page-career-detail"><a><i className="fi fi-rr-list" />Career Detail</a></Link>
                                                 </li>
@@ -281,20 +290,10 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                     <Link href="/404"><a><i className="fi fi-rr-exclamation" />Error 404</a></Link>
                                                 </li>
                                             </ul>
-                                        </li>
+                                        </li>*/}
                                         <li className="has-children">
                                             <Link href="#"><a>Services</a></Link>
-                                            <ul className="sub-menu">
-                                                <li>
-                                                    <Link href="/service-single"><a><i className="fi fi-rr-stats" />Customs Clearance</a></Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/service-single"><a><i className="fi fi-rr-data-transfer" />Transportation</a></Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/service-single"><a><i className="fi fi-rr-paper-plane" />International Shipping</a></Link>
-                                                </li>
-                                            </ul>
+                                            <ServicesPages content={servicePages} />
                                         </li>
                                         {/*<li className="has-children">
                                             <Link href="#"><a>Blog</a></Link>
@@ -308,7 +307,9 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                 </li>
                                             </ul>
                                         </li>*/}
-
+                                        <li>
+                                            <Link href="/page-contact"><a><i className="fi fi-rr-paper-plane" />Contact</a></Link>
+                                        </li>
                                         {(logged) ? (
                                         <li className="has-children">
                                             <div className="mobile-header-top float-start px-3 py-3 logged-in-user">
@@ -336,7 +337,17 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                 </li>
                                             </ul>
                                         </li>
-                                        ) : ''}
+                                        ) : (
+                                            <>
+                                            <li>
+                                                <Link href="/page-signup"><a><i className="fi fi-rr-user-add" />Sign Up</a></Link>
+                                            </li>
+                                            <li>
+                                                <Link href="/page-login"><a><i className="fi fi-rr-fingerprint" />Log In</a></Link>
+                                            </li>
+                                            </>
+                                        )}
+                                        
 
                                     </ul>
                                 </nav>

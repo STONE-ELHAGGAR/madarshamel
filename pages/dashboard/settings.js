@@ -8,6 +8,7 @@ const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 import AddUser from "./../../components/elements/AddUser";
 import AddDriver from "./../../components/elements/AddDriver";
 import AddCompany from "./../../components/elements/AddCompany";
+import AddPage from "./../../components/elements/AddPage";
 import Branches from "./../../components/elements/Branches";
 import AllUsers from "./../../components/elements/AllUsers";
 import AllPriceRequests from "./../../components/elements/AllPriceRequests";
@@ -58,6 +59,10 @@ const dashboardSettings = ({content}) => {
                     onClick={() => {setActiveSettingsTab('AddUser')}}>
                     Add User
                 </div>
+                <div className={(activeSettingsTab == 'AddPage') ? "settingsTab activeSettingsTab" : "settingsTab" }
+                    onClick={() => {setActiveSettingsTab('AddPage')}}>
+                    Add Page
+                </div>
                 <div className={(activeSettingsTab == 'Branches') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('Branches')}}>
                     Branches
@@ -86,6 +91,7 @@ const dashboardSettings = ({content}) => {
                     'AddDriver': AddDriver,
                     'AddCompany': AddCompany,    
                     'AddUser': AddUser,    
+                    'AddPage': AddPage,    
                     'Branches': Branches,    
                     'AllUsers': AllUsers,
                     'AllPriceRequests': AllPriceRequests,

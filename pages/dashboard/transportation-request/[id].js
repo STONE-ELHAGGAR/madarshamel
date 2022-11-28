@@ -85,6 +85,13 @@ const TransportationRequestData = () => {
     const [activeIndexData ,setActiveIndexData] = useState([]);
     const [activeTabCon ,setActiveTabCon] = useState(1);
 
+    const [companyNameData ,setCompanyNameData] = useState('');
+    const [companyMobileData ,setCompanyMobileData] = useState('');
+    const [companyAddressData ,setCompanyAddressData] = useState('');
+    const [fromDateData ,setFromDateData] = useState('');
+    const [toDateData ,setToDateData] = useState('');
+
+
     //Handle Table Socket
     const cc_send_accessToken_i_id = () => {
         if(accessToken && activeIndex){
@@ -106,7 +113,16 @@ const TransportationRequestData = () => {
     useEffect(() => {
         if (id) {
             handleTransportationActiveIndex(id).then((result) => {
-                (result.success) ? setActiveIndexData(result) : router.push({ pathname: '/404' }) ;
+                if(result.success){
+                    setActiveIndexData(result);
+                    setCompanyNameData(result.transportation?.companyName);
+                    setCompanyMobileData(result.transportation?.companyMobile);
+                    setCompanyAddressData(result.transportation?.companyAddress);
+                    setFromDateData(result.transportation?.fromDate);
+                    setToDateData(result.transportation?.toDate);
+                }else{
+                    router.push({ pathname: '/404' });
+                }
             })
             setActiveIndex(id);
         }
@@ -162,9 +178,9 @@ const TransportationRequestData = () => {
                                     <li className="nav-item">
                                         <div className={((activeTabCon === 2) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="attachFileTab" onClick={() => {setActiveTabCon(2)}}>Attach File</div>
                                     </li>
-                                    <li className="nav-item">
+                                    {/*<li className="nav-item">
                                         <div className={((activeTabCon === 3) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="serviceAlertTab" onClick={() => {setActiveTabCon(3)}}>Service Alert (SECRET)</div>
-                                    </li>
+                                    </li>*/}
                                 </ul>
                                 <div className="container-fluid float-start" id="tabCon">
                                     {((activeTabCon === 1) ? <SendMessageComponent /> : ((activeTabCon === 2) ? <SendAttachFileComponent /> : <SendAlertComponent /> ) )}
@@ -186,11 +202,27 @@ const TransportationRequestData = () => {
                                         <th scope="row">ID</th>
                                         <td id="_id">{guiId}</td>
                                     </tr>
-                                        <TrTableItem content={activeIndexData} id="companyName" row="Company Name" />
-                                        <TrTableItem content={activeIndexData} id="branch" row="Branch" />
+                                        <tr>
+                                            <th scope="row">Company Name</th>
+                                            <td>{companyNameData}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Company Mobile</th>
+                                            <td>{companyMobileData}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Company Address</th>
+                                            <td>{companyAddressData}</td>
+                                        </tr>
                                         <TrTableItem content={activeIndexData} id="transactionPlace" row="Transaction Place" />
-                                        <TrTableItem content={activeIndexData} id="fromDate" row="From" />
-                                        <TrTableItem content={activeIndexData} id="toDate" row="To" />
+                                        <tr>
+                                            <th scope="row">From Date Data</th>
+                                            <td>{fromDateData}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">To Date Data</th>
+                                            <td>{toDateData}</td>
+                                        </tr>
                                         <TrTableItem content={activeIndexData} id="sourceCountry" row="Source Country" />
                                         <TrTableItem content={activeIndexData} id="expectedShipDate" row="Expected Ship Date" />
                                         <TrTableItem content={activeIndexData} id="carCost" row="Car Cost" />

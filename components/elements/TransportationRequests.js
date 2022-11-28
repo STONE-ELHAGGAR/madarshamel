@@ -26,7 +26,8 @@ return (
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Company Name</th>
-                                <th scope="col">Branch</th>
+                                <th scope="col">Company Mobile</th>
+                                <th scope="col">Company Address</th>
                                 <th scope="col">Transaction Place</th>
                                 <th scope="col">From Date</th>
                                 <th scope="col">To Date</th>

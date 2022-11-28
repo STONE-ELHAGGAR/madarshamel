@@ -83,6 +83,13 @@ const CustomClearanceRequestData = () => {
     const [activeIndex ,setActiveIndex] = useState(0);
     const [guiId ,setGuiId] = useState(0);
     const [activeIndexData ,setActiveIndexData] = useState([]);
+    
+    const [companyNameData ,setCompanyNameData] = useState('');
+    const [companyMobileData ,setCompanyMobileData] = useState('');
+    const [companyAddressData ,setCompanyAddressData] = useState('');
+    const [recivingPortData ,setRecivingPortData] = useState('');
+    const [shippingPortData ,setShippingPortData] = useState('');
+
     const [activeTabCon ,setActiveTabCon] = useState(1);
 
     //Handle Table Socket
@@ -106,7 +113,16 @@ const CustomClearanceRequestData = () => {
     useEffect(() => {
         if (id) {
             handleCustomClearanceActiveIndex(id).then((result) => {
-                (result.success) ? setActiveIndexData(result) : router.push({ pathname: '/404' }) ;
+                if(result.success){
+                    setActiveIndexData(result);
+                    setCompanyNameData(result.custom_clearance?.companyName);
+                    setCompanyMobileData(result.custom_clearance?.companyMobile);
+                    setCompanyAddressData(result.custom_clearance?.companyAddress);
+                    setRecivingPortData(result.custom_clearance?.recivingPort);
+                    setShippingPortData(result.custom_clearance?.shippingPort);
+                }else{
+                    router.push({ pathname: '/404' });
+                }
             })
             setActiveIndex(id);
         }
@@ -163,9 +179,9 @@ const CustomClearanceRequestData = () => {
                                     <li className="nav-item">
                                         <div className={((activeTabCon === 2) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="attachFileTab" onClick={() => {setActiveTabCon(2)}}>Attach File</div>
                                     </li>
-                                    <li className="nav-item">
+                                    {/*<li className="nav-item">
                                         <div className={((activeTabCon === 3) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="serviceAlertTab" onClick={() => {setActiveTabCon(3)}}>Service Alert (SECRET)</div>
-                                    </li>
+                                    </li>*/}
                                 </ul>
                                 <div className="container-fluid float-start" id="tabCon">
                                     {((activeTabCon === 1) ? <SendMessageComponent /> : ((activeTabCon === 2) ? <SendAttachFileComponent /> : <SendAlertComponent /> ) )}
@@ -187,12 +203,28 @@ const CustomClearanceRequestData = () => {
                                         <th scope="row">ID</th>
                                         <td id="_id">{guiId}</td>
                                     </tr>
-                                        <TableItem content={activeIndexData} id="companyName" row="Company Name" />
-                                        <TableItem content={activeIndexData} id="branch" row="Branch" />
+                                        <tr>
+                                            <th scope="row">Company Name</th>
+                                            <td>{companyNameData}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Company Mobile</th>
+                                            <td>{companyMobileData}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Company Address</th>
+                                            <td>{companyAddressData}</td>
+                                        </tr>
                                         <TableItem content={activeIndexData} id="transactionPlace" row="Transaction Place" />
-                                        <TableItem content={activeIndexData} id="shippingPort" row="Shipping Port" />
-                                        <TableItem content={activeIndexData} id="recivingPort" row="Reciving Port" />
                                         <TableItem content={activeIndexData} id="sourceCountry" row="Source Country" />
+                                        <tr>
+                                            <th scope="row">Reciving Port Data</th>
+                                            <td>{recivingPortData}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Shipping Port Data</th>
+                                            <td>{shippingPortData}</td>
+                                        </tr>
                                         <TableItem content={activeIndexData} id="expectedShipDate" row="Expected Ship Date" />
                                         <TableItem content={activeIndexData} id="created_at" row="Created At" />
                                         <TableItem content={activeIndexData} id="u_id" row="By User" />

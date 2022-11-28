@@ -9,11 +9,11 @@ const Users = require('./../models/users');
 const authJWT = require('./../../util/authJWT');
 
 router.post('/create', authJWT.verify(['original-user','transportation','super-admin']), async (req,res,next) => {
-    const {companyName, branch, transactionPlace, fromDate, toDate, sourceCountry, drivers, expectedShipDate, carCost, transferData, attachedFiles} = req.body;
+    const {companyName, companyMobile, companyAddress, transactionPlace, fromDate, toDate, sourceCountry, drivers, expectedShipDate, carCost, transferData, attachedFiles} = req.body;
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
     const user = await Users.findById(req.userId);
     const u_id = user.id;
-    const transportation = Transportation({companyName, branch, transactionPlace, fromDate, toDate, sourceCountry, drivers, expectedShipDate, carCost, transferData, created_at, u_id, attachedFiles});
+    const transportation = Transportation({companyName, companyMobile, companyAddress, transactionPlace, fromDate, toDate, sourceCountry, drivers, expectedShipDate, carCost, transferData, created_at, u_id, attachedFiles});
 
     try {
         await transportation.save(function(err,transportationData) {

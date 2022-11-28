@@ -161,8 +161,13 @@ const TransportationRequestData = () => {
                                 </tr>
                                 <tr>
                                     <td>Contact No.</td>
-                                    <td style={{background: '#fff',fontSize: '13px',wordBreak: 'break-all',minWidth: '170px',textAlign: 'center'}} id="clientNumber"></td>
+                                    <td style={{background: '#fff',fontSize: '13px',wordBreak: 'break-all',minWidth: '170px',textAlign: 'center'}} id="companyMobile"></td>
                                     <td style={{textAlign: 'right'}}>رقم التواصل</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td style={{background: '#fff',fontSize: '13px',wordBreak: 'break-all',minWidth: '170px',textAlign: 'center'}} id="companyAddress"></td>
+                                    <td style={{textAlign: 'right'}}>العنوان</td>
                                 </tr>
                             </tbody>
                         </table>

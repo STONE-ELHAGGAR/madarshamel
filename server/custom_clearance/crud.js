@@ -13,11 +13,11 @@ const Settings = require('./../models/settings');
 const authJWT = require('./../../util/authJWT');
 
 router.post('/create', authJWT.verify(['original-user','custom-clearance','super-admin']), async (req,res,next) => {
-    const {companyName, branch, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, attachedFiles} = req.body;
+    const {companyName, companyAddress, companyMobile, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, attachedFiles} = req.body;
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
     const user = await Users.findById(req.userId);
     const u_id = user.id;
-    const custom_clearance = Custom_clearance({companyName, branch, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, attachedFiles, created_at, u_id});
+    const custom_clearance = Custom_clearance({companyName, companyAddress, companyMobile, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, attachedFiles, created_at, u_id});
 
     try {
         await custom_clearance.save(function(err,custom_clearanceData) {
@@ -104,21 +104,18 @@ router.post('/readAllRequests', authJWT.verify(['original-user','custom-clearanc
             let newcustom_clearance = [];
             for(custom_clearance in custom_clearances){
                 const countGTrecords = await Custom_clearance.find({_id: {$lt: custom_clearances[custom_clearance]._id}}).count()+501;
-                let companyData = await Companies.find( { _id: custom_clearances[custom_clearance].companyName } );
-                let branchData = await Branches.find( { _id: custom_clearances[custom_clearance].branch } );
                 let transactionPlace = await Settings.find( { _id: custom_clearances[custom_clearance].transactionPlace } );
-                let shippingPort = await Settings.find( { _id: custom_clearances[custom_clearance].shippingPort } );
-                let recivingPort = await Settings.find( { _id: custom_clearances[custom_clearance].recivingPort } );
                 let sourceCountry = await Settings.find( { _id: custom_clearances[custom_clearance].sourceCountry } );
                 
                 newcustom_clearance.push({
                     _id: custom_clearances[custom_clearance]._id,
                     id: countGTrecords,
-                    companyName: companyData[0].companyName,
-                    branch: branchData[0].name+' --- '+branchData[0].address,
+                    companyName: custom_clearances[custom_clearance].companyName,
+                    companyMobile: custom_clearances[custom_clearance].companyMobile,
+                    companyAddress: custom_clearances[custom_clearance].companyAddress,
                     transactionPlace: transactionPlace[0].content,
-                    shippingPort: shippingPort[0].content,
-                    recivingPort: recivingPort[0].content,
+                    shippingPort: custom_clearances[custom_clearance].shippingPort,
+                    recivingPort: custom_clearances[custom_clearance].recivingPort,
                     sourceCountry: sourceCountry[0].content,
                     expectedShipDate: custom_clearances[custom_clearance].expectedShipDate,
                     created_at: custom_clearances[custom_clearance].created_at

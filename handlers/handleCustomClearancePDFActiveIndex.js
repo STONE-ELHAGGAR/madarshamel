@@ -50,16 +50,7 @@ const handleCustomClearancePDFActiveIndex = async (id,movementId) => {
           if(fieldKey == 'u_id'){
             requestConData.innerHTML = content.name;
           }else{
-            if(fieldKey == 'companyName'){
-              handleTableReader(content.custom_clearance[fieldKey], 'id','/api/company/readById').then((result) => {
-                requestConData.innerHTML = result.companies[0].companyName
-                clientNumber.innerHTML = result.companies[0].companyMobile
-              })
-            } else if (fieldKey == 'branch'){
-              handleTableReader(content.custom_clearance[fieldKey], 'id','/api/branches/readById').then((result) => {
-                requestConData.innerHTML = result.branches[0].name+' --- '+result.branches[0].address;
-              })
-            } else if (fieldKey == 'created_at'){
+            if (fieldKey == 'created_at'){
                 const recordDate = new Date(content.custom_clearance[fieldKey]);
                 const toGetTime = recordDate.toLocaleString("en-US", {timeZone: "Asia/Riyadh"}).split(' ');
                 requestConData.innerHTML =
@@ -68,7 +59,7 @@ const handleCustomClearancePDFActiveIndex = async (id,movementId) => {
                   (recordDate.getMonth()+1)+'/'+
                   recordDate.getFullYear();
 
-            } else if (fieldKey == 'expectedShipDate' || fieldKey == '_id'){
+            } else if (fieldKey == 'expectedShipDate' || fieldKey == 'companyName' || fieldKey == 'companyMobile' || fieldKey == 'companyAddress' || fieldKey == 'recivingPort' || fieldKey == 'shippingPort' || fieldKey == '_id'){
                 requestConData.innerHTML = content.custom_clearance[fieldKey];
             }else{
               handleTableReader(content.custom_clearance[fieldKey], 'id','/api/settings/readById').then((result) => {

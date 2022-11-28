@@ -6,7 +6,13 @@ const ModelSchema = new mongoose. Schema ({
             required: true,
             maxlength: 255
         },
-    branch:
+    companyMobile:
+        {
+            type: String,
+            required: true,
+            maxlength: 255
+        },
+    companyAddress:
         {
             type: String,
             required: true,

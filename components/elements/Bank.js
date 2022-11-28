@@ -80,9 +80,7 @@ const Bank = ({requestId, tableName}) => {
                 setChoosedUserDebtLimit(result?.debtLimit);
             })
         handleTableReader(requestId, '_id','/api/'+tableName+'/read').then((result) => {
-            handleTableReader(result[tableName].companyName, 'id','/api/company/readById').then((result2) => {
-                setChoosedUser(result2.companies[0].u_id);
-            })
+            setChoosedUser(result[tableName].u_id);
         })
     },[]);
 

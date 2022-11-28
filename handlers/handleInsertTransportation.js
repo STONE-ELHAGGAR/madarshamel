@@ -2,7 +2,8 @@
 const handleInsertTransportation = async (e) => {
   e.preventDefault();
   const companyName= document.querySelector('.companyName').value;
-  const branch= document.querySelector('.branch').value;
+  const companyMobile= document.querySelector('.companyMobile').value;
+  const companyAddress= document.querySelector('.companyAddress').value;
   const transactionPlace= document.querySelector('.transactionPlace').value;
   const fromDate= document.querySelector('.fromDate').value;
   const toDate= document.querySelector('.toDate').value;
@@ -15,7 +16,8 @@ const handleInsertTransportation = async (e) => {
   const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
   const requestBody = {
     companyName: companyName,
-    branch: branch,
+    companyMobile: companyMobile,
+    companyAddress: companyAddress,
     fromDate: fromDate,
     transactionPlace: transactionPlace,
     toDate: toDate,
@@ -41,11 +43,12 @@ const handleInsertTransportation = async (e) => {
       document.querySelector(".custom-alert-data").innerHTML = '';
       document.querySelector(".custom-alert-data").innerHTML = '<div class="alert alert-success" role="alert">Added Succesfully</div>';
 
-      document.querySelector('.companyName').value = 0;
-      document.querySelector('.branch').value = 0;
+      document.querySelector('.companyName').value = '';
+      document.querySelector('.companyMobile').value = '';
+      document.querySelector('.companyAddress').value = '';
       document.querySelector('.transactionPlace').value = 0;
-      document.querySelector('.fromDate').value = 0;
-      document.querySelector('.toDate').value = 0;
+      document.querySelector('.fromDate').value = '';
+      document.querySelector('.toDate').value = '';
       document.querySelector('.drivers').value = 0;
       document.querySelector('.transferData').value = '';
       document.querySelector('.carCost').value = '';
