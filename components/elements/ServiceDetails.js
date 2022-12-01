@@ -15,9 +15,9 @@ const ServiceDetails = ({children, bgColor, titleTab, pageLink, imgSrc}) => {
                 <p className="text-body-excerpt mt-20">
                     {children}
                 </p>
-                <div className="mt-30">
+                {/*<div className="mt-30">
                     <Link href={pageLink}><a className="btn btn-default btn-white icon-arrow-right">Learn more</a></Link>
-                </div>
+                </div>*/}
             </div>
         </div>
     </>

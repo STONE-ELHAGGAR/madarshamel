@@ -8,7 +8,7 @@ const handleMovements = require('./../../handlers/handleMovements');
 const handleBalance = require('./../../handlers/handleBalance');
 const handleTableReader = require('./../../handlers/handleTableReader');
 
-const Bank = ({requestId, tableName}) => {
+const Bank = ({requestId, tableName, choosedUserData = ''}) => {
     const [choosedUserBalance, setChoosedUserBalance] = useState('');
     const [choosedUserDebt, setChoosedUserDebt] = useState('');
     const [choosedUserDebtLimit, setChoosedUserDebtLimit] = useState('');
@@ -21,7 +21,7 @@ const Bank = ({requestId, tableName}) => {
         const u_id= document.querySelector('.u_id').value;
         const amount= document.querySelector('.amount').value;
         const status= document.querySelector('.status').value;
-        const movementId= document.querySelector('.movementId').value;
+        const movementId= 0;//document.querySelector('.movementId').value;
         const details= document.querySelector('.details').value;
         const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
         const requestBody = {
@@ -48,7 +48,7 @@ const Bank = ({requestId, tableName}) => {
             document.querySelector('.u_id').value = content.transaction.u_id;
             document.querySelector('.amount').value = '';
             document.querySelector('.status').value = 0;
-            document.querySelector('.movementId').value = 0;
+            //document.querySelector('.movementId').value = 0;
             document.querySelector('.details').value = '';
             handleBalance(choosedUser).
                 then((result) => {
@@ -79,9 +79,13 @@ const Bank = ({requestId, tableName}) => {
                 setChoosedUserDebt(result?.currentDebt);
                 setChoosedUserDebtLimit(result?.debtLimit);
             })
-        handleTableReader(requestId, '_id','/api/'+tableName+'/read').then((result) => {
-            setChoosedUser(result[tableName].u_id);
-        })
+        if(choosedUserData == ''){
+            handleTableReader(requestId, '_id','/api/'+tableName+'/read').then((result) => {
+                setChoosedUser(result[tableName].u_id);
+            })
+        }else{
+            setChoosedUser(choosedUserData);
+        }
     },[]);
 
     useEffect(() => {
@@ -110,7 +114,7 @@ const Bank = ({requestId, tableName}) => {
             <option value="0">Withdraw</option>
             <option value="1">Deposit</option>
         </select><br />
-        <label>Choose Connected Policy</label>
+        {/*<label>Choose Connected Policy</label>
         <select name="movementId" className="movementId my-2 h6" style={{width: '100%', padding: '10px'}}>
             <option value="0">Not Connected</option>
             <OptionItem content={allMovementsData}
@@ -119,7 +123,7 @@ const Bank = ({requestId, tableName}) => {
                 internalItem={true}
                 internalItemKey="mainPolicy"
             />
-        </select><br />
+        </select><br />*/}
         <textarea placeholder="Additional Details" className="form-control details" id="details"></textarea><br />
         <button className="btn btn-square" onClick={handleTransaction}>Create</button>
     </div>

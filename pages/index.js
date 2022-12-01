@@ -19,23 +19,55 @@ import OfferSliderSection from "../components/elements/OfferSliderSection";
     ssr: false,
 });*/
 
-function Home() {
+function Home({content}) {
     const [isOpen, setOpen] = useState(false);
-
     return (
         <>
             {/* <Link href="/#">
                 <a>Link</a></Link>
             </Link> */}
             <Layout>
-                <Banner />
-                <PortfolioLogos />
-                <TabSection />
+                <Banner bannerDesc={content.homes[0].bannerDesc} />
+                <PortfolioLogos
+                    img1={content.homes[0].img1}
+                    img2={content.homes[0].img2}
+                    img3={content.homes[0].img3}
+                    img4={content.homes[0].img4}
+                    img5={content.homes[0].img5}
+                    img6={content.homes[0].img6}
+                />
+                <TabSection
+                  tabSec1={content.homes[0].tabSec1}
+                  tabSec2={content.homes[0].tabSec2}
+                  tabSec3={content.homes[0].tabSec3}  />
                 <ServiceSection />
                 <WhatWeDo />
                 <OfferSliderSection />
-                <TestimonialSliderSection />
-                <BlogPosts />
+                <TestimonialSliderSection
+                _1st={{
+                    name: content.homes[0]._1stname,
+                    company: content.homes[0]._1stcompany,
+                    quote: content.homes[0]._1stquote,
+                    bg: ""
+                }}
+                _2nd={{
+                    name: content.homes[0]._2ndname,
+                    company: content.homes[0]._2ndcompany,
+                    quote: content.homes[0]._2ndquote,
+                    bg: "bd-bg-6"
+                }}
+                _3rd={{
+                    name: content.homes[0]._3rdname,
+                    company: content.homes[0]._3rdcompany,
+                    quote: content.homes[0]._3rdquote,
+                    bg: "bd-bg-10"
+                }}
+                _4th={{
+                    name: content.homes[0]._4thname,
+                    company: content.homes[0]._4thcompany,
+                    quote: content.homes[0]._4thquote,
+                    bg: "bd-bg-6"
+                }} />
                 <section className="section-box overflow-visible mb-100">
                     <div className="container mt-100">
                         <div className="row">
@@ -47,16 +79,7 @@ function Home() {
                                             <h4 className="text-heading-2 mb-10 mt-10">
                                                 Subscribe our newsletter
                                             </h4>
-                                            <p className="text-body-text color-gray-500">
-                                                By clicking the button, you are
-                                                agreeing with our
-                                            </p>
-                                            <Link href="/page-terms"><a>Term &amp; Conditions</a></Link>
-                                            <div className="box-form-newsletter mt-30">
-                                                <form className="form-newsletter">
-                                                    <input className="input-newsletter"  placeholder="Enter you mail .." /><button className="btn btn-send" />
-                                                </form>
-                                            </div>
+                                            <Link href="/page-signup"><a className="btn btn-square">Register</a></Link>
                                         </div>
                                         <div className="col-lg-7 col-md-5 mt-30 mt-lg-0 mt-md-30 mt-sm-30 position-relative text-end">
                                             <div className="block-chart shape-1">
@@ -84,3 +107,20 @@ function Home() {
 }
 Home.layout = "L2";
 export default Home;
+
+export async function getServerSideProps(context) {
+    const homesRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/homes/read', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+      }
+    });
+  
+    let resultData = await homesRequest.json();
+    return {
+      props:{
+        content: resultData
+      }
+    }
+  } 

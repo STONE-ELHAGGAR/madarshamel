@@ -1,8 +1,37 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import Image from "next/image";
+import React, {useState, useEffect} from 'react';
 
-const Footer = () => {
+const Footer = ({fb, twitter, insta, address, phone, email}) => {
+    const [fbData, setfbData] = useState('');
+    const [twitterData, settwitterData] = useState('');
+    const [instaData, setinstaData] = useState('');
+    const [addressData, setaddressData] = useState('');
+    const [phoneData, setphoneData] = useState('');
+    const [emailData, setemailData] = useState('');
+
+    const getSettings = async () => {
+    const homesRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/homes/read', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+      });
+    
+      let resultData = await homesRequest.json();
+      return resultData;
+    }
+    getSettings().
+        then((result) => {
+            setfbData(result.homes[0].fb);
+            setinstaData(result.homes[0].insta);
+            settwitterData(result.homes[0].twitter);
+            setaddressData(result.homes[0].address);
+            setphoneData(result.homes[0].phone);
+            setemailData(result.homes[0].email);
+        });
     return (
         <>
             <footer className="footer col-12 float-start mt-50">
@@ -22,101 +51,37 @@ const Footer = () => {
                     <div className="row">
                         <div className="col-lg-3 width-20 mb-30">
                             <h4 className="text-heading-5">Contact</h4>
-                            <div className="mt-20 text-body-text color-gray-600 mb-20">Jeddah, KSA</div>
-                            <div className="mt-20 text-body-text color-gray-600">+(966) 556-565-564</div>
-                            <div className="text-body-text color-gray-600">cs@madarshamel.sa</div>
+                            <div className="mt-20 text-body-text color-gray-600 mb-20">{addressData}</div>
+                            <div className="mt-20 text-body-text color-gray-600">{phoneData}</div>
+                            <div className="text-body-text color-gray-600">{emailData}</div>
                         </div>
-                        <div className="col-lg-3 width-20 mb-30">
-                            <h4 className="text-heading-5">About Us</h4>
-                            <ul className="menu-footer mt-20">
-                                <li>
-                                    <Link href="/#">
-                                        <a>Mission &amp; Vision</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/#">
-                                        <a>Our Team</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/#">
-                                        <a>Careers</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/#">
-                                        <a>Press &amp; Media</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/#">
-                                        <a>Testimonials</a>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="col-lg-3 width-20 mb-30">
-                            <h4 className="text-heading-5">Discover</h4>
-                            <ul className="menu-footer mt-20">
-                                <li>
-                                    <Link href="/blog-1">
-                                        <a>Our Blog</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/#">
-                                        <a>Knowledge Base</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/#">
-                                        <a>Cookie Policy</a>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="col-lg-3 width-20 mb-30">
+                        <div className="col-lg-6 width-20 mb-30">
                             <h4 className="text-heading-5">Support</h4>
                             <ul className="menu-footer mt-20">
-                                <li>
-                                    <Link href="/page-faqs-1">
-                                        <a>FAQs</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/#">
-                                        <a>Live Chatting</a>
-                                    </Link>
-                                </li>
                                 <li>
                                     <Link href="/page-contact">
                                         <a>Contact Us</a>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href="/#">
-                                        <a>Support Center</a>
-                                    </Link>
-                                </li>
+                                <p>Or login to start live chat with our team.</p>
                             </ul>
                         </div>
-                        <div className="col-lg-3 width-16">
+                        <div className="col-lg-6 width-16">
                             <h4 className="text-heading-5">Useful links</h4>
                             <ul className="menu-footer mt-20">
                                 <li>
-                                    <Link href="/#">
-                                        <a>Request an offer</a>
+                                    <Link href="/page-signup">
+                                        <a>Register</a>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/#">
-                                        <a>How it works</a>
+                                    <Link href="/page-login">
+                                        <a>Login</a>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/#">
-                                        <a>Reviews</a>
+                                    <Link href="/page-reset">
+                                        <a>Reset Password</a>
                                     </Link>
                                 </li>
                             </ul>
@@ -126,29 +91,17 @@ const Footer = () => {
                         <div className="row">
                             <div className="col-md-6">
                                 <span className="color-gray-400 text-body-lead">© Madarshamel 2022</span>
-                                <Link href="/page-terms">
-                                    <a className="text-body-text color-gray-400 ml-50">Privacy policy</a>
-                                </Link>
-                                <Link href="/page-terms">
-                                    <a className="text-body-text color-gray-400 ml-50">Cookies</a>
-                                </Link>
-                                <Link href="/page-terms">
-                                    <a className="text-body-text color-gray-400 ml-50">Terms of service</a>
-                                </Link>
                             </div>
                             <div className="col-md-6 text-center text-lg-end text-md-end">
                                 <div className="footer-social">
-                                    <Link href="https://facebook.com">
+                                    <Link href={fbData}>
                                         <a className="icon-socials icon-facebook"></a>
                                     </Link>
-                                    <Link href="https://twitter.com">
+                                    <Link href={twitterData}>
                                         <a className="icon-socials icon-twitter"></a>
                                     </Link>
-                                    <Link href="https://www.instagram.com">
+                                    <Link href={instaData}>
                                         <a className="icon-socials icon-instagram"></a>
-                                    </Link>
-                                    <Link href="https://www.linkedin.com">
-                                        <a className="icon-socials icon-linkedin"></a>
                                     </Link>
                                 </div>
                             </div>

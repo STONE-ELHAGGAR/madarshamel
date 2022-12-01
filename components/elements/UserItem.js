@@ -19,14 +19,9 @@ const UserItem = ({content}) => {
                         <td>{user.mobile}</td>
                         <td>{userCreds}</td>
                         <td>
-                            <div className="btn btn-square">
+                            <a href={"/dashboard/editUser/"+user._id} className="btn btn-square">
                                 <i className="fi fi-rr-edit"></i> Edit
-                            </div>
-                        </td>
-                        <td>
-                            <div className="btn btn-square">
-                                <i className="fi fi-rr-trash"></i> Remove
-                            </div>
+                            </a>
                         </td>
                     </tr>
                 </>

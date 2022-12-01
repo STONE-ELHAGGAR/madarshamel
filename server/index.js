@@ -17,6 +17,8 @@ const company = require("./company/crud");
 const driver = require("./driver/crud");
 const chat = require("./chat/crud");
 const prices = require("./prices/crud");
+const contact = require("./contact/crud");
+const homes = require("./homes/crud");
 const pages = require("./pages/crud");
 const socketRouter = require("./socketRouter/index");
 
@@ -44,6 +46,8 @@ serverApp
     app.use('/api/driver',driver);
     app.use('/api/chat',chat);
     app.use('/api/prices',prices);
+    app.use('/api/contact',contact);
+    app.use('/api/homes',homes);
     app.use('/api/pages',pages);
     app.use('/',socketRouter);
 

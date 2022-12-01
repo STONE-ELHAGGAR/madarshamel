@@ -96,6 +96,52 @@ router.post('/verifyAccount' ,async (req,res) => {
     
     return res.status(200).json(verifyResult);
 })
+
+router.post('/changePassword' ,async (req,res) => {
+    const {verifyCode, password} = req.body;
+    let id_stamp = verifyCode.split('_');
+    let u_id = id_stamp[0];
+    let timeStamp = id_stamp[1];
+    let verifyResult = {};
+    cryptPassword(password, async (err, cryptedPassword) => {
+    try{
+        const user = await Users.find({ _id: u_id });
+        if(user[0]?.timeStamp){
+            if(user[0].timeStamp == timeStamp){
+                user[0].timeStamp
+                const userUpdate = await Users.updateOne(
+                    {_id: user[0]._id},
+                    {$set:{ timeStamp: '', password: cryptedPassword }}
+                );
+                verifyResult = {
+                    success: true,
+                    message: 'Changed Successfully.'
+                };
+            }else{
+                verifyResult = {
+                    success: true,
+                    message: 'This Link is invalid.'
+                };
+            }
+        }else{
+            verifyResult = {
+                success: true,
+                message: 'This Link is invalid.'
+            };
+        }
+    }catch(e){
+        verifyResult = {
+            success: true,
+            message: 'Cannot Find the User.',
+            error: e
+        };
+    }
+    
+    return res.status(200).json(verifyResult);
+})
+})
+
+
 router.post('/loginCheck', authJWT.verify([]) ,async (req,res,next) => {
     const {userCreds,params,modelName} = req.body;
     const currentLoggedInUser = await Users.findById(req.userId);
@@ -212,6 +258,85 @@ router.post('/adminReadAllUsers', authJWT.verify([]), async (req,res,next) => {
     try {
         let usersData = await Users.find();
         res.json({success: true,users: usersData});
+    }catch(e) {
+        return res.status(500).json({ message: 'Something went wrong' ,error: e});
+    }
+});
+
+router.post('/readById', authJWT.verify([]), async (req,res,next) => {
+    try {
+        let usersData = await Users.find({_id: req.userId});
+        res.json({success: true,users: usersData});
+    }catch(e) {
+        return res.status(500).json({ message: 'Something went wrong' ,error: e});
+    }
+});
+
+router.post('/readByUser', authJWT.verify([]), async (req,res,next) => {
+    const {id} = req.body;
+    try {
+        let usersData = await Users.find({_id: id});
+        res.json({success: true,users: usersData});
+    }catch(e) {
+        return res.status(500).json({ message: 'Something went wrong' ,error: e});
+    }
+});
+
+router.post('/updateMySelf', authJWT.verify([]), async (req,res,next) => {
+    const {name, mobile} = req.body;
+    try {
+        let usersData = await Users.updateOne(
+            {_id: req.userId},
+            { $set: {name, mobile} }
+         );
+        res.json({success: true,users: usersData});
+    }catch(e) {
+        return res.status(500).json({ message: 'Something went wrong' ,error: e});
+    }
+});
+
+router.post('/updateUser', authJWT.verify([]), async (req,res,next) => {
+    const {id, name, mobile, email} = req.body;
+    try {
+        let usersData = await Users.updateOne(
+            {_id: id},
+            { $set: {name, mobile, email} }
+         );
+        res.json({success: true,users: usersData});
+    }catch(e) {
+        return res.status(500).json({ message: 'Something went wrong' ,error: e});
+    }
+});
+
+router.post('/rememberPass', async (req,res,next) => {
+    const {email} = req.body;
+    try {
+        let usersData = await Users.find({email: email});
+        if(usersData.length === 1){
+            let timeStamp = new Date().valueOf();
+            let usersDataStamped = await Users.updateOne(
+                {_id: usersData[0]._id},
+                { $set: {timeStamp} }
+            );
+            try{
+            sendEmail(
+                usersData[0].email, //To Email
+                usersData[0].name, //To Name
+              'Madarshamel | Reset Password Madarshamel', //Message Subject
+              process.env.BASEURL+'/change-password/'+usersData[0]._id+'_'+timeStamp, //btn_link
+              'Reset Password', //btn_content
+              'Welcome '+usersData[0].name, //temp_line1
+              'Here is your password account ... Click on "Reset Password" button to Reset your account, please', //temp_line2
+              'This link button is secret', //temp_line3
+              'Please DON`T send or share this link to anyone.', //temp_line4
+            );
+            }catch(e){
+                console.log(e)
+            }
+            res.json({success: true,users: usersData,case: 'success' , message: 'We`ve Sent You an email to change your Password.'});
+        }else{
+            res.json({success: true,users: email,case: 'danger', message: 'We`ve not found an user with this email: '+email});
+        }
     }catch(e) {
         return res.status(500).json({ message: 'Something went wrong' ,error: e});
     }

@@ -1,6 +1,6 @@
 import TestimonialSlider from "../slider/Testimonial";
 
-const TestimonialSliderSection = () => {
+const TestimonialSliderSection = ({_1st, _2nd, _3rd, _4th}) => {
     return(
         <section className="section-box">
             <div className="container mt-110">
@@ -17,7 +17,7 @@ const TestimonialSliderSection = () => {
                 </div>
             </div>
             <div className="container mt-80">
-                <TestimonialSlider />
+                <TestimonialSlider _1st={_1st} _2nd={_2nd} _3rd={_3rd} _4th={_4th} />
             </div>
         </section>
     )

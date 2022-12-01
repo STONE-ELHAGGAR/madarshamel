@@ -71,6 +71,44 @@ router.post('/read', authJWT.verify([]), async (req,res,next) => {
     }
 });
 
+router.post('/readAll', authJWT.verify([]), async (req,res,next) => {
+    const u_id = req.userId;
+    try {
+        const userData = await Users.find({_id: u_id});
+        let transactionsData = await Transactions.find({ $or: [ { u_id: u_id }, { byUId: u_id } ] } );
+        let transactionsDataArray = [];
+        for(el in transactionsData){
+            let u_idData = '';
+            let byUIdData = '';
+            if(transactionsData[el].u_id == userData[0]._id){
+                u_idData = 'For Me';
+            }else{                
+                let truserData = await Users.find({_id: transactionsData[el].u_id});;
+                u_idData = 'For '+truserData[0].name;
+            }
+            if(transactionsData[el].byUId == userData[0]._id){
+                byUIdData = 'By Me';
+            }else{                
+                let byuserData = await Users.find({_id: transactionsData[el].byUId});;
+                u_idData = 'By '+byuserData[0].name;
+            }
+            transactionsDataArray.push({
+                _id: transactionsData[el]._id,
+                amount: transactionsData[el].amount,
+                details: transactionsData[el].details,
+                status: transactionsData[el].status,
+                movementId: transactionsData[el].movementId,
+                created_at: transactionsData[el].created_at,
+                u_id: u_idData,
+                byUId: byUIdData
+            });
+        }
+        res.json({success: true,transactions: transactionsDataArray});
+    }catch(e) {
+        return res.status(500).json({ message: 'Something went wrong' ,error: e});
+    }
+});
+
 router.post('/readByUID', authJWT.verify([]), async (req,res,next) => {
     const {u_id} = req.body;
     try {

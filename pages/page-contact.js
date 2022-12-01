@@ -2,6 +2,41 @@ import Layout from "../components/layout/Layout";
 
 
 function Contact() {
+    const handleSendRequest = async (e) => {
+        e.preventDefault();
+        let name = document.getElementById('name').value;
+        let company = document.getElementById('company').value;
+        let mobile = document.getElementById('mobile').value;
+        let email = document.getElementById('email').value;
+        let desc = document.getElementById('desc').value;
+        let bodyRequest = {
+            name: name,
+            company: company,
+            mobile: mobile,
+            email: email,
+            desc: desc
+            };
+        const contactRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/contact/create', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyRequest)
+        });
+
+    const content = await contactRequest.json();
+    if(content.success){
+        document.getElementById('name').value = '';
+        document.getElementById('company').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('desc').value = '';
+        document.getElementById('mobile').value = '';
+        document.querySelector(".alert-data").innerHTML = '<div class="alert alert-success" role="alert">We have recived your message ... You`ll reach a call or an email from us ASAP.</div>';
+    }else{
+        document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please try again later.</div>';
+    }
+    }
     return (
         <>
             <Layout>
@@ -9,7 +44,6 @@ function Contact() {
                     <div className="banner-hero banner-breadcrums">
                         <div className="container text-center">
                             <h1 className="text-heading-2 color-gray-1000 mb-20">Contact Us</h1>
-                            <p className="text-body-text color-gray-500">Equidem necessitatibus ei eam, ceteros expetenda<br className="d-lg-block d-none" />hendrerit ei per, tation vituperatoribus ut.</p>
                         </div>
                     </div>
                 </section>
@@ -29,60 +63,23 @@ function Contact() {
                                 </div>
                                 <div className="col-lg-8">
                                     <div className="row">
+                                        <div className="alert-data"></div>
                                         <div className="col-lg-6">
-                                            <div className="form-group"><input className="form-control"  placeholder="Enter your name" /></div>
+                                            <div className="form-group"><input id="name" className="form-control"  placeholder="Enter your name" /></div>
                                         </div>
                                         <div className="col-lg-6">
-                                            <div className="form-group"><input className="form-control"  placeholder="Comapy (optioanl)" /></div>
+                                            <div className="form-group"><input id="company" className="form-control"  placeholder="Company (optioanl)" /></div>
                                         </div>
                                         <div className="col-lg-6">
-                                            <div className="form-group"><input className="form-control"  placeholder="Your email" /></div>
+                                            <div className="form-group"><input id="email" className="form-control"  placeholder="Your email" /></div>
                                         </div>
                                         <div className="col-lg-6">
-                                            <div className="form-group"><input className="form-control"  placeholder="Phone number" /></div>
+                                            <div className="form-group"><input id="mobile" className="form-control"  placeholder="Phone number" /></div>
                                         </div>
                                         <div className="col-lg-12">
-                                            <div className="form-group"><textarea className="form-control" placeholder="Tell us about yourself"  /></div>
+                                            <div className="form-group"><textarea id="desc" className="form-control" placeholder="Tell us about yourself" /></div>
                                         </div>
-                                        <div className="col-lg-12 mt-15"><button className="btn btn-black icon-arrow-right-white mr-40 mb-20" type="submit">Send Message</button><br className="d-lg-none d-block" /><span className="text-body-text-md color-gray-500 mb-20">By clicking contact us button, you agree our terms and policy,</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section className="section-box mt-100">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12 col-sm-10 col-12 text-center mt-40">
-                                <h2 className="text-heading-1 color-gray-900 mb-20">Our Location</h2>
-                                <p className="text-body-lead-large color-gray-600 mt-20">In a professional context it often happens that private or<br className="d-lg-block d-none" />corporate clients order a publication to publish news.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="container mt-100">
-                        <div className="row">
-                            <div className="col-lg-4 col-md-12 col-sm-12">
-                                <div className="list-icons hover-up">
-                                    <div className="item-icon"><span className="icon-left"><img src="/assets/imgs/page/homepage2/icon-acquis.svg" alt="Agon" /></span>
-                                        <h4 className="text-heading-4">Office</h4>
-                                        <p className="text-body-text color-gray-1100 mt-15">Jeddah<br />KSA<br />Phone: +(966) 556-565-564<br />Email: cs@madarshamel.sa</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-12 col-sm-12">
-                                <div className="list-icons hover-up">
-                                    <div className="item-icon"><span className="icon-left"><img src="/assets/imgs/page/homepage2/icon-active.svg" alt="Agon" /></span>
-                                        <h4 className="text-heading-4">Studio</h4>
-                                        <p className="text-body-text color-gray-1100 mt-15">Jeddah<br />KSA<br />Phone: +(966) 556-565-564<br />Email: cs@madarshamel.sa</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-12 col-sm-12">
-                                <div className="list-icons hover-up">
-                                    <div className="item-icon"><span className="icon-left"><img src="/assets/imgs/page/homepage2/icon-retent.svg" alt="Agon" /></span>
-                                        <h4 className="text-heading-4">Factory</h4>
-                                        <p className="text-body-text color-gray-1100 mt-15">Jeddah<br />KSA<br />Phone: +(966) 556-565-564<br />Email: cs@madarshamel.sa</p>
+                                        <div className="col-lg-12 mt-15"><button onClick={handleSendRequest} className="btn btn-black icon-arrow-right-white mr-40 mb-20" type="submit">Send Message</button><br className="d-lg-none d-block" /><span className="text-body-text-md color-gray-500 mb-20">By clicking contact us button, you agree our terms and policy,</span></div>
                                     </div>
                                 </div>
                             </div>

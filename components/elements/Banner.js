@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Banner = () => {
+const Banner = ({bannerDesc}) => {
     return( 
         <section className="section-box">
             <div className="banner-hero banner-1">
@@ -13,12 +13,10 @@ const Banner = () => {
                                 for your business dream
                             </h1>
                             <p className="text-body-lead-large color-gray-500 mt-40 pr-40">
-                                We can help you reach your distination and finish your papers in
-                                your importation process.
+                                {bannerDesc}
                             </p>
                             <div className="mt-40">
-                                <Link href="/page-service-1"><a className="btn btn-black icon-arrow-right-white">Get Start</a></Link>
-                                <Link href="/page-about-2"><a className="btn btn-link icon-arrow-right color-gray-900 text-heading-6">Learn More</a></Link>
+                                <Link href="/page-signup"><a className="btn btn-black icon-arrow-right-white">Get Start</a></Link>
                             </div>
                         </div>
                         <div className="col-lg-5 d-none d-lg-block">

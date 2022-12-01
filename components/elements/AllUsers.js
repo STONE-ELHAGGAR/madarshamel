@@ -26,7 +26,6 @@ return (
                     <th scope="col">Mobile</th>
                     <th scope="col">Permisions</th>
                     <th scope="col">Edit</th>
-                    <th scope="col">Remove</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -266,7 +266,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                                             <Link href="/price-request"><a>Pricing</a></Link>
                                         </li>
                                         
-                                        <li className="has-children">
+                                        {/*<li className="has-children">
                                             <Link href="#"><a>More</a></Link>
                                             <ul className="sub-menu">
                                                 <li>
@@ -276,7 +276,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                                                     <Link href="/page-about-2"><a>About</a></Link>
                                                 </li>
                                             </ul>
-                                        </li>
+                                        </li>*/}
                                         {/*<li className="has-children">
                                             <Link href="#"><a>Pages</a></Link>
                                             <ul className="sub-menu">

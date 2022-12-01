@@ -4,11 +4,20 @@ import Footer from "./Footer";
 import Header from "./Header";
 const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Sidebar from "./Sidebar";
 
 const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName = '', forNewUsers = 1, itemId = ''}) => {
     const [openClass, setOpenClass] = useState('');
-
+    const [adminCheck, setAdminCheck] = useState(false);
+    checkIfLoggedIn(['transportation','custom-clearance','super-admin'],[],'','')
+    .then((result) => {
+        if(result){
+          setAdminCheck(true);
+        }else{
+          setAdminCheck(false);
+        }
+    })
     const handleOpen = () => {
         document.body.classList.add("mobile-menu-active");
         setOpenClass("sidebar-visible")
@@ -82,7 +91,7 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
                 <main className="main">
                     {(forNewUsers) ? children : 'Loading...' }
                 </main>
-                <Footer />
+                <Footer fb="#fb" twitter="#twitter" insta="#insta" address="Jeddah, KSA" phone="+(966) 556-565-564" email="cs@madarshamel.sa" />
                 <BackToTop/>
             </>
         );
@@ -95,9 +104,38 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
                 <Header handleOpen={handleOpen} headerStyle={headerStyle} />
                 <Sidebar openClass={openClass} />
                 <main className="main">
+                {(forNewUsers === 0) ? (<div className="container-fluid backgrounded-con float-start px-3 py-3">
+                <div className="container">
+                  <div className="col-12 px-3 py-3 float-start" style={{background: '#fff'}}>
+                      <ul className="nav nav-pills nav-fill col-12 float-start">
+                          <li className="nav-item">
+                              <Link href="/dashboard"><a className="nav-link"><i className="fi fi-rr-user"></i> Dashboard</a></Link>
+                          </li>
+                          <li className="nav-item">
+                              <Link href="/dashboard/controlCCRequests"><a className="nav-link"><i className="fi fi-rr-stats"></i> Custom Clearance</a></Link>
+                          </li>
+                          <li className="nav-item">
+                              <Link href="/dashboard/controlTRRequests"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> Transportation</a></Link>
+                          </li>
+                          {(adminCheck) ? (
+                            <li className="nav-item">
+                              <Link href="/dashboard/bank"><a className="nav-link"><i className="fi fi-rr-dollar"></i> Bank</a></Link>
+                            </li>
+                          ) : ''}
+                          
+                          {/*<li className="nav-item">
+                              <Link href="/dashboard/transportation-form"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> Add Transportation</a></Link>
+                          </li>*/}
+                          <li className="nav-item">
+                              <Link href="/dashboard/settings"><a className="nav-link"><i className="fi fi-rr-edit"></i> Dashboard Settings</a></Link>
+                          </li>
+                      </ul>
+                  </div>
+                </div>
+              </div>) : ''}
                     {children}
                 </main>
-                <Footer />
+                <Footer fb="#fb" twitter="#twitter" insta="#insta" address="Jeddah, KSA" phone="+(966) 556-565-564" email="cs@madarshamel.sa" />
                 <BackToTop/>
             </>
         );

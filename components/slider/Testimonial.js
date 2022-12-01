@@ -6,41 +6,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link"
 
 SwiperCore.use([Autoplay, Navigation]);
-const TestimonialSlider = () => {
+const TestimonialSlider = ({_1st, _2nd, _3rd, _4th}) => {
     const [domLoaded, setDomLoaded] = useState(false);
 
     useEffect(() => {
       setDomLoaded(true);
     }, []);
     const data = [
-        {
-            avatar: "1.png",
-            name: "Wade Warren",
-            company: "Louis Vuitton",
-            quote: "Simple text that can be replaced later.",
-            bg: ""
-        },
-        {
-            avatar: "2.png",
-            name: "Brooklyn Simmons",
-            company: "Nintendo",
-            quote: "Simple text that can be replaced later.",
-            bg: "bd-bg-6"
-        },
-        {
-            avatar: "3.png",
-            name: "Jenny Wilson",
-            company: "Starbucks",
-            quote: "Simple text that can be replaced later.",
-            bg: "bd-bg-10"
-        },
-        {
-            avatar: "4.png",
-            name: "Albert Flores",
-            company: "Bank of America",
-            quote: "Simple text that can be replaced later.",
-            bg: "bd-bg-6"
-        }
+        _1st,
+        _2nd,
+        _3rd,
+        _4th
     ];
 
 
@@ -75,9 +51,6 @@ const TestimonialSlider = () => {
                             <SwiperSlide>
                                 <div className="swiper-slide active">
                                     <div className={`card-grid-style-3 hover-up ${item.bg}`}>
-                                        <div className="grid-3-img">
-                                            <img src={`assets/imgs/page/homepage1/user-${item.avatar}`} alt="Agon" />
-                                        </div>
                                         <h3 className="text-heading-6 mb-5 mt-20">{item.name}</h3>
                                         <span className="text-body-small d-block">{item.company}</span>
                                         <p className="text-body-text text-desc color-gray-500 mt-20">{item.quote}</p>

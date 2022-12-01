@@ -151,35 +151,11 @@ const App = ({adminDashboardData}) => {
         setTransportationsData(result);
       })
   }, [])
+  
   return (
     <>
     <Layout userCreds={['original-user','custom-clearance','super-admin']} params={[]} modelName='' forNewUsers={0}>
-      <div className="container-fluid backgrounded-con float-start px-3 py-3">
-        <div className="container">
-          <div className="col-12 px-3 py-3 float-start" style={{background: '#fff'}}>
-              <ul className="nav nav-pills nav-fill col-12 float-start">
-                  <li className="nav-item">
-                      <Link href="/dashboard"><a className="nav-link"><i className="fi fi-rr-user"></i> Dashboard</a></Link>
-                  </li>
-                  <li className="nav-item">
-                      <Link href="/dashboard/controlCCRequests"><a className="nav-link"><i className="fi fi-rr-stats"></i> Custom Clearance</a></Link>
-                  </li>
-                  <li className="nav-item">
-                      <Link href="/dashboard/controlTRRequests"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> Transportation</a></Link>
-                  </li>
-                  {/*<li className="nav-item">
-                      <Link href="/dashboard/custom-clearance-form"><a className="nav-link"><i className="fi fi-rr-stats"></i> Add Custom Clearance</a></Link>
-                  </li>
-                  <li className="nav-item">
-                      <Link href="/dashboard/transportation-form"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> Add Transportation</a></Link>
-                  </li>*/}
-                  <li className="nav-item">
-                      <Link href="/dashboard/settings"><a className="nav-link"><i className="fi fi-rr-edit"></i> Dashboard Settings</a></Link>
-                  </li>
-              </ul>
-          </div>
-        </div>
-      </div>
+      
       <div className="container">
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 float-start">
           <div className="col-12 col-lg-3 col-md-3 col-sm-12 col-xs-12 float-start px-3 py-3">

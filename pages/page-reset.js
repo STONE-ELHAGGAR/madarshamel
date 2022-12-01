@@ -1,8 +1,13 @@
 import Link from "next/link";
-import Layout from "../components/layout/Layout";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Image from 'next/image';
+import Layout from "./../components/layout/Layout";
+const handleResetPassword = require("./../handlers/handleResetPassword");
 
 
 function Reset() {
+  const [email, setEmail] = useState('');
   return (
     <>
       <Layout>
@@ -16,10 +21,11 @@ function Reset() {
                     <p className="text-body-text color-gray-500">Enter your email to reset your password.</p>
                   </div>
                   <div className="box-form-signup">
+                    <div id="alert-section"></div>
                     <div className="form-group">
-                      <div className="form-field"><input className="form-control input-green-bd input-with-icon" placeholder="Enter your email" /><span className="icon-email-right" /></div>
+                      <div className="form-field"><input className="form-control input-green-bd input-with-icon" id="email" placeholder="Enter your email" /><span className="icon-email-right" /></div>
                     </div>
-                    <div className="form-group"><button className="btn btn-green-full text-heading-6">Reset password</button></div>
+                    <div className="form-group"><button onClick={(e) => {handleResetPassword(e,email)}} className="btn btn-green-full text-heading-6">Reset password</button></div>
                     <div className="form-group">
                       <Link href="/">
                       <a className="text-body-text">Back to homepage</a>

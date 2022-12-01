@@ -1,4 +1,5 @@
 const checkIfLoggedIn = async (userCreds = [],params = [], modelName = '', itemId = '') => {
+    if (typeof window !== 'undefined') {
     const sessionContent = JSON.parse(sessionStorage.getItem('loginData'));
     let requestBody = {};
     if(sessionContent) {
@@ -35,6 +36,7 @@ const checkIfLoggedIn = async (userCreds = [],params = [], modelName = '', itemI
     }else{
         return false;
     }
+}
 }
 
 module.exports = checkIfLoggedIn;
