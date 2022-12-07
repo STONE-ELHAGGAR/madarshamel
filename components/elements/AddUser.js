@@ -36,9 +36,9 @@ const handleRegister = async () => {
       checkedElements.forEach( el => {
         el.checked = false;
       });
-      document.querySelector(".alert-data").innerHTML = '<div class="alert alert-success" role="alert">Registered</div>';
+      document.querySelector(".alert-data").innerHTML = '<div className="alert alert-success" role="alert">Registered</div>';
   }else{
-      document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please try again OR use another email</div>';
+      document.querySelector(".alert-data").innerHTML = '<div className="alert alert-danger" role="alert">Something went wrong, please try again OR use another email</div>';
   }
 }
 
@@ -59,24 +59,24 @@ function Register() {
                     <div className="form-group"><input className="form-control email" type="email" placeholder="user@example.com" /></div>
                     <div className="form-group"><input className="form-control password" type="password" placeholder="**********" /></div>
                         <p>
-                        <input class="messageCheckbox" id="super-admin" type="checkbox" value="super-admin" name="userCreds[]" />
-                        <label for="super-admin">Super Admin</label>
+                        <input className="messageCheckbox" id="super-admin" type="checkbox" value="super-admin" name="userCreds[]" />
+                        <label htmlFor="super-admin">Super Admin</label>
                         </p>
                         <p>
-                        <input class="messageCheckbox" id="custom-clearance" type="checkbox" value="custom-clearance" name="userCreds[]" />
-                        <label for="custom-clearance">Custom Clearance</label>
+                        <input className="messageCheckbox" id="custom-clearance" type="checkbox" value="custom-clearance" name="userCreds[]" />
+                        <label htmlFor="custom-clearance">Custom Clearance</label>
                         </p>
                         <p>
-                        <input class="messageCheckbox" id="transportation" type="checkbox" value="transportation" name="userCreds[]" />
-                        <label for="transportation">Transportation</label>
+                        <input className="messageCheckbox" id="transportation" type="checkbox" value="transportation" name="userCreds[]" />
+                        <label htmlFor="transportation">Transportation</label>
                         </p>
                         <p>
-                        <input class="messageCheckbox" id="live-chat" type="checkbox" value="live-chat" name="userCreds[]" />
-                        <label for="live-chat">Live Chat</label>
+                        <input className="messageCheckbox" id="live-chat" type="checkbox" value="live-chat" name="userCreds[]" />
+                        <label htmlFor="live-chat">Live Chat</label>
                         </p>
                         <p>
-                        <input class="messageCheckbox" id="original-user" type="checkbox" value="original-user" name="userCreds[]" />
-                        <label for="original-user">Original User</label>
+                        <input className="messageCheckbox" id="original-user" type="checkbox" value="original-user" name="userCreds[]" />
+                        <label htmlFor="original-user">Original User</label>
                         </p>
                     <div className="form-group mt-10"><button onClick={handleRegister} className="btn btn-square text-heading-6">Save</button></div>
                     </div>

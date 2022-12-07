@@ -18,7 +18,7 @@ import RequestSettings from "./../../components/elements/RequestSettings";
 import EditHomePage from "./../../components/elements/EditHomePage";
 
 
-const dashboardSettings = ({content, userData, contactResultData, homes}) => {
+const DashboardSettings = ({content, userData, contactResultData, homes}) => {
     const [activeSettingsTab , setActiveSettingsTab] = useState('LoadingSettings');
     const [componentsTab , setComponentsTab] = useState({});
     const [menuTabs , setMenuTabs] = useState(false);
@@ -144,7 +144,7 @@ return (
     );
 }
 
-export default dashboardSettings;
+export default DashboardSettings;
 
 export async function getServerSideProps(context) {
     let accessToken = context.req.cookies['accessToken'];

@@ -9,7 +9,7 @@ import MyTransactions from "./../../components/elements/MyTransactions";
 import Bank from "./../../components/elements/Bank";
 
 
-const dashboardSettings = ({userData, transactionsData}) => {
+const DashboardSettings = ({userData, transactionsData}) => {
     const [activeSettingsTab , setActiveSettingsTab] = useState('LoadingSettings');
     const [componentsTab , setComponentsTab] = useState({});
     const [menuTabs , setMenuTabs] = useState(false);
@@ -97,7 +97,7 @@ return (
     );
 }
 
-export default dashboardSettings;
+export default DashboardSettings;
 
 export async function getServerSideProps(context) {
     let accessToken = context.req.cookies['accessToken'];

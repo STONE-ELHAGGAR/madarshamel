@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Layout from "./../../../components/layout/Layout";
 const handleVerifyAccount = require("./../../../handlers/handleVerifyAccount");
 
-const verifyPage = () => {
+const VerifyPage = () => {
     let router = useRouter()
     const {verify} = router.query;
 
@@ -32,4 +32,4 @@ const verifyPage = () => {
     );
 }
 
-export default verifyPage;
+export default VerifyPage;
