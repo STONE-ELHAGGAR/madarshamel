@@ -52,6 +52,30 @@ const ModelSchema = new mongoose. Schema ({
         {
             type: String
         },
+    chamberOfCommerceNumber:
+        {
+            type: String
+        },
+    postalCode:
+    {
+        type: String
+    },
+    fax:
+    {
+        type: String
+    },
+    commercialRegistrationNo:
+    {
+        type: String
+    },
+    commercialRegistrationDate:
+    {
+        type: String
+    },
+    commercialRegistrationCity:
+    {
+        type: String
+    },
     created_at:
         {
             type: String,

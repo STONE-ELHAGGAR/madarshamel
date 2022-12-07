@@ -72,7 +72,8 @@ const handleServiceAlert = async (e) => {
 }
 
 
-const TransportationRequestData = () => {
+const TransportationRequestData = ({userData}) => {
+    let userCreds = JSON.parse(userData.users[0].creds);
 
     let router = useRouter()
     
@@ -90,6 +91,7 @@ const TransportationRequestData = () => {
     const [companyAddressData ,setCompanyAddressData] = useState('');
     const [fromDateData ,setFromDateData] = useState('');
     const [toDateData ,setToDateData] = useState('');
+    const [bankNeed ,setBankNeed] = useState(false);
 
 
     //Handle Table Socket
@@ -125,6 +127,11 @@ const TransportationRequestData = () => {
                 }
             })
             setActiveIndex(id);
+            if(userCreds.includes('super-admin') || userCreds.includes('transportation') || userCreds.includes('custom_clearance')){
+                setBankNeed(true);
+            }else{
+                setBankNeed(false);
+            }
         }
     }, [id]);
     useEffect(() => {
@@ -238,7 +245,7 @@ const TransportationRequestData = () => {
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-xs-12 col-sm-12 px-2 py-2 float-start">
-                            <Bank tableName="transportation" requestId={activeIndex} />
+                            {(bankNeed) ? (<Bank tableName="transportation" requestId={activeIndex} />) : ''}
                         </div>
 
                     </div>
@@ -251,3 +258,22 @@ const TransportationRequestData = () => {
 
 
 export default TransportationRequestData;
+
+export async function getServerSideProps(context) {
+    let accessToken = context.req.cookies['accessToken'];
+    const userRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/readById', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': accessToken
+        }
+      });
+    
+      let userData = await userRequest.json();
+    return {
+      props:{
+        userData: userData
+      }
+    }
+  } 

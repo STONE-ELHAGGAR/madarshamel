@@ -1,4 +1,5 @@
 import Layout from "../components/layout/Layout";
+import React, {useState, useEffect} from 'react';
 
 
 function Contact() {
@@ -37,6 +38,34 @@ function Contact() {
         document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please try again later.</div>';
     }
     }
+    const [fbData, setfbData] = useState('');
+    const [twitterData, settwitterData] = useState('');
+    const [instaData, setinstaData] = useState('');
+    const [addressData, setaddressData] = useState('');
+    const [phoneData, setphoneData] = useState('');
+    const [emailData, setemailData] = useState('');
+
+    const getSettings = async () => {
+    const homesRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/homes/read', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+      });
+    
+      let resultData = await homesRequest.json();
+      return resultData;
+    }
+    getSettings().
+        then((result) => {
+            setfbData(result.homes[0].fb);
+            setinstaData(result.homes[0].insta);
+            settwitterData(result.homes[0].twitter);
+            setaddressData(result.homes[0].address);
+            setphoneData(result.homes[0].phone);
+            setemailData(result.homes[0].email);
+        });
     return (
         <>
             <Layout>
@@ -57,9 +86,9 @@ function Contact() {
                                 </div>
                                 <div className="col-lg-4 mb-40">
                                     <h4 className="text-heading-6 color-gray-900 icon-home mb-10 mt-10">Madarshamel</h4>
-                                    <p className="text-body-text color-gray-600">Jeddah<br />KSA</p>
-                                    <p className="text-body-text color-gray-600">+(966) 556-565-564</p>
-                                    <p className="text-body-text color-gray-600">cs@madarshamel.sa</p>
+                                    <p className="text-body-text color-gray-600">{addressData}</p>
+                                    <p className="text-body-text color-gray-600">{phoneData}</p>
+                                    <p className="text-body-text color-gray-600">{emailData}</p>
                                 </div>
                                 <div className="col-lg-8">
                                     <div className="row">

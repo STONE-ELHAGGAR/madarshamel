@@ -6,21 +6,29 @@ import { useRouter } from 'next/router';
 import ServicesPages from "../elements/ServicesPages";
 const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 const handleReadAllPages = require('./../../handlers/handleReadAllPages');
+import Sidebar from "./Sidebar";
 
 //Table Socket Requirments
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 
-const Header = ({ handleOpen, headerStyle }) => {
+const Header = ({headerStyle }) => {
     const router = useRouter();
     const [scroll, setScroll] = useState(0)
     const [logged , setLogged] = useState(false);
     const [servicePages , setServicePages] = useState([]);
+    const [openClass, setOpenClass] = useState('');
     // Messages States
     const [messagesReceived, setMessagesReceived] = useState([]);
     const [chatUsers , setChatUsers] = useState([]);
     const [neededChatBox , setNeededChatBox] = useState('');
     const [activeRoom , setActiveRoom] = useState('');
+    const handleRemove = () => {
+        if (openClass === "sidebar-visible") {
+            setOpenClass("")
+            document.body.classList.remove("mobile-menu-active");
+        }
+    }
     useEffect(() => {
         document.addEventListener("scroll", () => {
             const scrollCheck = window.scrollY > 100
@@ -169,7 +177,7 @@ const Header = ({ handleOpen, headerStyle }) => {
         let cuurentUid = JSON.parse(sessionStorage.getItem('loginData')).data.id;
         let allChat = messagesReceivedData.map((messageReceivedData) => {
             return (
-                <div className={(messageReceivedData.u_id == cuurentUid) ? "fromMe" : "fromOther" }>
+                <div key={messageReceivedData._id} className={(messageReceivedData.u_id == cuurentUid) ? "fromMe" : "fromOther" }>
                     <span>{messageReceivedData.message}</span>
                     {messageReceivedData.created_at+' By '+messageReceivedData.name}
                 </div>
@@ -200,7 +208,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                                 <textarea id="msg" placeholder="Type your message here"></textarea>
                             </div>
                             <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3 float-start send" onClick={sendMessage}>
-                                <img src="/assets/imgs/template/send.svg" />
+                                <Image width="50px" height="50px" src="/assets/imgs/template/send.svg" />
                             </div>
                         </div>
                     </div>
@@ -225,7 +233,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                                 <textarea id="msg" placeholder="Type your message here"></textarea>
                             </div>
                             <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3 float-start send" onClick={sendMessage}>
-                                <img src="/assets/imgs/template/send.svg" />
+                                <Image width="50px" height="50px" src="/assets/imgs/template/send.svg" />
                             </div>
                         </div>
                     </div>
@@ -244,6 +252,7 @@ const Header = ({ handleOpen, headerStyle }) => {
     }
     return (
         <>
+            <div className={openClass && "body-overlay-1"} onClick={handleRemove} />
             <header className={scroll ? `${headerStyle} header sticky-bar stick ` : `${headerStyle} header sticky-bar`}>
                 <div className="container">
                     <div className="main-header">
@@ -314,7 +323,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                                         <li className="has-children">
                                             <div className="mobile-header-top float-start px-3 py-3 logged-in-user">
                                                 <div className="user-account">
-                                                    <img src="/assets/imgs/template/ava_1.png" alt="Madarshamel" />
+                                                    <Image width="50px" height="50px" src="/assets/imgs/template/ava_1.png" alt="Madarshamel" />
                                                     <div className="content">
                                                         <h6 className="user-name">
                                                             <span className="text-brand">{(sessionStorage.getItem('loginData')) ? JSON.parse(sessionStorage.getItem('loginData')).data.name : ''}</span>
@@ -351,7 +360,10 @@ const Header = ({ handleOpen, headerStyle }) => {
 
                                     </ul>
                                 </nav>
-                                <div className="burger-icon burger-icon-white" onClick={handleOpen}>
+                                <div className="burger-icon burger-icon-white" onClick={() => {
+                                    document.body.classList.add("mobile-menu-active");
+                                    setOpenClass("sidebar-visible")
+                                }}>
                                     <span className="burger-icon-top" /><span className="burger-icon-mid" /><span className="burger-icon-bottom" />
                                 </div>
                             </div>
@@ -364,6 +376,7 @@ const Header = ({ handleOpen, headerStyle }) => {
                     </div>
                 </div>
             </header>
+            <Sidebar logged={logged} openClass={openClass} />
             {(logged) ? <ChatBox /> : '' }
             {(neededChatBox == 'adminChat') ? <AdminChat usersList={chatUsers} /> : (neededChatBox == 'userChat') ? <UserChat /> : (neededChatBox == 'chatRoom') ? <ChatRoom activeRoomData={activeRoom} usersList={chatUsers} /> : ''  }
         </>

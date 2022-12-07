@@ -30,7 +30,7 @@ const TrItem = ({content}) => {
                         requestConData.innerHTML = transportation[fieldKey];
                     }else{
                       handleTableReader(transportation[fieldKey], 'id','/api/settings/readById').then((result) => {
-                        requestConData.innerHTML = result.settings[0].content;
+                        (result?.settings[0]) ? requestConData.innerHTML = result.settings[0].content : '';
                       })
                     }
                   }

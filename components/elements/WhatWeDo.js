@@ -1,10 +1,12 @@
+import Image from "next/image";
+
 const WhatWeDo = () => {
     return(
     <section className="section-box">
         <div className="container mt-100">
             <div className="row">
                 <div className="col-lg-6 col-sm-12 block-img-we-do">
-                    <img className="bdrd-16 img-responsive" src="assets/imgs/page/homepage1/img-2.png" alt="Almadar Alshamel" />
+                    <Image width="618px" height="716px" className="bdrd-16 img-responsive" src="/assets/imgs/page/homepage1/img-2.png" alt="Almadar Alshamel" />
                 </div>
                 <div className="col-lg-6 col-sm-12 block-we-do">
                     <span className="tag-1">What We Do, What You Get</span>

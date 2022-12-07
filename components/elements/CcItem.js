@@ -17,6 +17,12 @@ const CcItem = ({content}) => {
                         <td>{custom_clearance.companyName}</td>
                         <td>{custom_clearance.companyMobile}</td>
                         <td>{custom_clearance.companyAddress}</td>
+                        <td>{custom_clearance.postalCode}</td>
+                        <td>{custom_clearance.fax}</td>
+                        <td>{custom_clearance.commercialRegistrationNo}</td>
+                        <td>{custom_clearance.commercialRegistrationDate}</td>
+                        <td>{custom_clearance.commercialRegistrationCity}</td>
+                        <td>{custom_clearance.chamberOfCommerceNumber}</td>
                         <td>{custom_clearance.transactionPlace}</td>
                         <td>{custom_clearance.shippingPort}</td>
                         <td>{custom_clearance.recivingPort}</td>

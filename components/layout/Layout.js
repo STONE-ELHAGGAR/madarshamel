@@ -5,10 +5,8 @@ import Header from "./Header";
 const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Sidebar from "./Sidebar";
 
 const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName = '', forNewUsers = 1, itemId = ''}) => {
-    const [openClass, setOpenClass] = useState('');
     const [adminCheck, setAdminCheck] = useState(false);
     checkIfLoggedIn(['transportation','custom-clearance','super-admin'],[],'','')
     .then((result) => {
@@ -18,24 +16,14 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
           setAdminCheck(false);
         }
     })
-    const handleOpen = () => {
-        document.body.classList.add("mobile-menu-active");
-        setOpenClass("sidebar-visible")
-    }
 
-    const handleRemove = () => {
-        if (openClass === "sidebar-visible") {
-            setOpenClass("")
-            document.body.classList.remove("mobile-menu-active");
-        }
-    }
     const router = useRouter();
     
     const [logged , setLogged] = useState(false);
-    if(forNewUsers){
         // Similar to componentDidMount and componentDidUpdate:
         useEffect(() => {
-            checkIfLoggedIn()
+            if(forNewUsers){
+                checkIfLoggedIn()
                 .then((result) => {
                     if(result){
                         setLogged(true);
@@ -47,62 +35,62 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
                         setLogged(false);
                     }
                 })
-        });
-    }else{
-        // Similar to componentDidMount and componentDidUpdate:
-        useEffect(() => {
-            if(modelName && itemId){
-                //Need to check u_id for item so wait until modelName && itemId ready together
-                checkIfLoggedIn(userCreds,params,modelName,itemId)
-                    .then((result) => {
-                        if(result){
-                            setLogged(true);
-                            console.log('Loggedin');
-                        }else{
-                            setLogged(false);
-                            console.log('Not Loggedin Needed to check u_id for item so wait until Model Name && Item Id ready together');
-                            router.push({ pathname: '/page-login' })
-                        }
-                    })
-            }else if(params.length === 0 && modelName == '' && itemId == ''){
-                //No Need to check u_id for item
-                checkIfLoggedIn(userCreds,params,modelName,itemId)
-                    .then((result) => {
-                        if(result){
-                            setLogged(true);
-                            console.log('Loggedin');
-                        }else{
-                            setLogged(false);
-                            console.log('Not Loggedin No Need to check u_id for item');
-                            router.push({ pathname: '/page-login' })
-                        }
-                    })
+            }else{
+                if(modelName && itemId){
+                    //Need to check u_id for item so wait until modelName && itemId ready together
+                    checkIfLoggedIn(userCreds,params,modelName,itemId)
+                        .then((result) => {
+                            if(result){
+                                setLogged(true);
+                                console.log('Loggedin');
+                            }else{
+                                setLogged(false);
+                                console.log('Not Loggedin Needed to check u_id for item so wait until Model Name && Item Id ready together');
+                                router.push({ pathname: '/page-login' })
+                            }
+                        })
+                }else if(params.length === 0 && modelName == '' && itemId == ''){
+                    //No Need to check u_id for item
+                    checkIfLoggedIn(userCreds,params,modelName,itemId)
+                        .then((result) => {
+                            if(result){
+                                setLogged(true);
+                                console.log('Loggedin');
+                            }else{
+                                setLogged(false);
+                                console.log('Not Loggedin No Need to check u_id for item');
+                                router.push({ pathname: '/page-login' })
+                            }
+                        })
+                }
             }
         });
-    }
+        /*/ Similar to componentDidMount and componentDidUpdate:
+        useEffect(() => {
+            
+        });*/
+
+
     
     const NotLoggedInComponent = () => {
         return (
-            <>
-                <div  className={openClass && "body-overlay-1"} onClick={handleRemove} />
-
-                <Header handleOpen={handleOpen} headerStyle={headerStyle} />
-                <Sidebar openClass={openClass} />
-                <main className="main">
-                    {(forNewUsers) ? children : 'Loading...' }
-                </main>
-                <Footer fb="#fb" twitter="#twitter" insta="#insta" address="Jeddah, KSA" phone="+(966) 556-565-564" email="cs@madarshamel.sa" />
-                <BackToTop/>
-            </>
+            <main className="main">
+                {(forNewUsers) ? children : (
+                    <div id="preloader-active">
+                        <div className="preloader d-flex align-items-center justify-content-center">
+                            <div className="preloader-inner position-relative">
+                                <div className="text-center">
+                                    <div className="loader" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ) }
+            </main>
         );
     }
     const LoggedInComponent = () => {
         return (
-            <>
-                <div  className={openClass && "body-overlay-1"} onClick={handleRemove} />
-
-                <Header handleOpen={handleOpen} headerStyle={headerStyle} />
-                <Sidebar openClass={openClass} />
                 <main className="main">
                 {(forNewUsers === 0) ? (<div className="container-fluid backgrounded-con float-start px-3 py-3">
                 <div className="container">
@@ -135,14 +123,14 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
               </div>) : ''}
                     {children}
                 </main>
-                <Footer fb="#fb" twitter="#twitter" insta="#insta" address="Jeddah, KSA" phone="+(966) 556-565-564" email="cs@madarshamel.sa" />
-                <BackToTop/>
-            </>
         );
     }
     return (
         <>
+            <Header headerStyle={headerStyle} />
             {((logged) ? <LoggedInComponent /> : <NotLoggedInComponent /> )}
+            <Footer fb="#fb" logged={logged} twitter="#twitter" insta="#insta" address="Jeddah, KSA" phone="+(966) 556-565-564" email="cs@madarshamel.sa" />
+            <BackToTop/>
         </>
       )
 };

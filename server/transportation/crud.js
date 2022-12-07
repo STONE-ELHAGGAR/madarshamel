@@ -4,6 +4,9 @@ const router = express.Router();
 //Users, transportation MongoDB Table schema (models)
 const Transportation = require('./../models/transportation');
 const Users = require('./../models/users');
+const Settings = require('./../models/settings');
+const sendEmail = require('./../../util/sendEmail');
+const getNumId = require('./../../util/getNumId');
 
 //JsonWebToken to create access token
 const authJWT = require('./../../util/authJWT');
@@ -13,11 +16,89 @@ router.post('/create', authJWT.verify(['original-user','transportation','super-a
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
     const user = await Users.findById(req.userId);
     const u_id = user.id;
+    const country = await Settings.findById(sourceCountry);
     const transportation = Transportation({companyName, companyMobile, companyAddress, transactionPlace, fromDate, toDate, sourceCountry, drivers, expectedShipDate, carCost, transferData, created_at, u_id, attachedFiles});
 
     try {
         await transportation.save(function(err,transportationData) {
             console.log('Inserted Transportation Request '+transportationData._id);
+            getNumId(transportationData._id,'transportation').then((numId) => {
+            //Send Email To CS
+            sendEmail(
+                'cs@madarshamel.sa', //To Email
+                'Madarshamel Customer Service', //To Name
+            'Madarshamel | New Transportation Request From '+user.name, //Message Subject
+            '', //btn_link
+            '', //btn_content
+            '', //temp_line3
+            user.name+' Created Transportation Request', //temp_line1
+            'Email: '+user.email+' Phone: '+user.mobile, //temp_line2
+            '<table class="table table-striped" style="margin: 0px;width: 100%;float: left;">\
+            <thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody id="requestChangesConData">\
+            <tr><th style="border:1px solid #000;" scope="row">ID</th><td id="_id">'+numId+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Name</th><td>'+transportationData.companyName+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+transportationData.companyMobile+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+transportationData.companyAddress+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+transportationData.transactionPlace+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+transportationData.fromDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+transportationData.toDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+transportationData.expectedShipDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Chamber Of Commerce Number</th><td id="chamberOfCommerceNumber">'+transportationData.carCost+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Postal Code</th><td id="postalCode">'+transportationData.transferData+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">By User</th><td id="u_id">'+user.name+'</td></tr></tbody></table>'+'<br/> Created at: '+created_at, //temp_line4
+            );
+            //Send Email To Ali
+            sendEmail(
+                'ali@madarshamel.sa', //To Email
+                'Madarshamel Ali', //To Name
+            'Madarshamel | New Transportation Request From '+user.name, //Message Subject
+            '', //btn_link
+            '', //btn_content
+            '', //temp_line3
+            user.name+' Created Transportation Request', //temp_line1
+            'Email: '+user.email+' Phone: '+user.mobile, //temp_line2
+            '<table class="table table-striped" style="margin: 0px;width: 100%;float: left;">\
+            <thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody id="requestChangesConData">\
+            <tr><th style="border:1px solid #000;" scope="row">ID</th><td id="_id">'+transportationData._id+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Name</th><td>'+transportationData.companyName+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+transportationData.companyMobile+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+transportationData.companyAddress+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+transportationData.transactionPlace+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+transportationData.fromDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+transportationData.toDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+transportationData.expectedShipDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Chamber Of Commerce Number</th><td id="chamberOfCommerceNumber">'+transportationData.carCost+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Postal Code</th><td id="postalCode">'+transportationData.transferData+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">By User</th><td id="u_id">'+user.name+'</td></tr></tbody></table>'+'<br/> Created at: '+created_at, //temp_line4
+            );
+            //Send Email To Hail
+            sendEmail(
+                'hail@madarshamel.sa', //To Email
+                'Madarshamel Hail', //To Name
+            'Madarshamel | New Transportation Request From '+user.name, //Message Subject
+            '', //btn_link
+            '', //btn_content
+            '', //temp_line3
+            user.name+' Created Transportation Request', //temp_line1
+            'Email: '+user.email+' Phone: '+user.mobile, //temp_line2
+            '<table class="table table-striped" style="margin: 0px;width: 100%;float: left;">\
+            <thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody id="requestChangesConData">\
+            <tr><th style="border:1px solid #000;" scope="row">ID</th><td id="_id">'+transportationData._id+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Name</th><td>'+transportationData.companyName+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+transportationData.companyMobile+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+transportationData.companyAddress+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+transportationData.transactionPlace+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+transportationData.fromDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+transportationData.toDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+transportationData.expectedShipDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Chamber Of Commerce Number</th><td id="chamberOfCommerceNumber">'+transportationData.carCost+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Postal Code</th><td id="postalCode">'+transportationData.transferData+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">By User</th><td id="u_id">'+user.name+'</td></tr></tbody></table>'+'<br/> Created at: '+created_at, //temp_line4
+            );
+            });
             res.json({success: true,err: err,transportation: transportationData});
         });
     }catch(e) {
@@ -35,7 +116,7 @@ router.post('/read', authJWT.verify(
         const user = await Users.findById(transportation.u_id);
         //const files = await Files.find( { _id : { $in : Object.values(JSON.parse(transportation.attachedFiles)) } } );
         const name = user.name;
-        //console.log('Founded Custom Clearance Request '+transportation._id+ ' ,And It`s "FILES"');
+        //console.log('Founded Transportation Request '+transportation._id+ ' ,And It`s "FILES"');
         console.log('Founded Transportation Request '+transportation._id);
         //return res.status(200).json({ success: true, transportation: transportation, name: name, files: files});
         return res.status(200).json({ success: true, transportation: transportation, name: name});

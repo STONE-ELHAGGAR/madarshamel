@@ -10,7 +10,7 @@ function BlogSingle({content}) {
             <Layout>
                 <div>
                     <section className="section-box">
-                        <div className="banner-hero banner-head-image" style={{ background: 'url(../assets/imgs/page/blog/single/shipping.jpg)' }}>
+                        <div className="banner-hero banner-head-image" style={{ background: 'url(../assets/imgs/page/blog/single/shipping.webp)' }}>
                             <div className="container">
                                 <div className="text-center">
                                     <h1 className="text-heading-1 color-white mt-30">{content.pages[0].title}</h1>

@@ -28,7 +28,8 @@ const Transportation = () => {
                   <input type="text" className="form-control display-1 companyMobile" name="companyMobile" id="companyMobile" placeholder="Company Mobile" />
                   <label className="mt-20">Company Address</label>
                   <input type="text" className="form-control display-1 companyAddress" name="companyAddress" id="companyAddress" placeholder="Company Address" />
-                  <SettingSelector field="transactionPlace" />
+                  <label className="mt-20">Transaction Place</label>
+                  <input type="text" className="form-control display-1 transactionPlace" name="transactionPlace" id="transactionPlace" placeholder="Transaction Place" />
                   <label className="mt-20">From</label>
                   <input type="text" className="form-control display-1 fromDate" name="fromDate" id="fromDate" placeholder="From" />
                   <label className="mt-20">To</label>

@@ -19,6 +19,12 @@ return (
                                 <th scope="col">Company Name</th>
                                 <th scope="col">Company Mobile</th>
                                 <th scope="col">Company Address</th>
+                                <th scope="col">Postal Code</th>
+                                <th scope="col">Fax</th>
+                                <th scope="col">Commercial Registration No</th>
+                                <th scope="col">Commercial Registration Date</th>
+                                <th scope="col">Commercial Registration City</th>
+                                <th scope="col">Chamber of Commerce Number</th>
                                 <th scope="col">Transaction Place</th>
                                 <th scope="col">Shipping Port</th>
                                 <th scope="col">Reciving Port</th>

@@ -16,7 +16,9 @@ const TableItem = ({content, id, row}) => {
             })
           } else if ((id == 'expectedShipDate' || id == '_id' || id == 'created_at') && content.custom_clearance[id]){}else{
             handleTableReader(content.custom_clearance[id], 'id','/api/settings/readById').then((result) => {
-              setConValue(result.settings[0].content);
+              if(result?.settings[0]){
+                setConValue(result.settings[0].content);
+              }
             })
           }
     }

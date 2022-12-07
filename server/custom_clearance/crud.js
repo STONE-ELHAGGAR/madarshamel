@@ -8,20 +8,113 @@ const Users = require('./../models/users');
 const Companies = require('./../models/companies');
 const Branches = require('./../models/branches');
 const Settings = require('./../models/settings');
+const sendEmail = require('./../../util/sendEmail');
+const getNumId = require('./../../util/getNumId');
 
 //JsonWebToken to create access token
 const authJWT = require('./../../util/authJWT');
 
 router.post('/create', authJWT.verify(['original-user','custom-clearance','super-admin']), async (req,res,next) => {
-    const {companyName, companyAddress, companyMobile, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, attachedFiles} = req.body;
+    const {companyName, companyAddress, companyMobile, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, postalCode, fax, commercialRegistrationNo, commercialRegistrationDate, commercialRegistrationCity, chamberOfCommerceNumber, attachedFiles} = req.body;
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
     const user = await Users.findById(req.userId);
+    const country = await Settings.findById(sourceCountry);
     const u_id = user.id;
-    const custom_clearance = Custom_clearance({companyName, companyAddress, companyMobile, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, attachedFiles, created_at, u_id});
-
+    const custom_clearance = Custom_clearance({companyName, companyAddress, companyMobile, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, postalCode, fax, commercialRegistrationNo, commercialRegistrationDate, commercialRegistrationCity, chamberOfCommerceNumber, attachedFiles, created_at, u_id});
+    
     try {
         await custom_clearance.save(function(err,custom_clearanceData) {
             console.log('Inserted Custom Clearance Request '+custom_clearanceData._id);
+            getNumId(custom_clearanceData._id,'custom_clearance').then((numId) => {
+            //Send Email To CS
+            sendEmail(
+                'cs@madarshamel.sa', //To Email
+                'Madarshamel Customer Service', //To Name
+            'Madarshamel | New Custom Clearance Request From '+user.name, //Message Subject
+            '', //btn_link
+            '', //btn_content
+            '', //temp_line3
+            user.name+' Created Custom Clearance Request', //temp_line1
+            'Email: '+user.email+' Phone: '+user.mobile, //temp_line2
+            '<table class="table table-striped" style="margin: 0px;width: 100%;float: left;">\
+            <thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody id="requestChangesConData">\
+            <tr><th style="border:1px solid #000;" scope="row">ID</th><td id="_id">'+numId+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Name</th><td>'+custom_clearanceData.companyName+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+custom_clearanceData.companyMobile+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+custom_clearanceData.companyAddress+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+custom_clearanceData.transactionPlace+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+custom_clearanceData.recivingPort+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+custom_clearanceData.shippingPort+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+custom_clearanceData.expectedShipDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Chamber Of Commerce Number</th><td id="chamberOfCommerceNumber">'+custom_clearanceData.chamberOfCommerceNumber+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Postal Code</th><td id="postalCode">'+custom_clearanceData.postalCode+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Fax</th><td id="fax">'+custom_clearanceData.fax+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Commercial Registration No</th><td id="commercialRegistrationNo">'+custom_clearanceData.commercialRegistrationNo+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Commercial Registration Date</th><td id="commercialRegistrationDate">'+custom_clearanceData.commercialRegistrationDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Commercial Registration City</th><td id="commercialRegistrationCity">'+custom_clearanceData.commercialRegistrationCity+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">By User</th><td id="u_id">'+user.name+'</td></tr></tbody></table>'+'<br/> Created at: '+created_at, //temp_line4
+            );
+            //Send Email To Ali
+            sendEmail(
+                'ali@madarshamel.sa', //To Email
+                'Madarshamel Ali', //To Name
+            'Madarshamel | New Custom Clearance Request From '+user.name, //Message Subject
+            '', //btn_link
+            '', //btn_content
+            '', //temp_line3
+            user.name+' Created Custom Clearance Request', //temp_line1
+            'Email: '+user.email+' Phone: '+user.mobile, //temp_line2
+            '<table class="table table-striped" style="margin: 0px;width: 100%;float: left;">\
+            <thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody id="requestChangesConData">\
+            <tr><th style="border:1px solid #000;" scope="row">ID</th><td id="_id">'+custom_clearanceData._id+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Name</th><td>'+custom_clearanceData.companyName+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+custom_clearanceData.companyMobile+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+custom_clearanceData.companyAddress+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+custom_clearanceData.transactionPlace+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+custom_clearanceData.recivingPort+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+custom_clearanceData.shippingPort+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+custom_clearanceData.expectedShipDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Chamber Of Commerce Number</th><td id="chamberOfCommerceNumber">'+custom_clearanceData.chamberOfCommerceNumber+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Postal Code</th><td id="postalCode">'+custom_clearanceData.postalCode+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Fax</th><td id="fax">'+custom_clearanceData.fax+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Commercial Registration No</th><td id="commercialRegistrationNo">'+custom_clearanceData.commercialRegistrationNo+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Commercial Registration Date</th><td id="commercialRegistrationDate">'+custom_clearanceData.commercialRegistrationDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Commercial Registration City</th><td id="commercialRegistrationCity">'+custom_clearanceData.commercialRegistrationCity+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">By User</th><td id="u_id">'+user.name+'</td></tr></tbody></table>'+'<br/> Created at: '+created_at, //temp_line4
+            );
+            //Send Email To Hail
+            sendEmail(
+                'hail@madarshamel.sa', //To Email
+                'Madarshamel Hail', //To Name
+            'Madarshamel | New Custom Clearance Request From '+user.name, //Message Subject
+            '', //btn_link
+            '', //btn_content
+            '', //temp_line3
+            user.name+' Created Custom Clearance Request', //temp_line1
+            'Email: '+user.email+' Phone: '+user.mobile, //temp_line2
+            '<table class="table table-striped" style="margin: 0px;width: 100%;float: left;">\
+            <thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody id="requestChangesConData">\
+            <tr><th style="border:1px solid #000;" scope="row">ID</th><td id="_id">'+custom_clearanceData._id+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Name</th><td>'+custom_clearanceData.companyName+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+custom_clearanceData.companyMobile+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+custom_clearanceData.companyAddress+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+custom_clearanceData.transactionPlace+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+custom_clearanceData.recivingPort+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+custom_clearanceData.shippingPort+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+custom_clearanceData.expectedShipDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Chamber Of Commerce Number</th><td id="chamberOfCommerceNumber">'+custom_clearanceData.chamberOfCommerceNumber+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Postal Code</th><td id="postalCode">'+custom_clearanceData.postalCode+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Fax</th><td id="fax">'+custom_clearanceData.fax+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Commercial Registration No</th><td id="commercialRegistrationNo">'+custom_clearanceData.commercialRegistrationNo+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Commercial Registration Date</th><td id="commercialRegistrationDate">'+custom_clearanceData.commercialRegistrationDate+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Commercial Registration City</th><td id="commercialRegistrationCity">'+custom_clearanceData.commercialRegistrationCity+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">By User</th><td id="u_id">'+user.name+'</td></tr></tbody></table>'+'<br/> Created at: '+created_at, //temp_line4
+            );
+            })
+            
             res.json({success: true,custom_clearance: custom_clearanceData});
         });
     }catch(e) {
@@ -99,12 +192,12 @@ router.post('/readAllRequests', authJWT.verify(['original-user','custom-clearanc
                 userRequest = {};
             }
             const custom_clearances = await Custom_clearance.find(userRequest);
-
+    
             //Start of fields
             let newcustom_clearance = [];
             for(custom_clearance in custom_clearances){
                 const countGTrecords = await Custom_clearance.find({_id: {$lt: custom_clearances[custom_clearance]._id}}).count()+501;
-                let transactionPlace = await Settings.find( { _id: custom_clearances[custom_clearance].transactionPlace } );
+                //let transactionPlace = await Settings.find( { _id: custom_clearances[custom_clearance].transactionPlace } );
                 let sourceCountry = await Settings.find( { _id: custom_clearances[custom_clearance].sourceCountry } );
                 
                 newcustom_clearance.push({
@@ -113,7 +206,13 @@ router.post('/readAllRequests', authJWT.verify(['original-user','custom-clearanc
                     companyName: custom_clearances[custom_clearance].companyName,
                     companyMobile: custom_clearances[custom_clearance].companyMobile,
                     companyAddress: custom_clearances[custom_clearance].companyAddress,
-                    transactionPlace: transactionPlace[0].content,
+                    chamberOfCommerceNumber: custom_clearances[custom_clearance].chamberOfCommerceNumber,
+                    postalCode: custom_clearances[custom_clearance].postalCode,
+                    fax: custom_clearances[custom_clearance].fax,
+                    commercialRegistrationNo: custom_clearances[custom_clearance].commercialRegistrationNo,
+                    commercialRegistrationDate: custom_clearances[custom_clearance].commercialRegistrationDate,
+                    commercialRegistrationCity: custom_clearances[custom_clearance].commercialRegistrationCity,
+                    transactionPlace: custom_clearances[custom_clearance].transactionPlace,
                     shippingPort: custom_clearances[custom_clearance].shippingPort,
                     recivingPort: custom_clearances[custom_clearance].recivingPort,
                     sourceCountry: sourceCountry[0].content,

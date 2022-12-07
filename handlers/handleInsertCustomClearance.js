@@ -9,6 +9,12 @@ const handleInsertCustomClearance = async (e) => {
   const recivingPort= document.querySelector('.recivingPort').value;
   const sourceCountry= document.querySelector('.sourceCountry').value;
   const expectedShipDate= document.querySelector('.expectedShipDate').value;
+  const postalCode= document.querySelector('.postalCode').value;
+  const fax= document.querySelector('.fax').value;
+  const commercialRegistrationNo= document.querySelector('.commercialRegistrationNo').value;
+  const commercialRegistrationDate= document.querySelector('.commercialRegistrationDate').value;
+  const commercialRegistrationCity= document.querySelector('.commercialRegistrationCity').value;
+  const chamberOfCommerceNumber= document.querySelector('.chamberOfCommerceNumber').value;
   const attachedFiles= '';//sessionStorage.getItem('attachedFiles');
   const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
   const requestBody = {
@@ -20,6 +26,12 @@ const handleInsertCustomClearance = async (e) => {
     recivingPort: recivingPort,
     sourceCountry: sourceCountry,
     expectedShipDate: expectedShipDate,
+    postalCode: postalCode,
+    fax: fax,
+    commercialRegistrationNo: commercialRegistrationNo,
+    commercialRegistrationDate: commercialRegistrationDate,
+    commercialRegistrationCity: commercialRegistrationCity,
+    chamberOfCommerceNumber: chamberOfCommerceNumber,
     attachedFiles: attachedFiles
   };
   const customClearanceRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/custom_clearance/create', {
@@ -40,11 +52,18 @@ const handleInsertCustomClearance = async (e) => {
       document.querySelector('.companyName').value = '';
       document.querySelector('.companyMobile').value = '';
       document.querySelector('.companyAddress').value = '';
-      document.querySelector('.transactionPlace').value = 0;
+      document.querySelector('.transactionPlace').value = '';
       document.querySelector('.shippingPort').value = '';
       document.querySelector('.recivingPort').value = '';
       document.querySelector('.sourceCountry').value = 0;
       document.querySelector('.expectedShipDate').value = '';
+
+      document.querySelector('.postalCode').value = '';
+      document.querySelector('.fax').value = '';
+      document.querySelector('.commercialRegistrationNo').value = '';
+      document.querySelector('.commercialRegistrationDate').value = '';
+      document.querySelector('.commercialRegistrationCity').value = '';
+      document.querySelector('.chamberOfCommerceNumber').value = '';
 
       sessionStorage.setItem('attachedFiles','');
       window.location.href = process.env.NEXT_PUBLIC_BASE_URL+'/dashboard/custom-clearance-request/'+content.custom_clearance._id;  // this reloads

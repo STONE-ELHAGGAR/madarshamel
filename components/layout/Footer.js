@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, {useState, useEffect} from 'react';
 
-const Footer = ({fb, twitter, insta, address, phone, email}) => {
+const Footer = ({fb, twitter, insta, address, phone, email, logged}) => {
     const [fbData, setfbData] = useState('');
     const [twitterData, settwitterData] = useState('');
     const [instaData, setinstaData] = useState('');
@@ -36,6 +36,7 @@ const Footer = ({fb, twitter, insta, address, phone, email}) => {
         <>
             <footer className="footer col-12 float-start mt-50">
                 <div className="container">
+                    {(!logged) ? (
                     <div className="footer-top">
                         <div className="row">
                             <div className="col-md-4 col-sm-6 text-center text-md-start">
@@ -48,6 +49,7 @@ const Footer = ({fb, twitter, insta, address, phone, email}) => {
                             </div>
                         </div>
                     </div>
+                    ) : ''}
                     <div className="row">
                         <div className="col-lg-3 width-20 mb-30">
                             <h4 className="text-heading-5">Contact</h4>

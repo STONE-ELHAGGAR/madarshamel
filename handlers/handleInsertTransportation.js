@@ -46,7 +46,7 @@ const handleInsertTransportation = async (e) => {
       document.querySelector('.companyName').value = '';
       document.querySelector('.companyMobile').value = '';
       document.querySelector('.companyAddress').value = '';
-      document.querySelector('.transactionPlace').value = 0;
+      document.querySelector('.transactionPlace').value = '';
       document.querySelector('.fromDate').value = '';
       document.querySelector('.toDate').value = '';
       document.querySelector('.drivers').value = 0;
