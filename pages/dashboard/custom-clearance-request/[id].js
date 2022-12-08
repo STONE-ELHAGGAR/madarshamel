@@ -178,7 +178,7 @@ const CustomClearanceRequestData = ({userData}) => {
                         <h3>Custom Clearance Request</h3>
                         <h5>{guiId}</h5>
                         <div className="col-lg-8 col-md-8 col-xs-12 col-sm-12 float-start px-2 py-2">
-                            <a href="https://oga.fasah.sa/ar/login/1.0/" target="_blank" className="btn btn-square col-12 mt-3 float-start">Login To Fasah</a><br />
+                            <a href="https://oga.fasah.sa/ar/login/1.0/" target="_blank" rel="noreferrer" className="btn btn-square col-12 mt-3 float-start">Login To Fasah</a><br />
                             <a href={"/dashboard/cc-auth-request/"+activeIndex} className="btn btn-square col-12 mt-3 float-start">PRRINT Authorization of navigation agents</a>
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
                                 <ul className="nav nav-pills nav-fill col-12 float-start">
