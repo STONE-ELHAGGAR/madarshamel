@@ -8,7 +8,7 @@ import AddCC from "./../../components/elements/AddCC";
 import CCRequests from "./../../components/elements/CCRequests";
 
 
-const controlRequests = ({content}) => {
+const ControlRequests = ({content}) => {
     const [activeSettingsTab , setActiveSettingsTab] = useState('AddCC');
     
     const all = {
@@ -47,7 +47,7 @@ return (
     );
 }
 
-export default controlRequests;
+export default ControlRequests;
 
 
 export async function getServerSideProps(context) {

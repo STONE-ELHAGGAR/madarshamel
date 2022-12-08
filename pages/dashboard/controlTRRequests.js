@@ -8,7 +8,7 @@ import AddTransportation from "./../../components/elements/AddTransportation";
 import TransportationRequests from "./../../components/elements/TransportationRequests";
 
 
-const controlTRRequests = () => {
+const ControlTRRequests = () => {
 
     const [activeSettingsTab , setActiveSettingsTab] = useState('AddTransportation');
     
@@ -50,4 +50,4 @@ return (
     );
 }
 
-export default controlTRRequests;
+export default ControlTRRequests;

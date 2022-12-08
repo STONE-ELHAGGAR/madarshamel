@@ -7,7 +7,7 @@ import CcItem from "./../../components/elements/CcItem";
 const handleAllCC = require('./../../handlers/handleAllCC');
 
 
-const allRecords = () => {
+const AllRecords = () => {
     const [ccData, setCcData] = useState([]);
 
     useEffect(() => {
@@ -49,4 +49,4 @@ return (
     );
 }
 
-export default allRecords;
+export default AllRecords;

@@ -9,7 +9,7 @@ const ServicesPages = ({content}) => {
     if(content.pages?.length > 0){
         allItems = content.pages?.map((page) => {
             return(
-                <li>
+                <li key={page._id}>
                     <Link href={"/service-single/"+page._id}><a>{page.title}</a></Link>
                 </li>
             )
