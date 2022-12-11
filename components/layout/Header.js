@@ -162,7 +162,7 @@ const Header = ({headerStyle }) => {
             })
         }
         return(
-            <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 chatBox">
+            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 chatBox">
                 <div className="chatTitle">
                     <span><i className="fi fi-rr-comment"></i> </span>
                     Admin Chat
@@ -186,7 +186,7 @@ const Header = ({headerStyle }) => {
             )
         })
         return (
-            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 float-start chatMsgs" id="chatMsgs">
+            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 float-start chatMsgs" style={{padding:'20px'}} id="chatMsgs">
                 {allChat}
             </div>
         )
@@ -195,7 +195,7 @@ const Header = ({headerStyle }) => {
     const ChatRoom = ({activeRoomData, usersList}) => {
         let userI = usersList.findIndex((element) => element._id == activeRoomData);
         return(
-            <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 chatBox">
+            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 chatBox">
                 <div className="chatTitle">
                     <span><i className="fi fi-rr-comment"></i> </span>
                     {usersList[userI].name}
@@ -220,7 +220,7 @@ const Header = ({headerStyle }) => {
     const UserChat = () => {
         let cuurentUid = JSON.parse(sessionStorage.getItem('loginData')).data.id;
         return(
-            <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 chatBox">
+            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 chatBox">
                 <div className="chatTitle">
                     <span><i className="fi fi-rr-comment"></i> </span>
                     Customer Service
@@ -244,7 +244,7 @@ const Header = ({headerStyle }) => {
     }
     const ChatBox = () => {
         return(
-            <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 chatBox" onClick={handleCheckUserAndGetChatView}>
+            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 chatBox" onClick={handleCheckUserAndGetChatView}>
                 <div className="chatTitle">
                     <span><i className="fi fi-rr-comment"></i> </span>
                     {t("common:chat")} ({t("common:free")})
