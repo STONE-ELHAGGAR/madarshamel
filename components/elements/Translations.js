@@ -97,15 +97,19 @@ function Translations({langsData}) {
                     <ul className="nav nav-pills nav-fill">
                         {langsData.map((lang , i) => {
                             return (
-                                <input type="submit" onClick={(e) => {changeActiveLang(e)}} value={lang} className={(activeLang == lang) ? "col-3 btn btn-square mx-2 my-2 active" : "col-3 btn btn-square mx-2" } />
+                                <div className="col-3" key={i}>
+                                    <input type="submit" onClick={(e) => {changeActiveLang(e)}} value={lang} className={(activeLang == lang) ? "btn btn-square mx-2 my-2 active" : "btn btn-square mx-2" } />
+                                </div>
                             )
                         })}
                     </ul>
                     <div className="col-12 px-2 py-2">
                         <h5>Files of "{activeLang}" Language</h5>
-                        {activeLangFiles.map((langFile) => {
+                        {activeLangFiles.map((langFile, i) => {
                             return (
-                                <input type="submit" value={langFile.replace('.json','')} onClick={(e) => {changeCurrentFile(e)}} className={(activeFile == langFile.replace('.json','')) ? "col-3 btn btn-square mx-2 my-2 active" : "col-3 btn btn-square mx-2 my-2" } />
+                                <div className="col-3" key={i}>
+                                    <input type="submit" value={langFile.replace('.json','')} onClick={(e) => {changeCurrentFile(e)}} className={(activeFile == langFile.replace('.json','')) ? "col-3 btn btn-square mx-2 my-2 active" : "col-3 btn btn-square mx-2 my-2" } />
+                                </div>
                             )
                         })}
                     </div>
