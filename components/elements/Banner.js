@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
+import useTranslation from "next-translate/useTranslation";
 
-const Banner = ({bannerDesc}) => {
+const Banner = () => {
+    let {t} = useTranslation();
     return( 
         <section className="section-box">
             <div className="banner-hero banner-1">
@@ -9,15 +11,15 @@ const Banner = ({bannerDesc}) => {
                     <div className="row">
                         <div className="col-lg-7">
                             <h1 className="text-display-2">
-                                We are
-                                <span className="color-green-900"> awesome team </span>
-                                for your business dream
+                                {t("common:weAre")}
+                                <span className="color-green-900"> {t("common:aweasomTeam")} </span>
+                                {t("common:forYourBusinessDream")}
                             </h1>
                             <p className="text-body-lead-large color-gray-500 mt-40 pr-40">
-                                {bannerDesc}
+                                {t("common:bannerDesc")}
                             </p>
                             <div className="mt-40">
-                                <Link href="/page-signup"><a className="btn btn-black icon-arrow-right-white">Get Start</a></Link>
+                                <Link href="/page-signup"><a className="btn btn-black icon-arrow-right-white">{t("common:getStart")}</a></Link>
                             </div>
                         </div>
                         <div className="col-lg-5 d-none d-lg-block">

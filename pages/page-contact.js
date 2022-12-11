@@ -1,8 +1,10 @@
 import Layout from "../components/layout/Layout";
 import React, {useState, useEffect} from 'react';
+import useTranslation from "next-translate/useTranslation";
 
 
 function Contact() {
+    let {t} = useTranslation();
     const handleSendRequest = async (e) => {
         e.preventDefault();
         let name = document.getElementById('name').value;
@@ -72,7 +74,7 @@ function Contact() {
                 <section className="section-box">
                     <div className="banner-hero banner-breadcrums">
                         <div className="container text-center">
-                            <h1 className="text-heading-2 color-gray-1000 mb-20">Contact Us</h1>
+                            <h1 className="text-heading-2 color-gray-1000 mb-20">{t("common:contact")}</h1>
                         </div>
                     </div>
                 </section>
@@ -80,35 +82,35 @@ function Contact() {
                     <div className="container mb-20 mt-140">
                         <div className="bdrd-58 box-gray-100 icon-wave">
                             <div className="row">
-                                <div className="col-lg-12 mb-60"><span className="text-body-capitalized text-uppercase">Contact us</span>
-                                    <h2 className="text-heading-3 color-gray-900 mt-10">Have an prject in mind?</h2>
-                                    <p className="text-body-text color-gray-600 mt-20">The right move at the right time saves your investment.<br className="d-lg-block d-none" />live the dream of expanding your business.</p>
+                                <div className="col-lg-12 mb-60"><span className="text-body-capitalized text-uppercase">{t("common:contact")}</span>
+                                    <h2 className="text-heading-3 color-gray-900 mt-10">{t("page-contact:q1")}</h2>
+                                    <p className="text-body-text color-gray-600 mt-20">{t("page-contact:p1")}<br className="d-lg-block d-none" />{t("page-contact:p2")}</p>
                                 </div>
                                 <div className="col-lg-4 mb-40">
                                     <h4 className="text-heading-6 color-gray-900 icon-home mb-10 mt-10">Madarshamel</h4>
-                                    <p className="text-body-text color-gray-600">{addressData}</p>
-                                    <p className="text-body-text color-gray-600">{phoneData}</p>
-                                    <p className="text-body-text color-gray-600">{emailData}</p>
+                                    <p className="text-body-text color-gray-600">{t("common:address")}</p>
+                                    <p className="text-body-text color-gray-600">{t("common:phone")}</p>
+                                    <p className="text-body-text color-gray-600">{t("common:email")}</p>
                                 </div>
                                 <div className="col-lg-8">
                                     <div className="row">
                                         <div className="alert-data"></div>
                                         <div className="col-lg-6">
-                                            <div className="form-group"><input id="name" className="form-control"  placeholder="Enter your name" /></div>
+                                            <div className="form-group"><input id="name" className="form-control"  placeholder={t("page-contact:p3")} /></div>
                                         </div>
                                         <div className="col-lg-6">
-                                            <div className="form-group"><input id="company" className="form-control"  placeholder="Company (optioanl)" /></div>
+                                            <div className="form-group"><input id="company" className="form-control"  placeholder={t("page-contact:p4")} /></div>
                                         </div>
                                         <div className="col-lg-6">
-                                            <div className="form-group"><input id="email" className="form-control"  placeholder="Your email" /></div>
+                                            <div className="form-group"><input id="email" className="form-control"  placeholder={t("page-contact:p5")} /></div>
                                         </div>
                                         <div className="col-lg-6">
-                                            <div className="form-group"><input id="mobile" className="form-control"  placeholder="Phone number" /></div>
+                                            <div className="form-group"><input id="mobile" className="form-control"  placeholder={t("page-contact:p6")} /></div>
                                         </div>
                                         <div className="col-lg-12">
-                                            <div className="form-group"><textarea id="desc" className="form-control" placeholder="Tell us about yourself" /></div>
+                                            <div className="form-group"><textarea id="desc" className="form-control" placeholder={t("page-contact:p7")} /></div>
                                         </div>
-                                        <div className="col-lg-12 mt-15"><button onClick={handleSendRequest} className="btn btn-black icon-arrow-right-white mr-40 mb-20" type="submit">Send Message</button><br className="d-lg-none d-block" /><span className="text-body-text-md color-gray-500 mb-20">By clicking contact us button, you agree our terms and policy,</span></div>
+                                        <div className="col-lg-12 mt-15"><button onClick={handleSendRequest} className="btn btn-black icon-arrow-right-white mr-40 mb-20" type="submit">{t("page-contact:p8")}</button><br className="d-lg-none d-block" /><span className="text-body-text-md color-gray-500 mb-20">{t("page-contact:p9")}</span></div>
                                     </div>
                                 </div>
                             </div>

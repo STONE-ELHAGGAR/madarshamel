@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import Layout from "../components/layout/Layout";
 import { useRouter } from 'next/router';
+import useTranslation from "next-translate/useTranslation";
 
 function Login() {
     const router = useRouter();
+    let {t} = useTranslation();
     const handleLogin = async () => {
         const email = document.querySelector(".email").value;
         const password = document.querySelector(".password").value;
@@ -45,9 +47,9 @@ function Login() {
                                 <div className="col-xxl-5 col-xl-6 col-lg-6 col-md-12 login-right pr-0">
                                     <div className="box-login-form">
                                         <div className="box-signup mt-90">
-                                            <h1 className="text-heading-3 mb-10 text-center">Welcome back.</h1>
+                                            <h1 className="text-heading-3 mb-10 text-center">{t("page-login:p1")}</h1>
                                             <div className="text-center">
-                                                <div className="mt-40 box-line-throught mb-40"><span className="text-body-text color-gray-500">Sign in with your email</span></div>
+                                                <div className="mt-40 box-line-throught mb-40"><span className="text-body-text color-gray-500">{t("page-login:p2")}</span></div>
                                             </div>
                                             <div className="box-form-signup">
                                             <div className="alert-data">
@@ -60,11 +62,11 @@ function Login() {
                                                     <div className="form-field"><span className="text-body-small color-green-900 tag-top">Password</span><input name="password" type="password" className="form-control password input-with-icon" placeholder="*********" /><span className="icon-eye-right" /></div>
                                                 </div>
                                                 <div className="form-group">
-                                                    <Link href="/page-reset"><a className="text-body-text">Forgot password?</a></Link>
+                                                    <Link href="/page-reset"><a className="text-body-text">{t("page-login:p3")}</a></Link>
                                                 </div>
-                                                <div className="form-group"><button className="btn btn-green-full text-heading-6" onClick={handleLogin}>Continue</button></div>
-                                                <div><span className="text-body-text color-gray-500">Don’t have an account?</span>
-                                                    <Link href="/page-signup"><a className="text-body-text color-green-900">Sign up</a></Link>
+                                                <div className="form-group"><button className="btn btn-green-full text-heading-6" onClick={handleLogin}>{t("common:logIn")}</button></div>
+                                                <div><span className="text-body-text color-gray-500">{t("page-login:p4")}</span>
+                                                    <Link href="/page-signup"><a className="text-body-text color-green-900">{t("common:signUp")}</a></Link>
                                                 </div>
                                             </div>
                                         </div>

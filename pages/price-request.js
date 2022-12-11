@@ -5,8 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import Layout from "../components/layout/Layout";
+import useTranslation from "next-translate/useTranslation";
 
 function PriceRequest() {
+    let {t} = useTranslation();
     const [isOpen, setOpen] = useState(false);
     const handleSendRequest = async (e) => {
         e.preventDefault();
@@ -78,25 +80,25 @@ function PriceRequest() {
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-3 py-3 float-start">
                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-3 py-3 float-start" style={{border: '1px solid #333', background: '#fff'}}>
-                            <h4>Company Personal Details</h4>
-                            <h5>Your full name:</h5>
-                            <input type="text" id="name" className="form-control" placeholder="Your Full Name" />
-                            <h5>Company name:</h5>
-                            <input type="text" id="company" className="form-control" placeholder="Company Name" />
-                            <h5>Email:</h5>
-                            <input type="text" id="email" className="form-control" placeholder="Email" />
-                            <h5>Mobile:</h5>
-                            <input type="text" id="mobile" className="form-control" placeholder="Mobile" />
+                            <h4>{t("price-request:companyPersonalDetails")}</h4>
+                            <h5>{t("price-request:yourFullName")}:</h5>
+                            <input type="text" id="name" className="form-control" placeholder={t("price-request:yourFullName")} />
+                            <h5>{t("price-request:companyName")}:</h5>
+                            <input type="text" id="company" className="form-control" placeholder={t("price-request:companyName")} />
+                            <h5>{t("price-request:email")}:</h5>
+                            <input type="text" id="email" className="form-control" placeholder={t("price-request:email")} />
+                            <h5>{t("price-request:mobile")}:</h5>
+                            <input type="text" id="mobile" className="form-control" placeholder={t("price-request:mobile")} />
                         </div>
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-3 py-3 float-start">
                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-3 py-3 float-start" style={{border: '1px solid #333', background: '#fff'}}>
-                            <h4>Shipment Details</h4>
-                            <h5>Goods Details</h5>
-                            <textarea id="goodsDetails" className="form-control" placeholder="Goods Details"></textarea>
-                            <h5>HTS Code:</h5>
-                            <input id="hts" type="text" className="form-control" placeholder="HTS Code" />
+                            <h4>{t("price-request:shipmentDetails")}</h4>
+                            <h5>{t("price-request:goodsDetails")}</h5>
+                            <textarea id="goodsDetails" className="form-control" placeholder={t("price-request:goodsDetails")}></textarea>
+                            <h5>{t("price-request:htsCode")}:</h5>
+                            <input id="hts" type="text" className="form-control" placeholder={t("price-request:htsCode")} />
                         </div>
                     </div>
 
@@ -104,20 +106,20 @@ function PriceRequest() {
                     <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-3 py-3 float-start">
                         <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-3 py-3 float-start">
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-3 py-3 float-start" style={{border: '1px solid #333', background: '#fff'}}>
-                                <h4>Source Country information</h4>
-                                <h5>Source Country:</h5>
-                                <input id="sourceCountry" type="text" className="form-control" placeholder="Source Country" />
-                                <h5>Sender Address</h5>
-                                <textarea id="senderAddress" className="form-control" placeholder="Sender Address"></textarea>
+                                <h4>{t("price-request:sourceCountryInformation")}</h4>
+                                <h5>{t("price-request:sourceCountry")}:</h5>
+                                <input id="sourceCountry" type="text" className="form-control" placeholder={t("price-request:sourceCountry")} />
+                                <h5>{t("price-request:senderAddress")}</h5>
+                                <textarea id="senderAddress" className="form-control" placeholder={t("price-request:senderAddress")}></textarea>
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-3 py-3 float-start">
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-3 py-3 float-start" style={{border: '1px solid #333', background: '#fff'}}>
-                                <h4>Consignee information</h4>
-                                <h5>Consignee City:</h5>
-                                <input id="consigneeCity" type="text" className="form-control" placeholder="Consignee City" />
-                                <h5>Consignee Address</h5>
-                                <textarea id="consigneeAddress" className="form-control" placeholder="Consignee Address"></textarea>
+                                <h4>{t("price-request:consigneeInformation")}</h4>
+                                <h5>{t("price-request:consigneeCity")}:</h5>
+                                <input id="consigneeCity" type="text" className="form-control" placeholder={t("price-request:consigneeCity")} />
+                                <h5>{t("price-request:consigneeAddress")}</h5>
+                                <textarea id="consigneeAddress" className="form-control" placeholder={t("price-request:consigneeAddress")}></textarea>
                             </div>
                         </div>
                     </div>
@@ -126,13 +128,13 @@ function PriceRequest() {
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" value="air" id="flexCheckDefault" />
                             <label className="form-check-label" htmlFor="flexCheckDefault">
-                                Air Shipping
+                                {t("price-request:airShipping")}
                             </label>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" value="plane" id="flexCheckChecked" />
                             <label className="form-check-label" htmlFor="flexCheckChecked">
-                                Plane Shipping
+                                {t("price-request:seaShipping")}
                             </label>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ import ServicesPages from "../elements/ServicesPages";
 const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 const handleReadAllPages = require('./../../handlers/handleReadAllPages');
 import Sidebar from "./Sidebar";
+import useTranslation from "next-translate/useTranslation";
 
 //Table Socket Requirments
 import io from "socket.io-client";
@@ -14,6 +15,7 @@ const socket = io.connect("http://localhost:3001");
 
 const Header = ({headerStyle }) => {
     const router = useRouter();
+    let {t} = useTranslation();
     const [scroll, setScroll] = useState(0)
     const [logged , setLogged] = useState(false);
     const [servicePages , setServicePages] = useState([]);
@@ -29,6 +31,7 @@ const Header = ({headerStyle }) => {
             document.body.classList.remove("mobile-menu-active");
         }
     }
+
     useEffect(() => {
         document.addEventListener("scroll", () => {
             const scrollCheck = window.scrollY > 100
@@ -143,7 +146,6 @@ const Header = ({headerStyle }) => {
         getChatMsgs(activeRoom);
     }
   }, [activeRoom]);
-
     const AdminChat = ({usersList}) => {
         let UsersData;
         if(usersList.length > 0){
@@ -245,7 +247,7 @@ const Header = ({headerStyle }) => {
             <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 chatBox" onClick={handleCheckUserAndGetChatView}>
                 <div className="chatTitle">
                     <span><i className="fi fi-rr-comment"></i> </span>
-                    Chat (Free)
+                    {t("common:chat")} ({t("common:free")})
                 </div>
             </div>
         )
@@ -257,6 +259,20 @@ const Header = ({headerStyle }) => {
                 <div className="container">
                     <div className="main-header">
                         <div className="header-left">
+                        <ul className="main-menu">
+                            <li className="has-children">
+                                <Link href="#"><a>{t("common:lang")}</a></Link>
+                                <ul className="sub-menu">
+                                    {
+                                    router.locales.map((locale) => (
+                                    <li key={locale}>
+                                        <Link href={router.asPath} locale={locale}><a>{(locale === 'ar') ? 'عربي' : locale.toUpperCase() }</a></Link>
+                                    </li>
+                                    ))
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
                             <div className="header-logo">
                                 <Link href="/">
                                     <a className="d-flex">
@@ -269,23 +285,12 @@ const Header = ({headerStyle }) => {
                                 <nav className="nav-main-menu d-none d-xl-block">
                                     <ul className="main-menu">
                                         <li>
-                                            <Link href="/"><a className="active">Home</a></Link>
+                                            <Link href="/"><a className="active">{t("common:home")}</a></Link>
                                         </li>
                                         <li>
-                                            <Link href="/price-request"><a>Pricing</a></Link>
+                                            <Link href="/price-request"><a>{t("common:pricing")}</a></Link>
                                         </li>
                                         
-                                        {/*<li className="has-children">
-                                            <Link href="#"><a>More</a></Link>
-                                            <ul className="sub-menu">
-                                                <li>
-                                                    <Link href="/page-faqs-1"><a>FAQs</a></Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/page-about-2"><a>About</a></Link>
-                                                </li>
-                                            </ul>
-                                        </li>*/}
                                         {/*<li className="has-children">
                                             <Link href="#"><a>Pages</a></Link>
                                             <ul className="sub-menu">
@@ -301,7 +306,7 @@ const Header = ({headerStyle }) => {
                                             </ul>
                                         </li>*/}
                                         <li className="has-children">
-                                            <Link href="#"><a>Services</a></Link>
+                                            <Link href="#"><a>{t("common:services")}</a></Link>
                                             <ServicesPages content={servicePages} />
                                         </li>
                                         {/*<li className="has-children">
@@ -317,7 +322,7 @@ const Header = ({headerStyle }) => {
                                             </ul>
                                         </li>*/}
                                         <li>
-                                            <Link href="/page-contact"><a><i className="fi fi-rr-paper-plane" />Contact</a></Link>
+                                            <Link href="/page-contact"><a><i className="fi fi-rr-paper-plane" />{t("common:contact")}</a></Link>
                                         </li>
                                         {(logged) ? (
                                         <li className="has-children">
@@ -335,29 +340,27 @@ const Header = ({headerStyle }) => {
                                             </div>
                                             <ul className="sub-menu">
                                                 <li>
-                                                    <Link href="/dashboard"><a className="closer"><i className="fi fi-rr-user" />Dashboard</a></Link>
+                                                    <Link href="/dashboard"><a className="closer"><i className="fi fi-rr-user" />{t("common:dashboard")}</a></Link>
                                                 </li>
                                                 <li>
-                                                    <Link href="/dashboard/settings"><a><i className="fi fi-rr-settings" />Settings</a></Link>
+                                                    <Link href="/dashboard/settings"><a><i className="fi fi-rr-settings" />{t("common:settings")}</a></Link>
                                                 </li>
                                                 <li className="hr"><span /></li>
                                                 <li>
-                                                    <a onClick={handleLogout}><i className="fi fi-rr-sign-out" />Logout</a>
+                                                    <a onClick={handleLogout}><i className="fi fi-rr-sign-out" />{t("common:logOut")}</a>
                                                 </li>
                                             </ul>
                                         </li>
                                         ) : (
                                             <>
                                             <li>
-                                                <Link href="/page-signup"><a><i className="fi fi-rr-user-add" />Sign Up</a></Link>
+                                                <Link href="/page-signup"><a><i className="fi fi-rr-user-add" />{t("common:signUp")}</a></Link>
                                             </li>
                                             <li>
-                                                <Link href="/page-login"><a><i className="fi fi-rr-fingerprint" />Log In</a></Link>
+                                                <Link href="/page-login"><a><i className="fi fi-rr-fingerprint" />{t("common:logIn")}</a></Link>
                                             </li>
                                             </>
                                         )}
-                                        
-
                                     </ul>
                                 </nav>
                                 <div className="burger-icon burger-icon-white" onClick={() => {
@@ -370,9 +373,10 @@ const Header = ({headerStyle }) => {
                         </div>
                         <div className="header-right">
                             <div className="block-signin">
-                                <Link href="/page-service-1"><a className="btn btn-default hover-up icon-arrow-right">Get Started</a></Link>
+                                <Link href="/page-signup"><a className="btn btn-default hover-up icon-arrow-right">{t("common:getStarted")}</a></Link>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </header>

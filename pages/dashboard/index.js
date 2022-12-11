@@ -8,6 +8,7 @@ const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import useTranslation from "next-translate/useTranslation";
 
 
 const options1 = {
@@ -41,6 +42,7 @@ const options2 = {
 
 const App = ({adminDashboardData}) => {
 
+  let {t} = useTranslation();
   const [customClearanceData, setCustomClearanceData] = useState([]);
   const [transportationsData, setTransportationsData] = useState([]);
   const ChartDataPie = {
@@ -98,11 +100,11 @@ const App = ({adminDashboardData}) => {
             <div className="text-center">
               <Image width="50px" height="50px" src="/assets/imgs/template/icons/users.svg" alt="money" />
             </div>
-            <h5 className="text-center">TODAY'S USERS</h5>
-            <h4 className="text-center">{adminDashboardData.data.todayUsersData} USER</h4>
+            <h5 className="text-center">{t("common:todayUsers")}</h5>
+            <h4 className="text-center">{adminDashboardData.data.todayUsersData} {t("common:users")}</h4>
             <div className="compare-tip">
               <span className={(adminDashboardData.data.todayUsersData > adminDashboardData.data.yesterdayUsersData) ? 'danger' : 'success'}>{adminDashboardData.data.yesterdayUsersData} </span>
-              user registered yesterday
+              {t("common:yesterdayUsers")}
             </div>
           </div>
         </div>
@@ -111,12 +113,12 @@ const App = ({adminDashboardData}) => {
             <div className="text-center">
               <Image width="50px" height="50px" src="/assets/imgs/template/icons/all-users.svg" alt="money" />
             </div>
-            <h5 className="text-center">All USERS</h5>
-            <h4 className="text-center">{adminDashboardData.data.allUsersData} USER</h4>
+            <h5 className="text-center">{t("common:allUsers")}</h5>
+            <h4 className="text-center">{adminDashboardData.data.allUsersData} {t("common:user")}</h4>
             <div className="compare-tip">
-              All 
-              <span className="success"> Registered </span>
-              Users
+              {t("common:all")}
+              <span className="success"> {t("common:registered")} </span>
+              {t("common:users")}
             </div>
           </div>
         </div>
@@ -124,18 +126,19 @@ const App = ({adminDashboardData}) => {
     )
   }
   const DebtComp = () => {
+    let totalDebt = adminDashboardData.data.allWithdrawBalance-adminDashboardData.data.allDepositBalance;
     return (
       <div className="col-12 col-lg-3 col-md-3 col-sm-12 col-xs-12 float-start px-3 py-3">
         <div className="product-item-2 hover-up">
           <div className="text-center">
             <Image width="50px" height="50px" src="/assets/imgs/template/icons/money-bills.svg" alt="money" />
           </div>
-          <h5 className="text-center">Total Debt</h5>
-          <h4 className="text-center">{adminDashboardData.data.allWithdrawBalance-adminDashboardData.data.allDepositBalance} SAR</h4>
+          <h5 className="text-center">{t("common:totalDebt")}</h5>
+          <h4 className="text-center">{(totalDebt > 0) ? totalDebt : 0} SAR</h4>
           <div className="compare-tip">
-            Please,
-            <span className="danger"> PAY </span>
-            Them ASAP
+          {t("common:please")},
+            <span className="danger"> {t("common:pay")} </span>
+            {t("common:asap")}
           </div>
         </div>
       </div>
@@ -163,12 +166,12 @@ const App = ({adminDashboardData}) => {
               <div className="text-center">
                 <Image width="50px" height="50px" src="/assets/imgs/template/icons/money.svg" alt="money" />
               </div>
-              <h5 className="text-center">TODAY'S Withdraw</h5>
+              <h5 className="text-center">{t("common:todayWithdraws")}</h5>
               <h4 className="text-center">{adminDashboardData.data.currentDayWithdrawBalance} SAR</h4>
               <div className="compare-tip">
                 <span className="success">{adminDashboardData.data.currentDayDepositBalance} </span>
-                SAR is 
-                <span className="success"> TODAY'S Deposit to Users </span>
+                SAR {t("common:is")} 
+                <span className="success"> {t("common:pd")} </span>
               </div>
             </div>
           </div>
@@ -177,12 +180,12 @@ const App = ({adminDashboardData}) => {
               <div className="text-center">
                 <Image width="50px" height="50px" src="/assets/imgs/template/icons/money-bills.svg" alt="money" />
               </div>
-              <h5 className="text-center">All Withdraws</h5>
+              <h5 className="text-center">{t("common:allWithdraws")}</h5>
               <h4 className="text-center">{adminDashboardData.data.allWithdrawBalance} SAR</h4>
               <div className="compare-tip">
                 <span className="success">{adminDashboardData.data.allDepositBalance} </span>
-                SAR is 
-                <span className="success"> All Deposits </span>
+                SAR {t("common:is")} 
+                <span className="success"> {t("common:allDeposits")} </span>
               </div>
             </div>
           </div>

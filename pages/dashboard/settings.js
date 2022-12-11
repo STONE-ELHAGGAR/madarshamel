@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from 'next/image';
 import Layout from "./../../components/layout/Layout";
 const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
+import useTranslation from "next-translate/useTranslation";
 
 import AddUser from "./../../components/elements/AddUser";
 import EditUser from "./../../components/elements/EditUser";
@@ -15,10 +16,12 @@ import AllUsers from "./../../components/elements/AllUsers";
 import AllPriceRequests from "./../../components/elements/AllPriceRequests";
 import ContactRequests from "./../../components/elements/ContactRequests";
 import RequestSettings from "./../../components/elements/RequestSettings";
+import Translations from "./../../components/elements/Translations";
 import EditHomePage from "./../../components/elements/EditHomePage";
 
 
-const DashboardSettings = ({content, userData, contactResultData, homes}) => {
+const DashboardSettings = ({content, userData, contactResultData, homes, langsData}) => {
+    let {t} = useTranslation();
     const [activeSettingsTab , setActiveSettingsTab] = useState('LoadingSettings');
     const [componentsTab , setComponentsTab] = useState({});
     const [menuTabs , setMenuTabs] = useState(false);
@@ -48,39 +51,43 @@ const DashboardSettings = ({content, userData, contactResultData, homes}) => {
             <div className="col-12 mt-3 float-start" style={{background: '#fff'}}>
                 <div className={(activeSettingsTab == 'EditUser') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('EditUser')}}>
-                    Edit My Info
+                    {t("common:editMyInfo")}
                 </div>
                 <div className={(activeSettingsTab == 'AddDriver') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('AddDriver')}}>
-                    Add Driver
+                    {t("common:addDriver")}
                 </div>
                 <div className={(activeSettingsTab == 'AddUser') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('AddUser')}}>
-                    Add User
+                    {t("common:addUser")}
                 </div>
                 <div className={(activeSettingsTab == 'AddPage') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('AddPage')}}>
-                    Add Page
+                    {t("common:addPage")}
                 </div>
                 <div className={(activeSettingsTab == 'AllUsers') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('AllUsers')}}>
-                    All Users
+                    {t("common:allUsers")}
                 </div>
                 <div className={(activeSettingsTab == 'AllPriceRequests') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('AllPriceRequests')}}>
-                    All Price Requests
+                    {t("common:allPriceRequests")}
                 </div>
                 <div className={(activeSettingsTab == 'ContactRequests') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('ContactRequests')}}>
-                    Contact Requests
+                    {t("common:contactRequests")}
                 </div>
                 <div className={(activeSettingsTab == 'RequestSettings') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('RequestSettings')}}>
-                    Request Settings
+                    {t("common:requestSettings")}
                 </div>
-                <div className={(activeSettingsTab == 'EditHomePage') ? "settingsTab activeSettingsTab" : "settingsTab" }
+                {/*<div className={(activeSettingsTab == 'EditHomePage') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('EditHomePage')}}>
                     Edit Home Page
+                </div>*/}
+                <div className={(activeSettingsTab == 'Translations') ? "settingsTab activeSettingsTab" : "settingsTab" }
+                    onClick={() => {setActiveSettingsTab('Translations')}}>
+                    {t("common:translationsAdvanced")}
                 </div>
             </div>
         )
@@ -101,7 +108,8 @@ const DashboardSettings = ({content, userData, contactResultData, homes}) => {
                     'AllPriceRequests': AllPriceRequests,
                     'ContactRequests': ContactRequests,
                     'RequestSettings': RequestSettings,   
-                    'EditHomePage': EditHomePage
+                    'EditHomePage': EditHomePage,
+                    'Translations': Translations
                 });
                 setActiveSettingsTab('EditUser');
                 setMenuTabs(true);
@@ -134,7 +142,7 @@ return (
                         </div>
                         <div className="col-lg-8 col-md-8 col-xs-12 col-sm-12 float-start px-2 py-2">
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
-                                {(pageIsReady) ? <ChoosedSetting homes={homes} contactResultData={contactResultData} requests={content} userData={userData} /> : <LoadingSettings />}
+                                {(pageIsReady) ? <ChoosedSetting homes={homes} langsData={langsData.langs} contactResultData={contactResultData} requests={content} userData={userData} /> : <LoadingSettings />}
                             </div>
                         </div>
                     </div>
@@ -193,12 +201,25 @@ export async function getServerSideProps(context) {
       });
     
       let userData = await userRequest.json();
+
+      const langsRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/files/readLangs', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': accessToken
+        }
+      });
+    
+      let langsData = await langsRequest.json();
+
     return {
       props:{
         content: resultData,
         homes: homesResultData,
         contactResultData: contactResultData,
-        userData: userData
+        userData: userData,
+        langsData: langsData
       }
     }
   } 

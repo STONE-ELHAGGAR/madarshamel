@@ -5,8 +5,10 @@ import Header from "./Header";
 const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import useTranslation from "next-translate/useTranslation";
 
 const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName = '', forNewUsers = 1, itemId = ''}) => {
+    let {t} = useTranslation();
     const [adminCheck, setAdminCheck] = useState(false);
     checkIfLoggedIn(['transportation','custom-clearance','super-admin'],[],'','')
     .then((result) => {
@@ -97,17 +99,17 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
                   <div className="col-12 px-3 py-3 float-start" style={{background: '#fff'}}>
                       <ul className="nav nav-pills nav-fill col-12 float-start">
                           <li className="nav-item">
-                              <Link href="/dashboard"><a className="nav-link"><i className="fi fi-rr-user"></i> Dashboard</a></Link>
+                              <Link href="/dashboard"><a className="nav-link"><i className="fi fi-rr-user"></i> {t("common:dashboard")}</a></Link>
                           </li>
                           <li className="nav-item">
-                              <Link href="/dashboard/controlCCRequests"><a className="nav-link"><i className="fi fi-rr-stats"></i> Custom Clearance</a></Link>
+                              <Link href="/dashboard/controlCCRequests"><a className="nav-link"><i className="fi fi-rr-stats"></i> {t("common:customsClearance")}</a></Link>
                           </li>
                           <li className="nav-item">
-                              <Link href="/dashboard/controlTRRequests"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> Transportation</a></Link>
+                              <Link href="/dashboard/controlTRRequests"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> {t("common:cargoTransportation")}</a></Link>
                           </li>
                           {(adminCheck) ? (
                             <li className="nav-item">
-                              <Link href="/dashboard/bank"><a className="nav-link"><i className="fi fi-rr-dollar"></i> Bank</a></Link>
+                              <Link href="/dashboard/bank"><a className="nav-link"><i className="fi fi-rr-dollar"></i> {t("common:bank")}</a></Link>
                             </li>
                           ) : ''}
                           
@@ -115,7 +117,7 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
                               <Link href="/dashboard/transportation-form"><a className="nav-link"><i className="fi fi-rr-data-transfer"></i> Add Transportation</a></Link>
                           </li>*/}
                           <li className="nav-item">
-                              <Link href="/dashboard/settings"><a className="nav-link"><i className="fi fi-rr-edit"></i> Dashboard Settings</a></Link>
+                              <Link href="/dashboard/settings"><a className="nav-link"><i className="fi fi-rr-edit"></i> {t("common:settings")}</a></Link>
                           </li>
                       </ul>
                   </div>

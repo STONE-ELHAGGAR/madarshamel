@@ -1,0 +1,18 @@
+{
+    "companyPersonalDetails": "Company Personal Details",
+    "yourFullName": "Your full name",
+    "companyName": "Company Name",
+    "email": "Email",
+    "mobile": "Mobile",
+    "shipmentDetails": "Shipment Details",
+    "goodsDetails": "Goods Details",
+    "htsCode": "HTS Code",
+    "sourceCountryInformation": "Source Country Information",
+    "sourceCountry": "Source Country",
+    "senderAddress": "Sender Address",
+    "consigneeInformation": "Consignee Information",
+    "consigneeCity": "Consignee City",
+    "consigneeAddress": "Consignee Address",
+    "airShipping": "Air Freight",
+    "seaShipping": "Sea Freight"
+}

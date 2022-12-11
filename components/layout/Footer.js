@@ -2,8 +2,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, {useState, useEffect} from 'react';
+import useTranslation from "next-translate/useTranslation";
 
 const Footer = ({fb, twitter, insta, address, phone, email, logged}) => {
+    let {t} = useTranslation();
     const [fbData, setfbData] = useState('');
     const [twitterData, settwitterData] = useState('');
     const [instaData, setinstaData] = useState('');
@@ -42,9 +44,9 @@ const Footer = ({fb, twitter, insta, address, phone, email, logged}) => {
                             <div className="col-md-4 col-sm-6 text-center text-md-start">
                             </div>
                             <div className="col-md-8 col-sm-6 text-center text-md-end">
-                                <span className="color-gray-900 text-heading-6 mr-30 text-mb-sm-20">Ready to get started?</span>
+                                <span className="color-gray-900 text-heading-6 mr-30 text-mb-sm-20">{t("common:readyStart")}</span>
                                 <Link href="/page-signup">
-                                    <a className="btn btn-square">Create an Account</a>
+                                    <a className="btn btn-square">{t("common:signUp")}</a>
                                 </Link>
                             </div>
                         </div>
@@ -52,38 +54,38 @@ const Footer = ({fb, twitter, insta, address, phone, email, logged}) => {
                     ) : ''}
                     <div className="row">
                         <div className="col-lg-3 width-20 mb-30">
-                            <h4 className="text-heading-5">Contact</h4>
-                            <div className="mt-20 text-body-text color-gray-600 mb-20">{addressData}</div>
-                            <div className="mt-20 text-body-text color-gray-600">{phoneData}</div>
-                            <div className="text-body-text color-gray-600">{emailData}</div>
+                            <h4 className="text-heading-5">{t("common:contact")}</h4>
+                            <div className="mt-20 text-body-text color-gray-600 mb-20">{t("common:address")}</div>
+                            <div className="mt-20 text-body-text color-gray-600">{t("common:phone")}</div>
+                            <div className="text-body-text color-gray-600">{t("common:email")}</div>
                         </div>
                         <div className="col-lg-6 width-20 mb-30">
-                            <h4 className="text-heading-5">Support</h4>
+                            <h4 className="text-heading-5">{t("common:support")}</h4>
                             <ul className="menu-footer mt-20">
                                 <li>
                                     <Link href="/page-contact">
-                                        <a>Contact Us</a>
+                                        <a>{t("common:contact")}</a>
                                     </Link>
                                 </li>
-                                <p>Or login to start live chat with our team.</p>
+                                <p>{t("common:orlogintostartlivechatwithourteam")}</p>
                             </ul>
                         </div>
                         <div className="col-lg-6 width-16">
-                            <h4 className="text-heading-5">Useful links</h4>
+                            <h4 className="text-heading-5">{t("common:usefulLinks")}</h4>
                             <ul className="menu-footer mt-20">
                                 <li>
                                     <Link href="/page-signup">
-                                        <a>Register</a>
+                                        <a>{t("common:signUp")}</a>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/page-login">
-                                        <a>Login</a>
+                                        <a>{t("common:logIn")}</a>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/page-reset">
-                                        <a>Reset Password</a>
+                                        <a>{t("common:resetPassword")}</a>
                                     </Link>
                                 </li>
                             </ul>

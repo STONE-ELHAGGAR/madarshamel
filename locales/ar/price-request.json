@@ -1,0 +1,18 @@
+{
+    "companyPersonalDetails": "المعلومات الشخصية للشركة",
+    "yourFullName": "اسمك كامل",
+    "companyName": "اسم الشركة",
+    "email": "البريد الالكتروني",
+    "mobile": "الهاتف",
+    "shipmentDetails": "تفاصيل الشحنة",
+    "goodsDetails": "بيانات البضائع",
+    "htsCode": "HTS Code",
+    "sourceCountryInformation": "بيانات الدولة المصدرة",
+    "sourceCountry": "الدولة المصدرة",
+    "senderAddress": "عنوان المُصدر",
+    "consigneeInformation": "معلومات المرسل إليه",
+    "consigneeCity": "مدينة المرسل إليه",
+    "consigneeAddress": "عنوان المُرسل إليه",
+    "airShipping": "الشحن الجوي",
+    "seaShipping": "الشحن البحري"
+}

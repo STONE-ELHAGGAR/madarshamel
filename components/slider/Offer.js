@@ -3,25 +3,26 @@
 import React, {useState, useEffect} from 'react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import useTranslation from "next-translate/useTranslation";
 
 SwiperCore.use([Autoplay, Navigation]);
 const OfferSlider = () => {
-
+    let {t} = useTranslation();
     const data = [
         {
             img: "market.svg",
-            title: "Customs clearance",
-            text: "Customs clearance for your imports"
+            title: t("common:customsClearance"),
+            text: t("common:customsClearanceDesc")
         },
         {
             img: "consulting.svg",
-            title: "Consulting",
-            text: "Free consultation from our customer service available 24/7."
+            title: t("common:consulting"),
+            text: t("common:consultingDesc")
         },
         {
             img: "cognity.svg",
-            title: "Cargo transportation",
-            text: "Fastest and safest way to transport your products."
+            title: t("common:cargoTransportation"),
+            text: t("common:cargoTransportationDesc")
         }
     ];
 

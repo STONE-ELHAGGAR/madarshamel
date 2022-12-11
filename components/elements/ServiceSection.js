@@ -1,43 +1,35 @@
 import Link from "next/link";
 import Question from "./Question";
 import ServiceDetails from "./ServiceDetails";
+import useTranslation from "next-translate/useTranslation";
 
 const ServiceSection = () => {
+    let {t} = useTranslation();
     return (
         <section className="section-box">
-        <Question q_1st_line='We create Greatness' q_2nd_line='by our work'>
-            Interactive userface, The best service
-            and We are her for you
+        <Question q_1st_line={t("common:weCreateGreatness")} q_2nd_line={t("common:byOurWork")}>
+            {t("common:uiSec")}
         </Question>
         <div className="container mt-70">
             <div className="row">
                 <ServiceDetails
-                    titleTab="Free Consultants"
+                    titleTab={t("common:freeConsultants")}
                     bgColor="5"
                     pageLink="/#"
                     imgSrc="/assets/imgs/page/homepage1/business-strategy.svg"
-                >
-                    Get a free consultation from our customer service available 24/7.
-                </ServiceDetails>
+                >{t("common:freeConsultantsDesc")}</ServiceDetails>
                 <ServiceDetails
-                    titleTab="Customs clearance of your imports"
+                    titleTab={t("common:customsClearanceOfYourImports")}
                     bgColor="9"
                     pageLink="/#"
                     imgSrc="/assets/imgs/page/homepage1/local.svg"
-                >
-                    The cheapest
-                    solution to obtain customs clearance for
-                    your imports.
-                </ServiceDetails>
+                >{t("common:customsClearanceOfYourImportsDesc")}</ServiceDetails>
                 <ServiceDetails
-                    titleTab="Cargo transportation"
+                    titleTab={t("common:cargoTransportation")}
                     bgColor="2"
                     pageLink="/#"
                     imgSrc="/assets/imgs/page/homepage1/social.svg"
-                >
-                    Fastest and safest way to transport your
-                    products and maintain their quality.
-                </ServiceDetails>
+                >{t("common:cargoTransportationDesc")}</ServiceDetails>
             </div>
         </div>
     </section>
