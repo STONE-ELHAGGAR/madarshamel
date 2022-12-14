@@ -91,11 +91,36 @@
     }
     // End new Agon
 }
-#scrollUp {
+.scrollUp-ltr {
 	width: 42px;
     height: 42px;
     color: $color-white;
     right: 30px;
+    bottom: 30px;
+    border-radius: 30px;
+    text-align: center;
+    overflow: hidden;
+    z-index: 999 !important;
+    border: 0;
+    background-color: #fff;
+    transition-duration: 0.2s;
+    background-color: $color-green-900;
+    i {
+        display: block;
+        line-height: 46px !important;
+        font-size: 20px;
+        color: #fff;
+    }
+    &:hover {
+        transform: translateY(-3px);
+        transition-duration: 0.2s;
+    }
+}
+.scrollUp-rtl {
+	width: 42px;
+    height: 42px;
+    color: $color-white;
+    left: 30px;
     bottom: 30px;
     border-radius: 30px;
     text-align: center;

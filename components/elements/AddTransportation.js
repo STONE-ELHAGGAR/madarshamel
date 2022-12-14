@@ -5,8 +5,10 @@ const handleInsertTransportation = require('./../../handlers/handleInsertTranspo
 import SettingSelector from "./SettingSelector";
 import CompanySelector from "./CompanySelector";
 import DriverSelector from "./DriverSelector";
+import useTranslation from "next-translate/useTranslation";
 
 const Transportation = () => {
+  let {t} = useTranslation();
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
       sessionStorage.setItem('files','');
@@ -18,42 +20,43 @@ const Transportation = () => {
           <div className="container">
             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 float-start">
               <form action="#">
-                <h3 className="text-center">Transportation Request</h3>
+                <h3 className="text-center">{t("common:trrequest")}</h3>
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
-                  <h4 className="text-center">Request Details</h4>
+                  <h4 className="text-center">{t("common:requestDetails")}</h4>
                   <div className="custom-alert-data"> </div>
-                  <label className="mt-20">Company Name</label>
-                  <input type="text" className="form-control display-1 companyName" name="companyName" id="companyName" placeholder="Company Name" />
-                  <label className="mt-20">Company Mobile</label>
-                  <input type="text" className="form-control display-1 companyMobile" name="companyMobile" id="companyMobile" placeholder="Company Mobile" />
-                  <label className="mt-20">Company Address</label>
-                  <input type="text" className="form-control display-1 companyAddress" name="companyAddress" id="companyAddress" placeholder="Company Address" />
-                  <label className="mt-20">Transaction Place</label>
-                  <input type="text" className="form-control display-1 transactionPlace" name="transactionPlace" id="transactionPlace" placeholder="Transaction Place" />
-                  <label className="mt-20">From</label>
-                  <input type="text" className="form-control display-1 fromDate" name="fromDate" id="fromDate" placeholder="From" />
-                  <label className="mt-20">To</label>
-                  <input type="text" className="form-control display-1 toDate" name="toDate" id="toDate" placeholder="To" />
-                  <SettingSelector field="sourceCountry" />
+                  <label className="mt-20">{t("common:companyName")}</label>
+                  <input type="text" className="form-control display-1 companyName" name="companyName" id="companyName" placeholder={t("common:companyName")} />
+                  <label className="mt-20">{t("common:companyMobile")}</label>
+                  <input type="text" className="form-control display-1 companyMobile" name="companyMobile" id="companyMobile" placeholder={t("common:companyMobile")} />
+                  <label className="mt-20">{t("common:companyAddress")}</label>
+                  <input type="text" className="form-control display-1 companyAddress" name="companyAddress" id="companyAddress" placeholder={t("common:companyAddress")} />
+                  <label className="mt-20">{t("common:transactionPlace")}</label>
+                  <input type="text" className="form-control display-1 transactionPlace" name="transactionPlace" id="transactionPlace" placeholder={t("common:transactionPlace")} />
+                  <label className="mt-20">{t("common:from")}</label>
+                  <input type="text" className="form-control display-1 fromDate" name="fromDate" id="fromDate" placeholder={t("common:from")} />
+                  <label className="mt-20">{t("common:to")}</label>
+                  <input type="text" className="form-control display-1 toDate" name="toDate" id="toDate" placeholder={t("common:to")} />
+                  <label className="mt-20">{t("common:sourceCountry")}</label>
+                  <input type="text" className="form-control display-1 sourceCountry" name="sourceCountry" id="sourceCountry" placeholder={t("common:sourceCountry")} />
                   <DriverSelector />
-                  <label className="mt-20">Expected Ship Date</label>
+                  <label className="mt-20">{t("common:expectedShipDate")}</label>
                   <input type="date" className="form-control display-1 expectedShipDate" name="expectedShipDate" />
                 </div>
 
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start px-5 py-5 mt-50">
                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-2 py-2 bg-white float-start">
-                    <h4 className="text-center">Other Details</h4>
-                    <label className="mt-20">Car Cost</label>
-                    <input className="form-control mt-20 display-1 carCost" name="carCost" placeholder="Car Cost" />
-                    <label className="mt-20">Transfer Data</label>
-                    <input className="form-control display-1 transferData" type="date" name="transferData" placeholder="Transfer Data" />
+                    <h4 className="text-center">{t("common:otherDetails")}</h4>
+                    <label className="mt-20">{t("common:carCost")}</label>
+                    <input className="form-control mt-20 display-1 carCost" name="carCost" placeholder={t("common:carCost")} />
+                    <label className="mt-20">{t("common:transferData")}</label>
+                    <input className="form-control display-1 transferData" type="date" name="transferData" placeholder={t("common:transferData")} />
                   </div>
                 </div>
                 
                 {/*<Uploader />*/}
 
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-4 py-4 float-start">
-                  <button className="btn btn-square" onClick={handleInsertTransportation}>Submit Request</button>
+                  <button className="btn btn-square" onClick={handleInsertTransportation}>{t("common:submitRequest")}</button>
                 </div>
 
               </form>

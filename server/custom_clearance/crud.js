@@ -18,7 +18,6 @@ router.post('/create', authJWT.verify(['original-user','custom-clearance','super
     const {companyName, companyAddress, companyMobile, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, postalCode, fax, commercialRegistrationNo, commercialRegistrationDate, commercialRegistrationCity, chamberOfCommerceNumber, attachedFiles} = req.body;
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
     const user = await Users.findById(req.userId);
-    const country = await Settings.findById(sourceCountry);
     const u_id = user.id;
     const custom_clearance = Custom_clearance({companyName, companyAddress, companyMobile, transactionPlace, shippingPort, recivingPort, sourceCountry, expectedShipDate, postalCode, fax, commercialRegistrationNo, commercialRegistrationDate, commercialRegistrationCity, chamberOfCommerceNumber, attachedFiles, created_at, u_id});
     
@@ -43,7 +42,7 @@ router.post('/create', authJWT.verify(['original-user','custom-clearance','super
             <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+custom_clearanceData.companyMobile+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+custom_clearanceData.companyAddress+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+custom_clearanceData.transactionPlace+'</td></tr>\
-            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+custom_clearanceData.sourceCountry+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+custom_clearanceData.recivingPort+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+custom_clearanceData.shippingPort+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+custom_clearanceData.expectedShipDate+'</td></tr>\
@@ -72,7 +71,7 @@ router.post('/create', authJWT.verify(['original-user','custom-clearance','super
             <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+custom_clearanceData.companyMobile+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+custom_clearanceData.companyAddress+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+custom_clearanceData.transactionPlace+'</td></tr>\
-            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+custom_clearanceData.sourceCountry+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+custom_clearanceData.recivingPort+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+custom_clearanceData.shippingPort+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+custom_clearanceData.expectedShipDate+'</td></tr>\
@@ -101,7 +100,7 @@ router.post('/create', authJWT.verify(['original-user','custom-clearance','super
             <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+custom_clearanceData.companyMobile+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+custom_clearanceData.companyAddress+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+custom_clearanceData.transactionPlace+'</td></tr>\
-            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+custom_clearanceData.sourceCountry+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+custom_clearanceData.recivingPort+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+custom_clearanceData.shippingPort+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+custom_clearanceData.expectedShipDate+'</td></tr>\
@@ -198,7 +197,7 @@ router.post('/readAllRequests', authJWT.verify(['original-user','custom-clearanc
             for(custom_clearance in custom_clearances){
                 const countGTrecords = await Custom_clearance.find({_id: {$lt: custom_clearances[custom_clearance]._id}}).count()+501;
                 //let transactionPlace = await Settings.find( { _id: custom_clearances[custom_clearance].transactionPlace } );
-                let sourceCountry = await Settings.find( { _id: custom_clearances[custom_clearance].sourceCountry } );
+                //let sourceCountry = await Settings.find( { _id: custom_clearances[custom_clearance].sourceCountry } );
                 
                 newcustom_clearance.push({
                     _id: custom_clearances[custom_clearance]._id,
@@ -215,7 +214,7 @@ router.post('/readAllRequests', authJWT.verify(['original-user','custom-clearanc
                     transactionPlace: custom_clearances[custom_clearance].transactionPlace,
                     shippingPort: custom_clearances[custom_clearance].shippingPort,
                     recivingPort: custom_clearances[custom_clearance].recivingPort,
-                    sourceCountry: sourceCountry[0].content,
+                    sourceCountry: custom_clearances[custom_clearance].sourceCountry,
                     expectedShipDate: custom_clearances[custom_clearance].expectedShipDate,
                     created_at: custom_clearances[custom_clearance].created_at
                 });

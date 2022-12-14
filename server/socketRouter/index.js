@@ -79,8 +79,8 @@ io.on('connection', (socket) => {
     });
 
     socket.on('cc_send_accessToken_i_id', async (data) => {
+        let replaceData = '';
         try {
-            let replaceData = '';
             const movements = await Movements.find({requestId: data.activeIndex});
             movementsData = movements.reverse();
             if(movementsData.length > 0){
@@ -101,16 +101,18 @@ io.on('connection', (socket) => {
                         let contentFiles = JSON.parse(movements[movementId].content);
                         let ccFiles = '<ul class="nav nav-pills nav-fill col-12 float-start"><li class="nav-item"><a class="nav-link h5" href="/dashboard/'+data.tableName+'-pdf-request/'+data.activeIndex+'/'+movements[movementId]._id+'"><i class="fi fi-rr-file"></i> Download PDF</a></li></ul>';
                         fileNames = '';
-                            Object.values(JSON.parse(contentFiles.files)).map((fileName) => {
-                            fileNames += '<a href="http://localhost:3000/api/download?fileName='+fileName+'" target="_blank">\
-                                                <div class="text-center">\
-                                                    <i class="fi fi-rr-file h4"></i>\
-                                                </div>\
-                                                <div class="compare-tip h6">\
-                                                    <span class="success" style="word-break: break-all;">'+fileName+'</span>\
-                                                </div>\
-                                            </a>';
-                            })
+                            if(contentFiles?.files){
+                                Object.values(JSON.parse(contentFiles.files)).map((fileName) => {
+                                fileNames += '<a href="http://localhost:3000/api/download?fileName='+fileName+'" target="_blank">\
+                                                    <div class="text-center">\
+                                                        <i class="fi fi-rr-file h4"></i>\
+                                                    </div>\
+                                                    <div class="compare-tip h6">\
+                                                        <span class="success" style="word-break: break-all;">'+fileName+'</span>\
+                                                    </div>\
+                                                </a>';
+                                })
+                            }
                             ccFiles += '<div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 float-start px-3 py-3">\
                                                 <div class="product-item-2 hover-up">\
                                                     <table class="table table-striped">\
@@ -167,11 +169,14 @@ io.on('connection', (socket) => {
                         <h5 style="border-bottom: 1px solid #ddd;padding-bottom: 10px;margin-bottom: 10px;">'+movements[movementId].type+' from '+user.name+'</h5><h6>'
                             +movements[movementId].content+
                     '</h6></div>';
+
                 }
             }
+
             resData = {data: null, replaceData: replaceData,activeIndex: data.activeIndex};
         } catch(e) {
             resData = {data: e,activeIndex: data.activeIndex};
+            console.log(e)
         }
         socket.emit('cc_receive_table_data', resData);
     })

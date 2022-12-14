@@ -11,39 +11,45 @@ const sendEmail = require('./../../util/sendEmail');
 
 router.post('/login',async (req,res,next) => {
     const { email, password } = req.body;
-    const user = await Users.findOne({ email });
-    comparePassword(password, user.password, (err, isPasswordMatch) => {
-            if(isPasswordMatch){
-                //Matched
-                console.log('matched')
-                //Check if User activated
-                if(user.timeStamp){
-                    //Not Activated
+    try{
+        const user = await Users.findOne({ email });
+        comparePassword(password, user.password, (err, isPasswordMatch) => {
+                if(isPasswordMatch){
+                    //Matched
+                    console.log('matched')
+                    //Check if User activated
+                    if(user.timeStamp){
+                        //Not Activated
+                        return res.status(401).json({
+                            message: 'Invalid Credentials'
+                        });
+                    }else{
+                        //Activated
+                        //{sub: user._id} is payload to create accessToken
+                        const accessToken = authJWT.sign({sub: user._id});
+                        const successLogin = {
+                            success: true,
+                            data: {
+                                id: user._id,
+                                name: user.name,
+                                accessToken: accessToken
+                            }
+                        };
+                        return res.status(200).json(successLogin);
+                    }
+                }else{
+                    //Not Matched
+                    console.log('Not Matched')
                     return res.status(401).json({
                         message: 'Invalid Credentials'
                     });
-                }else{
-                    //Activated
-                    //{sub: user._id} is payload to create accessToken
-                    const accessToken = authJWT.sign({sub: user._id});
-                    const successLogin = {
-                        success: true,
-                        data: {
-                            id: user._id,
-                            name: user.name,
-                            accessToken: accessToken
-                        }
-                    };
-                    return res.status(200).json(successLogin);
                 }
-            }else{
-                //Not Matched
-                console.log('Not Matched')
-                return res.status(401).json({
-                    message: 'Invalid Credentials'
-                });
-            }
-    })
+        })
+    }catch(e){
+        return res.status(401).json({
+            message: 'Invalid Credentials'
+        });
+    }
 });
 
 router.post('/getNumId', authJWT.verify([]), async (req,res,next) => {

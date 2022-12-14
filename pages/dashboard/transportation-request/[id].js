@@ -91,6 +91,7 @@ const TransportationRequestData = ({userData}) => {
     const [companyAddressData ,setCompanyAddressData] = useState('');
     const [fromDateData ,setFromDateData] = useState('');
     const [toDateData ,setToDateData] = useState('');
+    const [sourceCountryData ,setSourceCountryData] = useState('');
     const [bankNeed ,setBankNeed] = useState(false);
 
 
@@ -122,6 +123,7 @@ const TransportationRequestData = ({userData}) => {
                     setCompanyAddressData(result.transportation?.companyAddress);
                     setFromDateData(result.transportation?.fromDate);
                     setToDateData(result.transportation?.toDate);
+                    setSourceCountryData(result.transportation?.sourceCountry);
                 }else{
                     router.push({ pathname: '/404' });
                 }
@@ -230,7 +232,10 @@ const TransportationRequestData = ({userData}) => {
                                             <th scope="row">To Date Data</th>
                                             <td>{toDateData}</td>
                                         </tr>
-                                        <TrTableItem content={activeIndexData} id="sourceCountry" row="Source Country" />
+                                        <tr>
+                                            <th scope="row">Source Country</th>
+                                            <td>{sourceCountryData}</td>
+                                        </tr>
                                         <TrTableItem content={activeIndexData} id="expectedShipDate" row="Expected Ship Date" />
                                         <TrTableItem content={activeIndexData} id="carCost" row="Car Cost" />
                                         <TrTableItem content={activeIndexData} id="drivers" row="Driver" />

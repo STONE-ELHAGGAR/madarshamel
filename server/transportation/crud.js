@@ -16,7 +16,6 @@ router.post('/create', authJWT.verify(['original-user','transportation','super-a
     const created_at = new Date().toLocaleString("en-US", {timeZone: "Asia/Riyadh"});
     const user = await Users.findById(req.userId);
     const u_id = user.id;
-    const country = await Settings.findById(sourceCountry);
     const transportation = Transportation({companyName, companyMobile, companyAddress, transactionPlace, fromDate, toDate, sourceCountry, drivers, expectedShipDate, carCost, transferData, created_at, u_id, attachedFiles});
 
     try {
@@ -40,7 +39,7 @@ router.post('/create', authJWT.verify(['original-user','transportation','super-a
             <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+transportationData.companyMobile+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+transportationData.companyAddress+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+transportationData.transactionPlace+'</td></tr>\
-            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+transportationData.sourceCountry+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+transportationData.fromDate+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+transportationData.toDate+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+transportationData.expectedShipDate+'</td></tr>\
@@ -65,7 +64,7 @@ router.post('/create', authJWT.verify(['original-user','transportation','super-a
             <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+transportationData.companyMobile+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+transportationData.companyAddress+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+transportationData.transactionPlace+'</td></tr>\
-            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+transportationData.sourceCountry+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+transportationData.fromDate+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+transportationData.toDate+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+transportationData.expectedShipDate+'</td></tr>\
@@ -90,7 +89,7 @@ router.post('/create', authJWT.verify(['original-user','transportation','super-a
             <tr><th style="border:1px solid #000;" scope="row">Company Mobile</th><td>'+transportationData.companyMobile+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Company Address</th><td>'+transportationData.companyAddress+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Transaction Place</th><td id="transactionPlace">'+transportationData.transactionPlace+'</td></tr>\
-            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+country.content+'</td></tr>\
+            <tr><th style="border:1px solid #000;" scope="row">Source Country</th><td id="sourceCountry">'+transportationData.sourceCountry+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Reciving Port Data</th><td>'+transportationData.fromDate+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Shipping Port Data</th><td>'+transportationData.toDate+'</td></tr>\
             <tr><th style="border:1px solid #000;" scope="row">Expected Ship Date</th><td id="expectedShipDate">'+transportationData.expectedShipDate+'</td></tr>\

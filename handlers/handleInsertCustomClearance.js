@@ -55,7 +55,7 @@ const handleInsertCustomClearance = async (e) => {
       document.querySelector('.transactionPlace').value = '';
       document.querySelector('.shippingPort').value = '';
       document.querySelector('.recivingPort').value = '';
-      document.querySelector('.sourceCountry').value = 0;
+      document.querySelector('.sourceCountry').value = '';
       document.querySelector('.expectedShipDate').value = '';
 
       document.querySelector('.postalCode').value = '';

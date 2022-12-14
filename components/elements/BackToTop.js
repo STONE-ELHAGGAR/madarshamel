@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
+import useTranslation from "next-translate/useTranslation";
 
 function BackToTop() {
     const [hasScrolled, setHasScrolled] = useState("false");
+    let {t} = useTranslation();
     useEffect(() => {
         window.addEventListener("scroll", onScroll);
         return () => {
@@ -25,7 +27,7 @@ function BackToTop() {
     return (
         <>
             {hasScrolled && (
-                <a id="scrollUp" href="#top" style={{ position: 'fixed', zIndex: 2147483647 }}>
+                <a id="scrollUp" className={'scrollUp-'+t("common:dir")} href="#top" style={{ position: 'fixed', zIndex: 2147483647 }}>
                     <i className="fi-rr-arrow-small-up" />
                 </a>
 

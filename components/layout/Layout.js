@@ -6,6 +6,7 @@ const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useTranslation from "next-translate/useTranslation";
+import Head from "next/head"
 
 const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName = '', forNewUsers = 1, itemId = ''}) => {
     let {t} = useTranslation();
@@ -129,6 +130,9 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
     }
     return (
         <>
+            <Head>
+                <html lang={t("common:langHtml")} dir={t("common:dir")} />
+            </Head>
             <Header headerStyle={headerStyle} />
             {((logged) ? <LoggedInComponent /> : <NotLoggedInComponent /> )}
             <Footer fb="#fb" logged={logged} twitter="#twitter" insta="#insta" address="Jeddah, KSA" phone="+(966) 556-565-564" email="cs@madarshamel.sa" />

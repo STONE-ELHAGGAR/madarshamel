@@ -88,6 +88,7 @@ const CustomClearanceRequestData = ({userData}) => {
     const [companyAddressData ,setCompanyAddressData] = useState('');
     const [recivingPortData ,setRecivingPortData] = useState('');
     const [shippingPortData ,setShippingPortData] = useState('');
+    const [sourceCountryData ,setSourceCountryData] = useState('');
 
     const [bankNeed ,setBankNeed] = useState(false);
 
@@ -122,6 +123,7 @@ const CustomClearanceRequestData = ({userData}) => {
                     setCompanyAddressData(result.custom_clearance?.companyAddress);
                     setRecivingPortData(result.custom_clearance?.recivingPort);
                     setShippingPortData(result.custom_clearance?.shippingPort);
+                    setSourceCountryData(result.custom_clearance?.sourceCountry);
                 }else{
                     router.push({ pathname: '/404' });
                 }
@@ -225,7 +227,6 @@ const CustomClearanceRequestData = ({userData}) => {
                                             <td>{companyAddressData}</td>
                                         </tr>
                                         <TableItem content={activeIndexData} id="transactionPlace" row="Transaction Place" />
-                                        <TableItem content={activeIndexData} id="sourceCountry" row="Source Country" />
                                         <tr>
                                             <th scope="row">Reciving Port Data</th>
                                             <td>{recivingPortData}</td>
@@ -233,6 +234,10 @@ const CustomClearanceRequestData = ({userData}) => {
                                         <tr>
                                             <th scope="row">Shipping Port Data</th>
                                             <td>{shippingPortData}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Source Country</th>
+                                            <td>{sourceCountryData}</td>
                                         </tr>
                                         <TableItem content={activeIndexData} id="expectedShipDate" row="Expected Ship Date" />
                                         <TableItem content={activeIndexData} id="chamberOfCommerceNumber" row="Chamber Of Commerce Number" />

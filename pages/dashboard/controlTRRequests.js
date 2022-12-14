@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
 import Layout from "./../../components/layout/Layout";
+import useTranslation from "next-translate/useTranslation";
 
 import AddTransportation from "./../../components/elements/AddTransportation";
 import TransportationRequests from "./../../components/elements/TransportationRequests";
@@ -11,6 +12,7 @@ import TransportationRequests from "./../../components/elements/TransportationRe
 const ControlTRRequests = () => {
 
     const [activeSettingsTab , setActiveSettingsTab] = useState('AddTransportation');
+    let {t} = useTranslation();
     
     const all = {
         'AddTransportation': AddTransportation,    
@@ -24,16 +26,16 @@ return (
             <div className="container-fluid backgrounded-con float-start px-3 py-3">
                 <div className="container">
                     <div className="col-12 px-3 py-3">
-                        <div className="col-lg-4 col-md-4 col-xs-12 col-sm-12 float-start px-2 py-2">
-                            <h5>Transportation Settings</h5>
+                        <div className={(t("common:dir") === 'rtl') ? 'col-lg-4 col-md-4 col-xs-12 col-sm-12 float-end px-2 py-2' : 'col-lg-4 col-md-4 col-xs-12 col-sm-12 float-start px-2 py-2'}>
+                            <h5>{t("common:trsettings")}</h5>
                             <div className="col-12 mt-3 float-start" style={{background: '#fff'}}>
                                 <div className={(activeSettingsTab == 'AddTransportation') ? "settingsTab activeSettingsTab" : "settingsTab" }
                                     onClick={() => {setActiveSettingsTab('AddTransportation')}}>
-                                    Add Transportation
+                                    {t("common:addTransportation")}
                                 </div>
                                 <div className={(activeSettingsTab == 'TransportationRequests') ? "settingsTab activeSettingsTab" : "settingsTab" }
                                     onClick={() => {setActiveSettingsTab('TransportationRequests')}}>
-                                    Transportation Requests
+                                    {t("common:trRequests")}
                                 </div>
                             </div>
                         </div>

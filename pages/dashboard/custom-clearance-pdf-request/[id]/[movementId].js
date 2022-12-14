@@ -38,10 +38,19 @@ const CustomClearanceRequestData = () => {
             })
         }
     }, [activeIndex]);
+    let containerData;
     useEffect(() => {
         if(activeIndex){
             handleGetNumId('movements',activeMovementId).then((result) => {
                 setGuiMovementId(result.numId);
+            })
+            handleTableReader(activeMovementId, 'id','/api/movements/readById').then((result) => {
+                containerData = JSON.parse(result.movements[0].content);
+                document.getElementById('containerDetails').innerHTML = containerData.details;
+                document.getElementById('containerNumber').innerHTML = containerData.containerNumber+' / Container Size:'+containerData.containerSize;
+                document.getElementById('containerTemp').innerHTML = containerData.containerTemp;
+                document.getElementById('containerQuantity').innerHTML = containerData.quantity+' / '+containerData.type;
+                document.getElementById('containerWeight').innerHTML = containerData.weight+' / '+containerData.weightType;
             })
         }
     }, [activeMovementId]);

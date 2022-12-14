@@ -8,6 +8,14 @@ import useTranslation from "next-translate/useTranslation";
 function Login() {
     const router = useRouter();
     let {t} = useTranslation();
+    const handleShow = () => {
+        let passToggle = document.getElementById('passToggle');
+        if(passToggle.type == 'text'){
+            passToggle.type = 'password';
+        }else{
+            passToggle.type = 'text';
+        }
+    }
     const handleLogin = async () => {
         const email = document.querySelector(".email").value;
         const password = document.querySelector(".password").value;
@@ -59,7 +67,7 @@ function Login() {
                                                     <input className="form-control email" name="email" type="email" placeholder="Your email *" />
                                                 </div>
                                                 <div className="form-group">
-                                                    <div className="form-field"><span className="text-body-small color-green-900 tag-top">Password</span><input name="password" type="password" className="form-control password input-with-icon" placeholder="*********" /><span className="icon-eye-right" /></div>
+                                                    <div className="form-field"><span className="text-body-small color-green-900 tag-top">{t("common:password")}</span><input type="password" id="passToggle" className="form-control password input-green-bd input-with-icon" placeholder="*******" /><span onClick={handleShow} className="icon-eye-right" /></div>
                                                 </div>
                                                 <div className="form-group">
                                                     <Link href="/page-reset"><a className="text-body-text">{t("page-login:p3")}</a></Link>

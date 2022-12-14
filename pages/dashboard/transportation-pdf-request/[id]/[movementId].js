@@ -20,17 +20,34 @@ const TransportationRequestData = () => {
     const [guiMovementId ,setGuiMovementId] = useState(0);
     const [activeMovementId ,setActiveMovementId] = useState(0);
     const [activeTab ,setActiveTab] = useState(1);
+    const [driversInput ,setDriversInput] = useState('');
 
 
     useEffect(() => {
         if (id) {
             handleTransportationPDFActiveIndex(id,movementId).then((result) => {
-                (result) ? true : false;//router.push({ pathname: '/404' }) ;
+                (result.success) ? true : router.push({ pathname: '/404' }) ;
+                setDriversInput(result.driversInput);
             })
             setActiveMovementId(movementId);
             setActiveIndex(id);
         }
     }, [id]);
+    useEffect(() => {
+        if(driversInput){
+            const driverName = document.getElementById('driverName');
+            const driverMobile = document.getElementById('driverMobile');
+            const driverTruck = document.getElementById('driverTruck');
+            const driverNid = document.getElementById('driverNid');
+            //Driver Data
+            handleTableReader(driversInput, 'id','/api/driver/readById').then((result) => {
+                driverName.innerHTML = result.drivers[0].name
+                driverMobile.innerHTML = result.drivers[0].mobile
+                driverTruck.innerHTML = result.drivers[0].truck
+                driverNid.innerHTML = result.drivers[0].nid
+            })
+        }
+    },[driversInput]);
     useEffect(() => {
         if(activeIndex){
             handleGetNumId('transportation',activeIndex).then((result) => {
@@ -38,10 +55,19 @@ const TransportationRequestData = () => {
             })
         }
     }, [activeIndex]);
+    let containerData;
     useEffect(() => {
         if(activeIndex){
             handleGetNumId('movements',activeMovementId).then((result) => {
                 setGuiMovementId(result.numId);
+            })
+            handleTableReader(activeMovementId, 'id','/api/movements/readById').then((result) => {
+                containerData = JSON.parse(result.movements[0].content);
+                document.getElementById('containerDetails').innerHTML = containerData.details;
+                document.getElementById('containerNumber').innerHTML = containerData.containerNumber+' / Container Size:'+containerData.containerSize;
+                document.getElementById('containerTemp').innerHTML = containerData.containerTemp;
+                document.getElementById('containerQuantity').innerHTML = containerData.quantity+' / '+containerData.type;
+                document.getElementById('containerWeight').innerHTML = containerData.weight+' / '+containerData.weightType;
             })
         }
     }, [activeMovementId]);
@@ -54,6 +80,7 @@ const TransportationRequestData = () => {
                 <div className="container-fluid px-0 py-0 float-start backgrounded-con">
                 <div className="a4">
                     <table className="table table-borderless">
+                    <input type="hidden" value="" id="driversInput" />
                         <tbody>
                             <tr>
                                 <td style={{float: 'left'}}>

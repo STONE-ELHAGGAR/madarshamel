@@ -23,6 +23,22 @@ function Signup() {
                 }
             })
     });
+    const handleShow = () => {
+        let passToggle = document.getElementById('passToggle');
+        if(passToggle.type == 'text'){
+            passToggle.type = 'password';
+        }else{
+            passToggle.type = 'text';
+        }
+    }
+    const handleShowCheck = () => {
+        let passToggleCheck = document.getElementById('passToggleCheck');
+        if(passToggleCheck.type == 'text'){
+            passToggleCheck.type = 'password';
+        }else{
+            passToggleCheck.type = 'text';
+        }
+    }
     const LoggedInComponent = () => {
         return false;
     }
@@ -46,7 +62,10 @@ function Signup() {
                                     <div className="form-group"><input className="form-control mobile" type="text" placeholder={t("page-signup:p4")} /></div>
                                     <div className="form-group"><input className="form-control email" type="email" placeholder={t("page-signup:p5")} /></div>
                                     <div className="form-group">
-                                        <div className="form-field"><span className="text-body-small color-green-900 tag-top">{t("page-signup:p6")}</span><input type="password" className="form-control password input-green-bd input-with-icon" placeholder="*******" /><span className="icon-eye-right" /></div>
+                                        <div className="form-field"><span className="text-body-small color-green-900 tag-top">{t("page-signup:p6")}</span><input type="password" id="passToggle" className="form-control password input-green-bd input-with-icon" placeholder="*******" /><span onClick={handleShow} className="icon-eye-right" /></div>
+                                    </div>
+                                    <div className="form-group">
+                                        <div className="form-field"><span className="text-body-small color-green-900 tag-top">{t("page-signup:p6")}</span><input type="password" id="passToggleCheck" className="form-control passwordCheck input-green-bd input-with-icon" placeholder="*******" /><span onClick={handleShowCheck} className="icon-eye-right" /></div>
                                     </div>
                                     {/*<div className="form-group">
                                         <div className="form-field"><span className="text-body-small color-green-900 tag-top">Re-type Password</span><input className="form-control input-green-bd input-with-icon" placeholder /><span className="icon-eye-right" /></div>
@@ -77,21 +96,26 @@ function Signup() {
     const handleRegister = async () => {
         const email = document.querySelector(".email").value;
         const password = document.querySelector(".password").value;
+        const passwordCheck = document.querySelector(".passwordCheck").value;
         const name = document.querySelector(".name").value;
         const mobile = document.querySelector(".mobile").value;
-        const registerRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/register', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: email, password: password, name: name, mobile: mobile})
-        });
-        const content = await registerRequest.json();
-        if(content.success) {
-            router.push({ pathname: '/page-login' })
+        if(password == passwordCheck){
+            const registerRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/register', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email: email, password: password, name: name, mobile: mobile})
+            });
+            const content = await registerRequest.json();
+            if(content.success) {
+                router.push({ pathname: '/page-login' })
+            }else{
+                document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please try again OR use another email</div>';
+            }
         }else{
-            document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please try again OR use another email</div>';
+            document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Passwords are not equaled.</div>';
         }
     }
 

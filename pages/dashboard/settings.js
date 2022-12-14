@@ -38,17 +38,17 @@ const DashboardSettings = ({content, userData, contactResultData, homes, langsDa
     };
     const MenuTabsOriginal = () => {
         return (
-            <div className="col-12 mt-3 float-start" style={{background: '#fff'}}>
+            <div className={(t("common:dir") === 'rtl') ? 'col-12 mt-3 float-end' : 'col-12 mt-3 float-start'} style={{background: '#fff'}}>
                 <div className={(activeSettingsTab == 'EditUser') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('EditUser')}}>
-                    Edit My Info
+                    {t("common:editMyInfo")}
                 </div>
             </div>
         )
     }
     const MenuTabs = () => {
         return (
-            <div className="col-12 mt-3 float-start" style={{background: '#fff'}}>
+            <div className={(t("common:dir") === 'rtl') ? 'col-12 mt-3 float-end' : 'col-12 mt-3 float-start'} style={{background: '#fff'}}>
                 <div className={(activeSettingsTab == 'EditUser') ? "settingsTab activeSettingsTab" : "settingsTab" }
                     onClick={() => {setActiveSettingsTab('EditUser')}}>
                     {t("common:editMyInfo")}
@@ -136,11 +136,11 @@ return (
             <div className="container-fluid backgrounded-con float-start px-3 py-3">
                 <div className="container">
                     <div className="col-12 px-3 py-3">
-                        <div className="col-lg-4 col-md-4 col-xs-12 col-sm-12 float-start px-2 py-2">
-                            <h5>Dashboard Settings</h5>
+                        <div className={(t("common:dir") === 'rtl') ? 'col-lg-4 col-md-4 col-xs-12 col-sm-12 float-end px-2 py-2' : 'col-lg-4 col-md-4 col-xs-12 col-sm-12 float-start px-2 py-2'}>
+                            <h5>{t("common:settings")}</h5>
                             {(menuTabs) ? <MenuTabs /> : <MenuTabsOriginal />}
                         </div>
-                        <div className="col-lg-8 col-md-8 col-xs-12 col-sm-12 float-start px-2 py-2">
+                        <div className={(t("common:dir") === 'rtl') ? 'col-lg-8 col-md-8 col-xs-12 col-sm-12 float-end px-2 py-2' : 'col-lg-8 col-md-8 col-xs-12 col-sm-12 float-start px-2 py-2'}>
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
                                 {(pageIsReady) ? <ChoosedSetting homes={homes} langsData={langsData.langs} contactResultData={contactResultData} requests={content} userData={userData} /> : <LoadingSettings />}
                             </div>

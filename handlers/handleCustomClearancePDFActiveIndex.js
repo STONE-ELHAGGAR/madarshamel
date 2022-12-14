@@ -23,7 +23,6 @@ const handleCustomClearancePDFActiveIndex = async (id,movementId) => {
         const requestConData = document.getElementById(fieldKey);
         const clientNumber = document.getElementById('clientNumber');
 
-        let containerData;
         /*const driverName = document.getElementById('driverName');
         const driverMobile = document.getElementById('driverMobile');
         const driverTruck = document.getElementById('driverTruck');
@@ -37,14 +36,7 @@ const handleCustomClearancePDFActiveIndex = async (id,movementId) => {
         })*/
 
 
-        handleTableReader(movementId, 'id','/api/movements/readById').then((result) => {
-          containerData = JSON.parse(result.movements[0].content);
-          document.getElementById('containerDetails').innerHTML = containerData.details;
-          document.getElementById('containerNumber').innerHTML = containerData.containerNumber+' / Container Size:'+containerData.containerSize;
-          document.getElementById('containerTemp').innerHTML = containerData.containerTemp;
-          document.getElementById('containerQuantity').innerHTML = containerData.quantity+' / '+containerData.type;
-          document.getElementById('containerWeight').innerHTML = containerData.weight+' / '+containerData.weightType;
-        })
+        
 
         if(requestConData){
           if(fieldKey == 'u_id'){
@@ -59,11 +51,11 @@ const handleCustomClearancePDFActiveIndex = async (id,movementId) => {
                   (recordDate.getMonth()+1)+'/'+
                   recordDate.getFullYear();
 
-            } else if (fieldKey == 'expectedShipDate' || fieldKey == 'companyName' || fieldKey == 'companyMobile' || fieldKey == 'companyAddress' || fieldKey == 'recivingPort' || fieldKey == 'shippingPort' || fieldKey == '_id'){
+            } else if (fieldKey == 'expectedShipDate' || fieldKey == 'transactionPlace' || fieldKey == 'companyName' || fieldKey == 'companyMobile' || fieldKey == 'companyAddress' || fieldKey == 'recivingPort' || fieldKey == 'shippingPort' || fieldKey == '_id'){
                 requestConData.innerHTML = content.custom_clearance[fieldKey];
             }else{
               handleTableReader(content.custom_clearance[fieldKey], 'id','/api/settings/readById').then((result) => {
-                requestConData.innerHTML = result.settings[0].content;
+                (result?.settings) ? requestConData.innerHTML = result.settings[0].content : '';
               })
             }
           }

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
 import Layout from "./../../components/layout/Layout";
+import useTranslation from "next-translate/useTranslation";
 
 import AddCC from "./../../components/elements/AddCC";
 import CCRequests from "./../../components/elements/CCRequests";
@@ -10,7 +11,8 @@ import CCRequests from "./../../components/elements/CCRequests";
 
 const ControlRequests = ({content}) => {
     const [activeSettingsTab , setActiveSettingsTab] = useState('AddCC');
-    
+    let {t} = useTranslation();
+    console.log('ssss',content)
     const all = {
         'AddCC': AddCC,
         'CCRequests': CCRequests
@@ -22,16 +24,16 @@ return (
             <div className="container-fluid backgrounded-con float-start px-3 py-3">
                 <div className="container">
                     <div className="col-12 px-3 py-3">
-                        <div className="col-lg-4 col-md-4 col-xs-12 col-sm-12 float-start px-2 py-2">
-                            <h5>Custom Clearance Settings</h5>
+                        <div className={(t("common:dir") === 'rtl') ? 'col-lg-4 col-md-4 col-xs-12 col-sm-12 float-end px-2 py-2' : 'col-lg-4 col-md-4 col-xs-12 col-sm-12 float-start px-2 py-2'}>
+                            <h5>{t("common:ccsettings")}</h5>
                             <div className="col-12 mt-3 float-start" style={{background: '#fff'}}>
                                 <div className={(activeSettingsTab == 'AddCC') ? "settingsTab activeSettingsTab" : "settingsTab" }
                                     onClick={() => {setActiveSettingsTab('AddCC')}}>
-                                    Add Custom Clearance Request
+                                    {t("common:addccrequest")}
                                 </div>
                                 <div className={(activeSettingsTab == 'CCRequests') ? "settingsTab activeSettingsTab" : "settingsTab" }
                                     onClick={() => {setActiveSettingsTab('CCRequests')}}>
-                                    Custom Clearance Requests
+                                    {t("common:ccrequests")}
                                 </div>
                             </div>
                         </div>

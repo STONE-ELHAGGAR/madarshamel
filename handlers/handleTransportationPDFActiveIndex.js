@@ -23,8 +23,7 @@ const handleTransportationPDFActiveIndex = async (id,movementId) => {
         const requestConData = document.getElementById(fieldKey);
         const clientNumber = document.getElementById('clientNumber');
 
-        let containerData;
-        const driverName = document.getElementById('driverName');
+        /*const driverName = document.getElementById('driverName');
         const driverMobile = document.getElementById('driverMobile');
         const driverTruck = document.getElementById('driverTruck');
         const driverNid = document.getElementById('driverNid');
@@ -34,17 +33,7 @@ const handleTransportationPDFActiveIndex = async (id,movementId) => {
             driverMobile.innerHTML = result.drivers[0].mobile
             driverTruck.innerHTML = result.drivers[0].truck
             driverNid.innerHTML = result.drivers[0].nid
-          })
-
-
-        handleTableReader(movementId, 'id','/api/movements/readById').then((result) => {
-          containerData = JSON.parse(result.movements[0].content);
-          document.getElementById('containerDetails').innerHTML = containerData.details;
-          document.getElementById('containerNumber').innerHTML = containerData.containerNumber+' / Container Size:'+containerData.containerSize;
-          document.getElementById('containerTemp').innerHTML = containerData.containerTemp;
-          document.getElementById('containerQuantity').innerHTML = containerData.quantity+' / '+containerData.type;
-          document.getElementById('containerWeight').innerHTML = containerData.weight+' / '+containerData.weightType;
-        })
+          })*/
 
         if(requestConData){
           if(fieldKey == 'u_id'){
@@ -59,18 +48,17 @@ const handleTransportationPDFActiveIndex = async (id,movementId) => {
                   (recordDate.getMonth()+1)+'/'+
                   recordDate.getFullYear();
 
-            } else if (fieldKey == 'expectedShipDate' || fieldKey == 'companyName' || fieldKey == 'companyMobile' || fieldKey == 'fromDate' || fieldKey == 'toDate' || fieldKey == 'companyAddress' || fieldKey == '_id'){
+            } else if (fieldKey == 'expectedShipDate' || fieldKey == 'transactionPlace' || fieldKey == 'companyName' || fieldKey == 'companyMobile' || fieldKey == 'fromDate' || fieldKey == 'toDate' || fieldKey == 'companyAddress' || fieldKey == '_id'){
                 requestConData.innerHTML = content.transportation[fieldKey];
             }else{
               handleTableReader(content.transportation[fieldKey], 'id','/api/settings/readById').then((result) => {
-                requestConData.innerHTML = result.settings[0].content;
+                (result?.settings) ? requestConData.innerHTML = result.settings[0].content : '';
               })
             }
           }
         }
       }
-      console.log(content);
-      return true;
+      return {success: true, driversInput: content.transportation.drivers};
     }else{
       console.log(content);
       return false;

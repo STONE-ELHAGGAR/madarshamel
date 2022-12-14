@@ -51,9 +51,9 @@ const Sidebar = ({ openClass ,logged }) => {
                                     <li>
                                         <Link href="/"><a>Home</a></Link>
                                     </li>
-                                    <li>
+                                    {/*<li>
                                         <Link href="/dashboard"><a>Dashboard</a></Link>
-                                    </li>
+                                    </li>*/}
                                     <li>
                                         <Link href="/dashboard/settings"><a>Dashboard Settings</a></Link>
                                     </li>

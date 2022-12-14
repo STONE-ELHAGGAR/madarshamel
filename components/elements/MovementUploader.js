@@ -1,3 +1,6 @@
+import Image from 'next/image';
+
+
 const attachedFilesFullData = [];
 const previousFiles = [];
 
@@ -71,6 +74,9 @@ const handleSaveFile = async (e,tableName) => {
 const handleUploader = async (e) => {
     e.preventDefault();
     const file = document.getElementById('fileUploadData');
+    const load = document.getElementById('load');
+    load.classList.remove('hidden');
+    file.classList.add('hidden');
     var data = new FormData()
     data.append('file', file.files[0])
     const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
@@ -86,6 +92,8 @@ const handleUploader = async (e) => {
     console.log(content);
     
       if(content.success) {
+          file.classList.remove('hidden');
+          load.classList.add('hidden');
           previousFiles.push(content.filename);
           const previousFilesJson = { ...previousFiles };
           //console.log(previousFilesJson);
@@ -95,6 +103,8 @@ const handleUploader = async (e) => {
           document.querySelector(".alert-data").innerHTML = '<div class="alert alert-success" role="alert">Uploaded Succesfully</div>';
           document.querySelector(".uploadedFiles").innerHTML = document.querySelector(".uploadedFiles").innerHTML+'<p><h6><i class="fi fi-rr-file"></i> '+content.filename+'</h6></p>';
       }else{
+          load.classList.add('hidden');
+          file.classList.remove('hidden');
           document.querySelector(".alert-data").innerHTML = '<div class="alert alert-danger" role="alert">Something went wrong, please try again later.</div>';
           content.error.map((err) => {
             document.querySelector(".alert-data").innerHTML = document.querySelector(".alert-data").innerHTML+'<div class="alert alert-danger" role="alert">'+err+'</div>';
@@ -125,6 +135,7 @@ const MovementUploader = ({id,tableName = 'custom-clearance'}) => {
               
             </div>
             <input type="hidden" name="activeIndex" className="activeIndex" value={id} id="activeIndex" />
+            <Image id="load" width="50px" height="50px" className="hidden" src="/assets/imgs/template/load.gif" />
             <input type="file" name="file" accept=".png, .jpeg, .jpg, .pdf" onChange={handleUploader} id="fileUploadData" />
           </form>
           <br /><br />

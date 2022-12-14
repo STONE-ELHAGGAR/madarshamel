@@ -8,6 +8,7 @@ const checkIfLoggedIn = require('./../../util/checkIfLoggedIn');
 const handleReadAllPages = require('./../../handlers/handleReadAllPages');
 import Sidebar from "./Sidebar";
 import useTranslation from "next-translate/useTranslation";
+import ReactHtmlParser from 'react-html-parser';
 
 //Table Socket Requirments
 import io from "socket.io-client";
@@ -24,6 +25,7 @@ const Header = ({headerStyle }) => {
     const [messagesReceived, setMessagesReceived] = useState([]);
     const [chatUsers , setChatUsers] = useState([]);
     const [neededChatBox , setNeededChatBox] = useState('');
+    const previousFiles = [];
     const [activeRoom , setActiveRoom] = useState('');
     const handleRemove = () => {
         if (openClass === "sidebar-visible") {
@@ -180,7 +182,7 @@ const Header = ({headerStyle }) => {
         let allChat = messagesReceivedData.map((messageReceivedData) => {
             return (
                 <div key={messageReceivedData._id} className={(messageReceivedData.u_id == cuurentUid) ? "fromMe" : "fromOther" }>
-                    <span>{messageReceivedData.message}</span>
+                    <span>{(messageReceivedData.message.search('--uploaded--') === 0) ? <a href={'/api/download/?fileName='+messageReceivedData.message.split('--uploaded--')[1]}>{messageReceivedData.message.split('--uploaded--')[1]}</a> : messageReceivedData.message}</span>
                     {messageReceivedData.created_at+' By '+messageReceivedData.name}
                 </div>
             )
@@ -190,6 +192,41 @@ const Header = ({headerStyle }) => {
                 {allChat}
             </div>
         )
+    }
+    const handleUploaderHead = async () => {
+        const file = document.getElementById('fileUploadDataHead');
+        const load = document.getElementById('loadHead');
+        load.classList.remove('hidden');
+        file.classList.add('hidden');
+        var data = new FormData()
+        data.append('file', file.files[0])
+        const accessToken = JSON.parse(sessionStorage.getItem('loginData')).data.accessToken;
+      
+        const fileRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/uploader/upload', {
+          method: 'POST',
+          headers: {
+            'Authorization': accessToken
+          },
+          body: data
+        })
+        const content = await fileRequest.json();
+        console.log(content);
+        
+          if(content.success) {
+              file.classList.remove('hidden');
+              load.classList.add('hidden');
+              document.getElementById('fileUploadDataHead').value = null;
+              document.getElementById('msg').value = '--uploaded--'+content.filename;
+              sendMessage();
+          }else{
+              load.classList.add('hidden');
+              file.classList.remove('hidden');
+              document.querySelector(".alert-data").innerHTML = 'Something went wrong, please try again later.';
+              content.error.map((err) => {
+                document.querySelector(".alert-data").innerHTML = document.querySelector(".alert-data").innerHTML+err;
+              });
+              document.getElementById('fileUploadDataHead').value = null;
+          }
     }
 
     const ChatRoom = ({activeRoomData, usersList}) => {
@@ -206,10 +243,14 @@ const Header = ({headerStyle }) => {
                 <ReloadChat messagesReceivedData={messagesReceived} />
 
                     <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 sendMsg">
-                            <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9 float-start">
-                                <textarea id="msg" placeholder="Type your message here"></textarea>
+                            <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 float-start send" onClick={sendMessage}>
+                                <Image id="loadHead" width="50px" height="50px" className="hidden" src="/assets/imgs/template/load.gif" />
                             </div>
-                            <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3 float-start send" onClick={sendMessage}>
+                            <div className="col-lg-8 col-md-8 col-sm-8 col-xs-8 float-start">
+                                <textarea id="msg" placeholder="Type your message here"></textarea>
+                                <input type="file" name="fileHead" accept=".png, .jpeg, .jpg, .pdf" onChange={handleUploaderHead} id="fileUploadDataHead" />
+                            </div>
+                            <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 float-start send" onClick={sendMessage}>
                                 <Image width="50px" height="50px" src="/assets/imgs/template/send.svg" />
                             </div>
                         </div>
@@ -259,14 +300,14 @@ const Header = ({headerStyle }) => {
                 <div className="container">
                     <div className="main-header">
                         <div className="header-left">
-                        <ul className="main-menu">
+                        <ul className={'main-menu-'+t("common:dir")}>
                             <li className="has-children">
                                 <Link href="#"><a>{t("common:lang")}</a></Link>
                                 <ul className="sub-menu">
                                     {
                                     router.locales.map((locale) => (
                                     <li key={locale}>
-                                        <Link href={router.asPath} locale={locale}><a>{(locale === 'ar') ? 'عربي' : locale.toUpperCase() }</a></Link>
+                                        <a href={'/'+((locale != 'en') ? locale : '')} locale={locale}>{(locale === 'ar') ? 'عربي' : locale.toUpperCase() }</a>
                                     </li>
                                     ))
                                     }
@@ -283,7 +324,7 @@ const Header = ({headerStyle }) => {
                             </div>
                             <div className="header-nav">
                                 <nav className="nav-main-menu d-none d-xl-block">
-                                    <ul className="main-menu">
+                                    <ul className={'main-menu-'+t("common:dir")}>
                                         <li>
                                             <Link href="/"><a className="active">{t("common:home")}</a></Link>
                                         </li>
