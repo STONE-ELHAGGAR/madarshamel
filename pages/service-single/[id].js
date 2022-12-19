@@ -1,10 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import Layout from "../../components/layout/Layout";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import useTranslation from "next-translate/useTranslation";
 
 
 function BlogSingle({content}) {
+    let router = useRouter()
+    const { id } = router.query;
+    let {t} = useTranslation();
     return (
         <>
             <Layout>
@@ -13,7 +18,7 @@ function BlogSingle({content}) {
                         <div className="banner-hero banner-head-image" style={{ background: 'url(../assets/imgs/page/blog/single/shipping.webp)' }}>
                             <div className="container">
                                 <div className="text-center">
-                                    <h1 className="text-heading-1 color-white mt-30">{content.pages[0].title}</h1>
+                                    <h1 className="text-heading-1 color-white mt-30">{t("common:"+id)}</h1>
                                 </div>
                             </div>
                         </div>
@@ -24,7 +29,7 @@ function BlogSingle({content}) {
                                 <div className="col-lg-2" />
                                 <div className="col-lg-8">
                                     <div className="single-detail mt-50">
-                                        <p>{content.pages[0].description}</p>
+                                        <p>{t("common:"+id+"-p")}</p>
                                     </div>
                                 </div>
                             </div>
@@ -39,26 +44,3 @@ function BlogSingle({content}) {
 }
 
 export default BlogSingle;
-
-
-export async function getServerSideProps(context) {
-    let id = context.params.id;
-    const servicesPagesRequest = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/pages/readById', {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id: id
-      })
-    });
-  
-    let resultData = await servicesPagesRequest.json();
-
-    return {
-      props:{
-        content: resultData
-      }
-    }
-  } 

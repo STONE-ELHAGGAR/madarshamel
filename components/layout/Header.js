@@ -19,7 +19,7 @@ const Header = ({headerStyle }) => {
     let {t} = useTranslation();
     const [scroll, setScroll] = useState(0)
     const [logged , setLogged] = useState(false);
-    const [servicePages , setServicePages] = useState([]);
+    //const [servicePages , setServicePages] = useState([]);
     const [openClass, setOpenClass] = useState('');
     // Messages States
     const [messagesReceived, setMessagesReceived] = useState([]);
@@ -55,12 +55,12 @@ const Header = ({headerStyle }) => {
             })
     })
     useEffect(() => {
-        handleReadAllPages().
+        /*handleReadAllPages().
             then((result) => {
                 if(result?.pages){
                     setServicePages(result);
                 }
-            });
+            });*/
     },[])
     const handleLogout = () => {
         sessionStorage.removeItem('loginData');
@@ -348,7 +348,15 @@ const Header = ({headerStyle }) => {
                                         </li>*/}
                                         <li className="has-children">
                                             <Link href="#"><a>{t("common:services")}</a></Link>
-                                            <ServicesPages content={servicePages} />
+                                            {/*<ServicesPages content={servicePages} />*/}
+                                            <ul className="sub-menu">
+                                                <li>
+                                                    <Link href="/service-single/customsClearance"><a>{t("common:customsClearance")}</a></Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/service-single/transportation"><a>{t("common:transportation")}</a></Link>
+                                                </li>
+                                            </ul>
                                         </li>
                                         {/*<li className="has-children">
                                             <Link href="#"><a>Blog</a></Link>
