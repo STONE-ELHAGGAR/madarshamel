@@ -1,1 +1,25 @@
-{"locales":["en","ar"],"defaultLocale":"en","pages":{"*":["common"],"/price-request":["price-request"],"/page-contact":["page-contact"],"/page-signup":["page-signup"],"/page-login":["page-login"]}}
+{
+    "locales": [
+      "ar",
+      "en"
+    ],
+    "defaultLocale": "ar",
+    "localeDetection": false,
+    "pages": {
+      "*": [
+        "common"
+      ],
+      "/price-request": [
+        "price-request"
+      ],
+      "/page-contact": [
+        "page-contact"
+      ],
+      "/page-signup": [
+        "page-signup"
+      ],
+      "/page-login": [
+        "page-login"
+      ]
+    }
+  }

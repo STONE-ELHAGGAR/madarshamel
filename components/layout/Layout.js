@@ -8,7 +8,7 @@ import Link from 'next/link';
 import useTranslation from "next-translate/useTranslation";
 import Head from "next/head"
 
-const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName = '', forNewUsers = 1, itemId = ''}) => {
+const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName = '', forNewUsers = 1, itemId = '', title = '', seoDesc = '', seoKeywords = ''}) => {
     let {t} = useTranslation();
     const [adminCheck, setAdminCheck] = useState(false);
     checkIfLoggedIn(['transportation','custom-clearance','super-admin'],[],'','')
@@ -132,6 +132,11 @@ const Layout = ({ children, headerStyle, userCreds = [],params = [], modelName =
         <>
             <Head>
                 <html lang={t("common:langHtml")} dir={t("common:dir")} />
+                <meta name="description" content={seoDesc} />
+                <meta name="keywords" content={seoKeywords} />
+                <meta name="author" content="Madarshamel Company" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>{title}</title>
             </Head>
             <Header headerStyle={headerStyle} />
             {((logged) ? <LoggedInComponent /> : <NotLoggedInComponent /> )}

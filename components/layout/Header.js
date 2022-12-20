@@ -307,7 +307,7 @@ const Header = ({headerStyle }) => {
                                     {
                                     router.locales.map((locale) => (
                                     <li key={locale}>
-                                        <a href={'/'+((locale != 'en') ? locale : '')} locale={locale}>{(locale === 'ar') ? 'عربي' : locale.toUpperCase() }</a>
+                                        <a href={'/'+((locale != 'ar') ? locale : '')} locale={locale}>{(locale === 'ar') ? 'عربي' : locale.toUpperCase() }</a>
                                     </li>
                                     ))
                                     }

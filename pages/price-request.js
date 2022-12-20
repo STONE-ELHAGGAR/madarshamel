@@ -73,7 +73,11 @@ function PriceRequest() {
     }
     return (
         <>
-            <Layout>
+            <Layout
+                title={t("common:pricepageTitle")}
+                seoDesc={t("common:pricepageDesc")}
+                seoKeywords="madarshamel, madarshamel company, شركة المدار الشامل, شركة المدار الشامل للتخليص الجمركي والشحن, Al madar al shamel,المدار الشامل , شركة تخليص جمركي,طلب تسعير تخليص جمركي"
+            >
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 px-3 py-3 backgrounded-con float-start" id="scrollerReq">
                     <div className="alert-data">
                                 

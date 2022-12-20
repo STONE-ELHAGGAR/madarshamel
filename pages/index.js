@@ -30,16 +30,20 @@ function Home({content}) {
             {/* <Link href="/#">
                 <a>Link</a></Link>
             </Link>router.locale */}
-            <Layout>
+            <Layout
+                title={t("common:homepageTitle")}
+                seoDesc={t("common:seoDesc")}
+                seoKeywords="madarshamel, madarshamel company, شركة المدار الشامل, شركة المدار الشامل للتخليص الجمركي والشحن, Al madar al shamel,المدار الشامل , شركة تخليص جمركي"
+            >
                 <Banner />
-                <PortfolioLogos
+                {/*<PortfolioLogos
                     img1={t("common:img1")}
                     img2={t("common:img2")}
                     img3={t("common:img3")}
                     img4={t("common:img4")}
                     img5={t("common:img5")}
                     img6={t("common:img6")}
-                />
+                />*/}
                 <TabSection />
                 <ServiceSection />
                 <WhatWeDo />
