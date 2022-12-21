@@ -12,6 +12,7 @@ const handleGetNumId = require('./../../../handlers/handleGetNumId');
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 import ReactHtmlParser from 'react-html-parser';
+import useTranslation from "next-translate/useTranslation";
 
 /*const handleTableReader = require('./../../../handlers/handleTableReader');
 
@@ -73,6 +74,7 @@ const handleServiceAlert = async (e) => {
 
 
 const TransportationRequestData = ({userData}) => {
+    let {t} = useTranslation();
     let userCreds = JSON.parse(userData.users[0].creds);
 
     let router = useRouter()
@@ -176,16 +178,16 @@ const TransportationRequestData = ({userData}) => {
             <Layout userCreds={['same-as-u-id','transportation','super-admin']} params={['_id']} modelName='transportation' forNewUsers={0} itemId={activeIndex}>
                 <div className="container-fluid px-3 py-3 float-start backgrounded-con">
                     <div className="container">
-                        <h3>Transportation Request</h3>
+                        <h3>{t('common:trrequest')}</h3>
                         <h5>{guiId}</h5>
                         <div className="col-lg-8 col-md-8 col-xs-12 col-sm-12 float-start px-2 py-2">
                             <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
                                 <ul className="nav nav-pills nav-fill col-12 float-start">
                                     <li className="nav-item">
-                                        <div className={((activeTabCon === 1) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="messageTab" onClick={() => {setActiveTabCon(1)}}>Message</div>
+                                        <div className={((activeTabCon === 1) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="messageTab" onClick={() => {setActiveTabCon(1)}}>{t('common:message')}</div>
                                     </li>
                                     <li className="nav-item">
-                                        <div className={((activeTabCon === 2) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="attachFileTab" onClick={() => {setActiveTabCon(2)}}>Attach File</div>
+                                        <div className={((activeTabCon === 2) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="attachFileTab" onClick={() => {setActiveTabCon(2)}}>{t('common:attachFile')}</div>
                                     </li>
                                     {/*<li className="nav-item">
                                         <div className={((activeTabCon === 3) ? 'nav-link active h5' : 'nav-link h5' )} role="button" id="serviceAlertTab" onClick={() => {setActiveTabCon(3)}}>Service Alert (SECRET)</div>

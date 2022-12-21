@@ -6,6 +6,8 @@ const handleTableReader = require('./../../handlers/handleTableReader');
 const handleGetNumId = require('./../../handlers/handleGetNumId');
 
 const TrItem = ({content}) => {
+    const router = useRouter();
+    const currentLang =  router.locale;
     let userCreds = '';
     let allItems = '';
     if(content?.transportations){
@@ -17,7 +19,7 @@ const TrItem = ({content}) => {
                 if(requestConData){
                   handleGetNumId('transportation',transportation._id).
                     then((result) => {
-                      idConData.innerHTML = '<a href="/dashboard/transportation-request/'+transportation._id+'">'+result.numId+'</a>';
+                      idConData.innerHTML = '<a href="/'+currentLang+'/dashboard/transportation-request/'+transportation._id+'">'+result.numId+'</a>';
                     })
                   if(fieldKey == 'u_id'){
                     transportation.u_id = transportation.u_id;
