@@ -25,7 +25,7 @@ TABLE CONTENT
  WP STYPE
  Custom amine
 ***/
-@import url("https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&family=Noto+Sans:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;800;900&display=swap");
 @import url(../css/vendors/normalize.css);
 @import url(../css/vendors/bootstrap.min.css);
 @import url(../css/vendors/uicons-regular-rounded.css);
@@ -180,7 +180,7 @@ input,
 select,
 button,
 textarea {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-size: 14px; }
 
 *:focus,
@@ -321,103 +321,103 @@ a {
   max-width: 100%; }
 
 .text-body-lead {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 16px;
   line-height: 24px; }
 
 .text-body-excerpt {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 26px; }
 
 .text-body-text {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400 !important;
   font-size: 16px;
   line-height: 28px; }
 
 .text-body-quote {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 28px; }
 
 .text-body-normal {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 28px; }
 
 .text-body-capitalized {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
   letter-spacing: 2px; }
 
 .text-body-small {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 500;
   font-size: 13px;
   line-height: 16px; }
 
 .text-body-tiny {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 600;
   font-size: 10px;
   line-height: 14px; }
 
 .text-body-lead-large {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400;
   font-size: 24px;
   line-height: 32px; }
 
 .text-body-text-md {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 19px; }
 
 .tablet-display-2 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 72px;
   line-height: 82px;
   letter-spacing: -0.5%; }
 
 .text-display-1 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 900;
   font-size: 96px;
   line-height: 132px;
   letter-spacing: -1%; }
 
 .text-display-2 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 80px;
   line-height: 88px;
   letter-spacing: -0.5%; }
 
 .text-display-3 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 64px;
   line-height: 72px;
   letter-spacing: 0%; }
 
 .text-display-4 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400;
   font-size: 56px;
   line-height: 66px;
   letter-spacing: 0%; }
 
 .text-heading-1 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 56px;
   line-height: 64px;
@@ -425,42 +425,42 @@ a {
   color: #101828; }
 
 .text-heading-2 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 42px;
   line-height: 44px;
   letter-spacing: 0%; }
 
 .text-heading-3 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 35px;
   line-height: 38px;
   letter-spacing: 0%; }
 
 .text-heading-4 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 28px;
   line-height: 32px;
   letter-spacing: 0%; }
 
 .text-heading-5 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 22px;
   line-height: 24px;
   letter-spacing: 0%; }
 
 .text-heading-6 {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 18px;
   line-height: 22px;
   letter-spacing: 0%; }
 
 .text-bold {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-size: 14px;
   line-height: 14px;
   font-weight: bold; }
@@ -554,7 +554,7 @@ a {
 
 .text-billed {
   font-weight: 400;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-size: 16px;
   line-height: 28px;
   display: inline-block;
@@ -580,7 +580,7 @@ a {
   .content-detail p {
     margin-bottom: 15px;
     font-size: 16px;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     color: #101828;
     line-height: 28px; }
   .content-detail ul {
@@ -588,7 +588,7 @@ a {
     color: #101828;
     padding-left: 20px;
     font-size: 16px;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     line-height: 28px; }
 
 .border-bottom {
@@ -760,7 +760,7 @@ h4 {
 /*TYPOGRAPHY*/
 body {
   color: #101828;
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-size: 14px;
   line-height: 24px;
   font-style: normal;
@@ -777,7 +777,7 @@ h6,
 .display-2,
 .heading-lg,
 .heading-sm-1 {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   color: #101828;
   font-weight: 700;
   line-height: 1.2; }
@@ -818,7 +818,7 @@ h6 {
   line-height: 24px;
   color: #101828;
   font-weight: 500;
-  font-family: "Noto Sans", sans-serif; }
+  font-family: "Cairo", sans-serif; }
 
 .heading-sm {
   font-size: 14px;
@@ -828,25 +828,25 @@ h6 {
 .text-sm {
   font-size: 12px;
   line-height: 16px;
-  font-family: "Chivo", sans-serif; }
+  font-family: "Cairo", sans-serif; }
 
 .text-md {
   font-size: 16px;
   line-height: 20px;
-  font-family: "Chivo", sans-serif; }
+  font-family: "Cairo", sans-serif; }
 
 .small-heading {
   font-size: 16px;
   line-height: 20px;
   font-weight: bold;
-  font-family: "Noto Sans", sans-serif; }
+  font-family: "Cairo", sans-serif; }
 
 .medium-heading {
   font-size: 18px;
   color: #101828;
   line-height: 22px;
   font-weight: 600;
-  font-family: "Noto Sans", sans-serif; }
+  font-family: "Cairo", sans-serif; }
 
 .display-block {
   display: block; }
@@ -894,7 +894,7 @@ h6 {
   color: #667085 !important; }
 
 .btn {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   padding: 22px 32px;
   font-size: 18px;
   line-height: 22px;
@@ -933,7 +933,7 @@ h6 {
     border-radius: 50px;
     font-size: 18px;
     line-height: 22px;
-    font-family: "Chivo", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-weight: bold; }
     .btn.btn-default:hover {
       background-color: #101828;
@@ -961,7 +961,7 @@ h6 {
     margin-bottom: 15px; }
   .btn.btn-green-900 {
     background-color: #9d866b;
-    font-family: "Chivo", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-weight: bold;
     font-size: 18px;
     line-height: 22px;
@@ -980,7 +980,7 @@ h6 {
     border-radius: 50px;
     font-size: 18px;
     line-height: 22px;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-weight: bold; }
     .btn.btn-black.icon-arrow-right-white:hover {
       background-color: #F2F4F7;
@@ -997,7 +997,7 @@ h6 {
   .btn.shape-square {
     border-radius: 4px; }
   .btn.btn-link {
-    font-family: "Chivo", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-style: normal;
     font-size: 18px;
     line-height: 18px;
@@ -1012,7 +1012,7 @@ h6 {
     .btn.btn-pink:hover {
       background-color: #101828; }
   .btn.btn-link-inter {
-    font-family: "Chivo", sans-serif !important;
+    font-family: "Cairo", sans-serif !important;
     font-weight: 500;
     font-size: 20px;
     line-height: 24px; }
@@ -1058,7 +1058,7 @@ h6 {
   .btn.btn-tag {
     background-color: #E4E7EC;
     color: #101828;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-size: 14px;
     line-height: 18px;
     font-weight: 400;
@@ -1074,7 +1074,7 @@ h6 {
     border-radius: 8px;
     padding: 16px 56px 16px 27px;
     border: 0px;
-    font-family: "Chivo", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-weight: bold;
     font-size: 18px;
     line-height: 22px;
@@ -1096,7 +1096,7 @@ h6 {
     background-image: url(../imgs/page/homepage5/icon-plus.svg);
     background-repeat: no-repeat;
     background-position: center right 10px;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-weight: bold;
     font-size: 16px;
     line-height: 24px; }
@@ -1110,7 +1110,7 @@ h6 {
     background-image: url(../imgs/page/homepage8/icon-arrow-green.svg);
     background-repeat: no-repeat;
     background-position: center right 12px;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-weight: bold;
     font-size: 16px;
     line-height: 24px; }
@@ -1148,7 +1148,7 @@ h6 {
   background-repeat: no-repeat;
   background-position: center left;
   padding-left: 30px;
-  font-family: "Chivo", sans-serif !important;
+  font-family: "Cairo", sans-serif !important;
   font-weight: 500;
   font-size: 20px;
   line-height: 24px; }
@@ -1449,7 +1449,7 @@ label {
   color: #98A2B3;
   font-size: 20px;
   line-height: 27px;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400;
   min-height: 150px; }
 .form-comment .box-agree span {
@@ -1963,7 +1963,7 @@ label {
   .block-pricing .box-info-price .text-price {
     font-size: 36px;
     color: #101828;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     line-height: 46px;
     font-weight: 600;
     margin-right: 15px; }
@@ -2049,7 +2049,7 @@ label {
       font-size: 16px;
       line-height: 28px;
       color: #ffffff;
-      font-family: "Noto Sans", sans-serif;
+      font-family: "Cairo", sans-serif;
       font-weight: 400;
       background: url(../imgs/template/icons/icon-untick.svg) no-repeat right 15px top 1px; }
       .block-pricing-3 .block-pricing-left .list-package-feature li.active {
@@ -2172,7 +2172,7 @@ label {
       font-size: 12px;
       line-height: 16px;
       color: #9d866b;
-      font-family: "Noto Sans", sans-serif;
+      font-family: "Cairo", sans-serif;
       font-weight: bold;
       text-decoration: none; }
     .grid-category-2 .category-info-bottom a:hover {
@@ -2211,12 +2211,12 @@ label {
     .product-item-1 .product-info .title-product {
       color: #101828;
       font-size: 26px;
-      font-family: "Chivo", sans-serif;
+      font-family: "Cairo", sans-serif;
       line-height: 32px;
       margin-bottom: 10px; }
     .product-item-1 .product-info .price-regular {
       font-size: 28px;
-      font-family: "Chivo", sans-serif;
+      font-family: "Cairo", sans-serif;
       line-height: 34px;
       color: #101828; }
     .product-item-1 .product-info .price-line {
@@ -2304,7 +2304,7 @@ label {
       width: 50%; }
       .product-item-2 .product-info .box-prices .price-regular {
         font-size: 22px;
-        font-family: "Noto Sans", sans-serif;
+        font-family: "Cairo", sans-serif;
         line-height: 24px;
         font-weight: bold;
         color: #9d866b; }
@@ -2343,7 +2343,7 @@ label {
     font-size: 12px;
     line-height: 16px;
     color: #667085;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-weight: bold;
     text-decoration: none;
     display: inline-block;
@@ -2369,7 +2369,7 @@ label {
       border-radius: 8px;
       background: transparent;
       border: 0px;
-      font-family: "Noto Sans", sans-serif;
+      font-family: "Cairo", sans-serif;
       font-weight: 500;
       transition-duration: 0.2s; }
       .nav-right li button:hover {
@@ -2409,7 +2409,7 @@ label {
         line-height: 28px;
         color: #98A2B3; }
       .box-newsletter .box-form-newsletter form .font-heading {
-        font-family: "Noto Sans", sans-serif;
+        font-family: "Cairo", sans-serif;
         font-weight: 500; }
   .box-newsletter .btn-send {
     background-image: url(../imgs/template/icons/btn-send.svg);
@@ -2973,7 +2973,7 @@ label {
           display: block;
           margin: 5px 0; }
       .header .main-menu-rtl li a {
-        font-family: "Chivo", sans-serif;
+        font-family: "Cairo", sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
@@ -3059,7 +3059,7 @@ label {
           display: block;
           margin: 5px 0; }
       .header .main-menu-ltr li a {
-        font-family: "Chivo", sans-serif;
+        font-family: "Cairo", sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
@@ -3119,7 +3119,7 @@ label {
         .header .main-menu-ltr li:hover > ul li {
           width: 100%; }
   .header .text-link-bd-btom {
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -3207,7 +3207,7 @@ label {
   color: #ffffff;
   padding: 10px 0px; }
   .header-top span {
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-size: 16px;
     line-height: 24px;
     font-weight: bold; }
@@ -3373,7 +3373,7 @@ label {
             content: "\f113"; }
         .mobile-header-wrapper-style .mobile-header-wrapper-inner .mobile-header-content-area .mobile-menu-wrap nav .mobile-menu li a {
           font-size: 16px;
-          font-family: "Chivo", sans-serif;
+          font-family: "Cairo", sans-serif;
           line-height: 1;
           text-transform: capitalize;
           font-weight: 500;
@@ -3676,7 +3676,7 @@ label {
     margin-bottom: 8px; }
     .footer .menu-footer li a {
       color: #667085;
-      font-family: "Noto Sans", sans-serif;
+      font-family: "Cairo", sans-serif;
       font-size: 16px;
       line-height: 28px;
       text-decoration: none;
@@ -4981,13 +4981,13 @@ label {
   color: #5580bb;
   font-size: 14px;
   line-height: 14px;
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   display: inline-block; }
 
 .tag-dot {
   font-size: 12px;
   line-height: 16px;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   color: #667085;
   background: url(../imgs/template/icons/dot.svg) no-repeat left center;
   display: block;
@@ -5319,7 +5319,7 @@ label {
   font-size: 28px;
   line-height: 32px;
   color: #98A2B3;
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold; }
 
 .list-icon-3 {
@@ -5359,7 +5359,7 @@ label {
   font-weight: bold; }
 
 .text-semibold {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-size: 10px;
   line-height: 14px;
   color: #98A2B3;
@@ -5373,7 +5373,7 @@ label {
   padding: 10px 0px 0px 0px;
   margin: 0px; }
   .list-category li {
-    font-family: "Chivo", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-weight: 500;
     display: inline-block;
     width: 100%;
@@ -5419,7 +5419,7 @@ label {
   .box-green .text-desc-white {
     font-size: 18px;
     line-height: 32px;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     color: #ffffff; }
 
 .cb-layout {
@@ -5846,7 +5846,7 @@ label {
         overflow: hidden; }
 
 .text-inter-lg {
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 28px;
@@ -5908,7 +5908,7 @@ label {
   font-size: 16px;
   line-height: 28px;
   color: #101828;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: 400;
   text-align: center; }
   .table-pricing tr td {
@@ -6122,7 +6122,7 @@ label {
 
 .text-summary {
   font-weight: bold;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-size: 18px;
   line-height: 32px;
   color: #667085; }
@@ -6130,7 +6130,7 @@ label {
 .single-detail p {
   margin-bottom: 15px;
   font-size: 18px;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   color: #667085;
   line-height: 32px;
   font-weight: 400; }
@@ -6188,7 +6188,7 @@ label {
     padding: 75px 0px 0px 0px;
     font-size: 32px;
     line-height: 48px;
-    font-family: "Chivo", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-weight: 400;
     text-align: center; }
 
@@ -6319,7 +6319,7 @@ label {
         padding: 10px 8px;
         margin: 0px 5px;
         font-weight: 700;
-        font-family: "Chivo", sans-serif;
+        font-family: "Cairo", sans-serif;
         color: #667085;
         line-height: 30px;
         text-decoration: none;
@@ -6375,7 +6375,7 @@ label {
         margin: 8px 10px 0px 0px; }
 
 .text-heading-7 {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-weight: bold;
   font-size: 14px;
   line-height: 18px;
@@ -6461,7 +6461,7 @@ label {
   font-size: 18px;
   line-height: 22px;
   font-weight: bold;
-  font-family: "Chivo", sans-serif;
+  font-family: "Cairo", sans-serif;
   color: #9d866b; }
   .btn-filter:hover {
     background-color: #D1ECFD; }
@@ -6488,13 +6488,13 @@ label {
     font-size: 39px;
     line-height: 42px;
     font-weight: bold;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Cairo", sans-serif;
     color: #9d866b; }
   .banner-ads .desc-ads {
     font-size: 16px;
     line-height: 20px;
     color: #667085;
-    font-family: "Noto Sans", sans-serif; }
+    font-family: "Cairo", sans-serif; }
   .banner-ads .box-banner-ads {
     display: table;
     margin: auto;
@@ -6627,7 +6627,7 @@ label {
   line-height: 16px;
   color: #667085;
   font-weight: bold;
-  font-family: "Noto Sans", sans-serif; }
+  font-family: "Cairo", sans-serif; }
 
 .box-price {
   display: inline-block;
@@ -6638,14 +6638,14 @@ label {
     line-height: 38px;
     font-weight: bold;
     color: #004B52;
-    font-family: "Chivo", sans-serif;
+    font-family: "Cairo", sans-serif;
     margin-right: 15px; }
   .box-price .price-old {
     color: #667085;
     font-weight: bold;
     font-size: 28px;
     line-height: 32px;
-    font-family: "Chivo", sans-serif;
+    font-family: "Cairo", sans-serif;
     text-decoration: line-through;
     margin-right: 15px; }
 
@@ -6654,7 +6654,7 @@ label {
   line-height: 28px;
   color: #667085;
   font-weight: 400;
-  font-family: "Noto Sans", sans-serif; }
+  font-family: "Cairo", sans-serif; }
 
 .font-bold {
   font-weight: bold !important; }
@@ -6842,7 +6842,7 @@ strong {
   line-height: 22px;
   color: #004B52;
   font-weight: bold;
-  font-family: "Chivo", sans-serif; }
+  font-family: "Cairo", sans-serif; }
 
 .process-bar-line {
   margin-top: 10px;
@@ -6989,7 +6989,7 @@ input.qty-val {
   font-size: 22px;
   line-height: 24px;
   font-weight: bold;
-  font-family: "Chivo", sans-serif; }
+  font-family: "Cairo", sans-serif; }
 
 .countdown-period {
   display: block;
@@ -6997,7 +6997,7 @@ input.qty-val {
   font-size: 10px;
   line-height: 14px;
   font-weight: 600;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Cairo", sans-serif;
   margin-top: 4px; }
 
 .zoomContainer {

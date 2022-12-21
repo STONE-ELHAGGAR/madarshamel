@@ -7,8 +7,10 @@ const handleAllUsers = require('./../../handlers/handleAllUsers');
 const handleMovements = require('./../../handlers/handleMovements');
 const handleBalance = require('./../../handlers/handleBalance');
 const handleTableReader = require('./../../handlers/handleTableReader');
+import useTranslation from "next-translate/useTranslation";
 
 const Bank = ({requestId, tableName, choosedUserData = ''}) => {
+    let {t} = useTranslation();
     const [choosedUserBalance, setChoosedUserBalance] = useState('');
     const [choosedUserDebt, setChoosedUserDebt] = useState('');
     const [choosedUserDebtLimit, setChoosedUserDebtLimit] = useState('');
@@ -99,7 +101,7 @@ const Bank = ({requestId, tableName, choosedUserData = ''}) => {
     },[choosedUser]);
     return (
     <div className="col-12 px-3 py-3 mt-3 float-start" style={{background: '#fff'}}>
-        <h5>Bank Request</h5>
+        <h5>{t('common:bankRequest')}</h5>
         <div className="custom-alert-data"></div>
         <select name="u_id" onChange={userChanged} className="u_id my-2 h6" style={{width: '100%', padding: '10px'}}>
             <OptionItem content={allUsersData} property="name" table="users" />

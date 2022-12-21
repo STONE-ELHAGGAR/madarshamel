@@ -6,6 +6,8 @@ const handleTableReader = require('./../../handlers/handleTableReader');
 const handleGetNumId = require('./../../handlers/handleGetNumId');
 
 const CcItem = ({content}) => {
+    const router = useRouter();
+    const currentLang =  router.locale;
     let userCreds = '';
     let allItems = '';
     if(content?.custom_clearances){
@@ -13,7 +15,7 @@ const CcItem = ({content}) => {
         allItems = content.custom_clearances?.map((custom_clearance, index) => {
             return(
                     <tr key={custom_clearance._id}>
-                        <th scope="row"><a href={"/dashboard/custom-clearance-request/"+custom_clearance._id}>{custom_clearance.id}</a></th>
+                        <th scope="row"><a href={"/"+currentLang+"/dashboard/custom-clearance-request/"+custom_clearance._id}>{custom_clearance.id}</a></th>
                         <td>{custom_clearance.companyName}</td>
                         <td>{custom_clearance.companyMobile}</td>
                         <td>{custom_clearance.companyAddress}</td>

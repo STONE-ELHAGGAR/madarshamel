@@ -302,11 +302,11 @@ router.post('/updateMySelf', authJWT.verify([]), async (req,res,next) => {
 });
 
 router.post('/updateUser', authJWT.verify([]), async (req,res,next) => {
-    const {id, name, mobile, email} = req.body;
+    const {id, name, mobile, email, creds} = req.body;
     try {
         let usersData = await Users.updateOne(
             {_id: id},
-            { $set: {name, mobile, email} }
+            { $set: {name, mobile, email, creds} }
          );
         res.json({success: true,users: usersData});
     }catch(e) {

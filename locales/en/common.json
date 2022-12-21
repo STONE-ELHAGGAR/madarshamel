@@ -123,6 +123,7 @@
  "trrequest": "Transportation Request",
  "addccrequest": "Add Custom Clearance Request",
  "ccrequests": "Custom Clearance Requests",
+ "ccrequest": "Custom Clearance Request",
  "companyDetails": "Company Details",
  "companyName": "Company Name",
  "companyMobile": "Company Mobile",
@@ -154,5 +155,10 @@
  "homepageTitle": "Madarshamel Company | Home Page",
  "pricepageTitle": "Madarshamel Company | Request pricing",
  "pricepageDesc": "Pricing Request to finish your custom clearance an transportation",
- "seoDesc": "Al-Madar Al-Shamel Company for customs clearance, we can help you reach your destination and papers in your import process."
+ "seoDesc": "Al-Madar Al-Shamel Company for customs clearance, we can help you reach your destination and papers in your import process.",
+ "bankRequest": "Bank Request",
+ "loginToFasah": "Login To Fasah",
+ "printAuth": "PRINT Authorization of navigation agents",
+ "message": "Message",
+ "attachFile": "Attach File"
 }
