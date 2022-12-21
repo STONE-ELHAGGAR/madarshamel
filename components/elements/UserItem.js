@@ -46,8 +46,8 @@ const UserItem = ({content}) => {
     }
     return (
         <>
-            <div className="col-12 float-start"><button onClick={(e) => {setUserData('')}} className="btn btn-square float-start text-heading-6">X Close User Editor</button><br /></div>
-            {(userData !== '') ? <EditUserByAdmin userData={userData} userNameData={userName} userEmailData={userEmail} userMobileData={userMobile} userCredsData={userCredsData} userDebtLimit={userDebtLimit} /> : <h5>Please choose user to edit</h5>}
+            {(userData != '') ? <div className="col-12 float-start"><button onClick={(e) => {setUserData('')}} className="btn btn-square float-start text-heading-6 closeEditor">X Close User Editor</button><br /></div> : ''}
+            {(userData != '') ? <EditUserByAdmin userData={userData} userNameData={userName} userEmailData={userEmail} userMobileData={userMobile} userCredsData={userCredsData} userDebtLimit={userDebtLimit} /> : <h5>Please choose user to edit</h5>}
             <table className="table table-striped">
                 <thead>
                 <tr>

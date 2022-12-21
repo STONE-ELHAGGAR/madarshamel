@@ -70,7 +70,8 @@ const EditUserByAdmin = ({userData, userNameData, userEmailData, userMobileData,
     }
 return (
     <>
-        <div className="col-12 px-3 py-3 mt-3 mb-3 float-start" style={{background: 'rgb(255, 255, 255)',maxWidth: '100%',border: '3px solid #333'}}>
+        <div id="overlay"></div>
+        <div className="col-12 px-3 py-3 mt-3 mb-3 float-start editUserModal" style={{background: 'rgb(255, 255, 255)',maxWidth: '100%',border: '3px solid #333'}}>
             <div className="container px-3 py-3" style={{background: '#fff'}}>
                 <div className="box-form-signup">
                 <div className="alert-data">
